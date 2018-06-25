@@ -3,12 +3,23 @@
 
 from PIL import Image, ImageDraw
 
-im = Image.new('L', (640, 480), 'white')
+def drawText(imageSize, imageMode, imageBackground, fileName, fileType, char, coordinates):
+    image = Image.new(imageMode, imageSize, imageBackground)
 
-d = ImageDraw.Draw(im)
+    canvas = ImageDraw.Draw(image)
 
-d.text((5,100), "+")
+    canvas.text(coordinates, char)
 
-im.show()
+    image.save(fileName, fileType)
 
-im.save("text.png", "PNG")
+imageSize = (640, 480)
+imageMode = 'L'
+imageBackground = 'white'
+
+char = '+'
+coordinates = (5, 100)
+
+fileType = 'PNG'
+fileName = 'text.png'
+
+drawText(imageSize, imageMode, imageBackground, fileName, fileType, char, coordinates)
