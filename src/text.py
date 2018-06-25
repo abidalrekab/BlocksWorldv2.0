@@ -14,17 +14,19 @@ def drawText(canvas, taskList):
 def regularTriangle(x, y, size):
     output = []
 
-    x0 = x
-    y0 = y - int(size / math.sqrt(3.0))
-    output.append((x0, y0))
+    output.append((x, y - int(size / math.sqrt(3.0))))
+    output.append((x - int(size / 2.0), y + int(size / math.sqrt(3.0) / 2.0)))
+    output.append((x + int(size / 2.0), y + int(size / math.sqrt(3.0) / 2.0)))
 
-    x1 = x - int(size / 2.0)
-    y1 = y + int(size / math.sqrt(3.0) / 2.0)
-    output.append((x1, y1))
+    return output
 
-    x2 = x + int(size / 2.0)
-    y2 = y + int(size / math.sqrt(3.0) / 2.0)
-    output.append((x2, y2))
+def square(x, y, size):
+    output = []
+
+    output.append((x - int(size / 2.0), y + int(size / 2.0)))
+    output.append((x + int(size / 2.0), y + int(size / 2.0)))
+    output.append((x - int(size / 2.0), y - int(size / 2.0)))
+    output.append((x + int(size / 2.0), y - int(size / 2.0)))
 
     return output
 
@@ -53,7 +55,13 @@ canvas = ImageDraw.Draw(image)
 drawText(canvas, taskList)
 
 taskList = []
-for point in regularTriangle(320, 240, 50):
+for point in regularTriangle(160, 120, 50):
+    taskList.append(['+', point])
+
+drawText(canvas, taskList)
+
+taskList = []
+for point in square(480, 120, 50):
     taskList.append(['+', point])
 
 drawText(canvas, taskList)
