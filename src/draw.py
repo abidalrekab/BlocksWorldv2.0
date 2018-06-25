@@ -26,5 +26,9 @@ label.draw(win)
 
 message = Text(Point(win.getWidth()/2, 20), 'Click anywhere to quit.')
 message.draw(win)
+
+# saves the current TKinter object in postscript format
+win.postscript(file="draw.eps", colormode='color')
+
 win.getMouse()
 win.close()
