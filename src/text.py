@@ -4,33 +4,12 @@
 from PIL import Image, ImageDraw
 import math
 
-def drawText(imageSize, imageMode, imageBackground, fileName, fileType, taskList):
-    image = Image.new(imageMode, imageSize, imageBackground)
-
-    canvas = ImageDraw.Draw(image)
-
+def drawText(canvas, taskList):
     for task in taskList:
         char = task[0]
         coordinates = task[1]
 
         canvas.text(coordinates, char)
-
-    image.save(fileName, fileType)
-
-imageSize = (640, 480)
-imageMode = 'L'
-imageBackground = 'white'
-
-taskList = [
-    ['+', (5,  5)],
-    ['+', (5, 15)],
-    ['+', (5, 25)],
-    ['+', (5, 35)],
-    ['+', (5, 45)],
-    ['+', (5, 55)],
-    ['+', (5, 65)],
-    ['+', (5, 75)],
-]
 
 def regularTriangle(x, y, size):
     output = []
@@ -49,11 +28,34 @@ def regularTriangle(x, y, size):
 
     return output
 
-taskList = []
-for point in regularTriangle(320, 240, 50):
-    taskList.append(['+', point])
+imageSize = (640, 480)
+imageMode = 'L'
+imageBackground = 'white'
 
 fileType = 'PNG'
 fileName = 'text.png'
 
-drawText(imageSize, imageMode, imageBackground, fileName, fileType, taskList)
+image = Image.new(imageMode, imageSize, imageBackground)
+
+taskList = [
+    ['+', (5,  5)],
+    ['+', (5, 15)],
+    ['+', (5, 25)],
+    ['+', (5, 35)],
+    ['+', (5, 45)],
+    ['+', (5, 55)],
+    ['+', (5, 65)],
+    ['+', (5, 75)],
+]
+
+canvas = ImageDraw.Draw(image)
+
+drawText(canvas, taskList)
+
+taskList = []
+for point in regularTriangle(320, 240, 50):
+    taskList.append(['+', point])
+
+drawText(canvas, taskList)
+
+image.save(fileName, fileType)
