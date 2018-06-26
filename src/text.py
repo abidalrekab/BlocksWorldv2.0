@@ -11,65 +11,25 @@ def drawText(canvas, vertices):
 
         canvas.text(coordinates, char)
 
-def triangle(x, y, size):
+def regularShape(nrNodes, x, y, size):
+    radius = size / 2.0
     output = []
 
-    output.append((x, y - int(size / math.sqrt(3.0))))
-    output.append((x - int(size / 2.0), y + int(size / math.sqrt(3.0) / 2.0)))
-    output.append((x + int(size / 2.0), y + int(size / math.sqrt(3.0) / 2.0)))
+    x0 = x + radius
+    y0 = y
+    output.append((x0, y0))
+
+    segment = 2 * math.pi / nrNodes
+
+    # (xi - x)^2 + (yi - y)^2 = radius^2
+    for i in range(nrNodes - 1):
+        angle = (i + 1) * segment
+
+        xi = radius * math.cos(angle) + x
+        yi = radius * math.sin(angle) + y
+        output.append((xi, yi))
 
     return output
-
-def square(x, y, size):
-    output = []
-
-    output.append((x - int(size / 2.0), y + int(size / 2.0)))
-    output.append((x + int(size / 2.0), y + int(size / 2.0)))
-    output.append((x - int(size / 2.0), y - int(size / 2.0)))
-    output.append((x + int(size / 2.0), y - int(size / 2.0)))
-
-    return output
-
-def pentagon(x, y, size):
-    output = []
-
-
-    c1 = int(size * 0.25 * (math.sqrt(5.0) - 1.0))
-    c2 = int(size * 0.25 * (math.sqrt(5.0) + 1.0))
-    s1 = int(size * 0.25 * math.sqrt(10.0 + 2.0 * math.sqrt(5.0)))
-    s2 = int(size * 0.25 * math.sqrt(10.0 - 2.0 * math.sqrt(5.0)))
-
-    output.append((x, y - size))
-    output.append((x - s1, y - c1))
-    output.append((x - s2, y + c2))
-    output.append((x + s2, y + c2))
-    output.append((x + s1, y - c1))
-
-    return output
-
-def hexagon(x, y, size):
-    output = []
-
-    output.append((x + int(size / 2.0), y - int(size * math.sqrt(3.0) / 2.0)))
-    output.append((x - int(size / 2.0), y - int(size * math.sqrt(3.0) / 2.0)))
-    output.append((x - size, y))
-    output.append((x - int(size / 2.0), y + int(size * math.sqrt(3.0) / 2.0)))
-    output.append((x + int(size / 2.0), y + int(size * math.sqrt(3.0) / 2.0)))
-    output.append((x + size, y))
-
-    return output
-
-def shape(shapeType, x, y, size):
-    switcher = {
-        3: triangle,
-        4: square,
-        5: pentagon,
-        6: hexagon,
-    }
-
-    func = switcher.get(shapeType)
-
-    return func(x, y, size)
 
 imageSize = (640, 480)
 imageMode = 'L'
@@ -91,19 +51,21 @@ vertices = [
 ]
 drawText(canvas, vertices)
 
-def drawShape(canvas, char, shapeType, x, y, size):
+def drawRegularShape(canvas, char, nrNodes, x, y, size):
     vertices = []
     points = []
 
-    points = shape(shapeType, x, y, size)
+    points = regularShape(nrNodes, x, y, size)
     for point in points:
         vertices.append([char, point])
     drawText(canvas, vertices)
 
-drawShape(canvas, '3', 3, 160, 120, 50)
-drawShape(canvas, '4', 4, 480, 120, 50)
-drawShape(canvas, '5', 5, 480, 360, 50)
-drawShape(canvas, '6', 6, 160, 360, 50)
+drawText(canvas, [['+', (160, 120)]])
+drawRegularShape(canvas, '3', 3, 160, 120, 50)
+drawRegularShape(canvas, '4', 4, 480, 120, 50)
+drawRegularShape(canvas, '5', 5, 480, 360, 50)
+drawRegularShape(canvas, '6', 6, 160, 360, 50)
+drawRegularShape(canvas, '7', 7, 320, 240, 50)
 
 fileType = 'PNG'
 fileName = 'output.png'
