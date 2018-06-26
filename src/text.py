@@ -63,9 +63,6 @@ imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
 
-fileType = 'PNG'
-fileName = 'text.png'
-
 image = Image.new(imageMode, imageSize, imageBackground)
 
 taskList = [
@@ -83,24 +80,36 @@ canvas = ImageDraw.Draw(image)
 
 drawText(canvas, taskList)
 
-taskList = []
-for point in triangle(160, 120, 50):
-    taskList.append(['+', point])
-drawText(canvas, taskList)
+def drawTriangle(canvas, x, y, size):
+    taskList = []
+    for point in triangle(x, y, size):
+        taskList.append(['+', point])
+    drawText(canvas, taskList)
 
-taskList = []
-for point in square(480, 120, 50):
-    taskList.append(['+', point])
-drawText(canvas, taskList)
+def drawSquare(canvas, x, y, size):
+    taskList = []
+    for point in square(x, y, size):
+        taskList.append(['+', point])
+    drawText(canvas, taskList)
 
-taskList = []
-for point in pentagon(480, 360, 50):
-    taskList.append(['+', point])
-drawText(canvas, taskList)
+def drawPentagon(canvas, x, y, size):
+    taskList = []
+    for point in pentagon(x, y, size):
+        taskList.append(['+', point])
+    drawText(canvas, taskList)
 
-taskList = []
-for point in hexagon(160, 360, 50):
-    taskList.append(['+', point])
-drawText(canvas, taskList)
+def drawHexagon(canvas, x, y, size):
+    taskList = []
+    for point in hexagon(x, y, size):
+        taskList.append(['+', point])
+    drawText(canvas, taskList)
+
+drawTriangle(canvas, 160, 120, 50)
+drawSquare(canvas, 480, 120, 50)
+drawPentagon(canvas, 480, 360, 50)
+drawHexagon(canvas, 160, 360, 50)
+
+fileType = 'PNG'
+fileName = 'output.png'
 
 image.save(fileName, fileType)
