@@ -31,6 +31,15 @@ def regularShape(nrNodes, x, y, size):
 
     return output
 
+def drawRegularShape(canvas, char, nrNodes, x, y, size):
+    vertices = []
+    points = []
+
+    points = regularShape(nrNodes, x, y, size)
+    for point in points:
+        vertices.append([char, point])
+    drawText(canvas, vertices)
+
 imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
@@ -50,15 +59,6 @@ vertices = [
     ['+', (5, 75)],
 ]
 drawText(canvas, vertices)
-
-def drawRegularShape(canvas, char, nrNodes, x, y, size):
-    vertices = []
-    points = []
-
-    points = regularShape(nrNodes, x, y, size)
-    for point in points:
-        vertices.append([char, point])
-    drawText(canvas, vertices)
 
 drawText(canvas, [['+', (160, 120)]])
 drawRegularShape(canvas, '3', 3, 160, 120, 50)
