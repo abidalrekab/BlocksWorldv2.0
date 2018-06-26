@@ -3,6 +3,7 @@
 
 from PIL import Image, ImageDraw
 import math
+import random
 
 def drawText(canvas, vertices):
     for task in vertices:
@@ -11,7 +12,7 @@ def drawText(canvas, vertices):
 
         canvas.text(coordinates, char)
 
-def regularShape(nrNodes, x, y, size):
+def regularPolygon(nrNodes, x, y, size):
     radius = size / 2.0
     output = []
 
@@ -31,11 +32,32 @@ def regularShape(nrNodes, x, y, size):
 
     return output
 
-def drawRegularShape(canvas, char, nrNodes, x, y, size):
+def randomPolygon(seed, nrNodes, x, y, size):
+    radius = size / 2.0
+    output = []
+
+    random.seed(seed)
+    for i in range(nrNodes):
+        xi = random.uniform(-1.0, 1.0) * radius + x
+        yi = random.uniform(-1.0, 1.0) * radius + y
+        output.append((xi, yi))
+
+    return output
+
+def drawRegularPolygon(canvas, char, nrNodes, x, y, size):
     vertices = []
     points = []
 
-    points = regularShape(nrNodes, x, y, size)
+    points = regularPolygon(nrNodes, x, y, size)
+    for point in points:
+        vertices.append([char, point])
+    drawText(canvas, vertices)
+
+def drawRandomPolygon(seed, canvas, char, nrNodes, x, y, size):
+    vertices = []
+    points = []
+
+    points = randomPolygon(seed, nrNodes, x, y, size)
     for point in points:
         vertices.append([char, point])
     drawText(canvas, vertices)
@@ -61,11 +83,18 @@ vertices = [
 drawText(canvas, vertices)
 
 drawText(canvas, [['+', (160, 120)]])
-drawRegularShape(canvas, '3', 3, 160, 120, 50)
-drawRegularShape(canvas, '4', 4, 480, 120, 50)
-drawRegularShape(canvas, '5', 5, 480, 360, 50)
-drawRegularShape(canvas, '6', 6, 160, 360, 50)
-drawRegularShape(canvas, '7', 7, 320, 240, 50)
+drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
+drawRegularPolygon(canvas, '4', 4, 480, 120, 50)
+drawRegularPolygon(canvas, '5', 5, 480, 360, 50)
+drawRegularPolygon(canvas, '6', 6, 160, 360, 50)
+drawRegularPolygon(canvas, '7', 7, 320, 240, 50)
+
+seed = 1
+drawRandomPolygon(seed, canvas, '3r', 3, 160, 120, 200)
+drawRandomPolygon(seed, canvas, '4r', 4, 480, 120, 200)
+drawRandomPolygon(seed, canvas, '5r', 5, 480, 360, 200)
+drawRandomPolygon(seed, canvas, '6r', 6, 160, 360, 200)
+drawRandomPolygon(seed, canvas, '7r', 7, 320, 240, 200)
 
 fileType = 'PNG'
 fileName = 'output.png'
