@@ -4,8 +4,8 @@
 from PIL import Image, ImageDraw
 import math
 
-def drawText(canvas, taskList):
-    for task in taskList:
+def drawText(canvas, vertices):
+    for task in vertices:
         char = task[0]
         coordinates = task[1]
 
@@ -59,13 +59,27 @@ def hexagon(x, y, size):
 
     return output
 
+def shape(shapeType, x, y, size):
+    switcher = {
+        3: triangle,
+        4: square,
+        5: pentagon,
+        6: hexagon,
+    }
+
+    func = switcher.get(shapeType)
+
+    return func(x, y, size)
+
 imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
 
 image = Image.new(imageMode, imageSize, imageBackground)
 
-taskList = [
+canvas = ImageDraw.Draw(image)
+
+vertices = [
     ['+', (5,  5)],
     ['+', (5, 15)],
     ['+', (5, 25)],
@@ -75,39 +89,21 @@ taskList = [
     ['+', (5, 65)],
     ['+', (5, 75)],
 ]
+drawText(canvas, vertices)
 
-canvas = ImageDraw.Draw(image)
+def drawShape(canvas, char, shapeType, x, y, size):
+    vertices = []
+    points = []
 
-drawText(canvas, taskList)
+    points = shape(shapeType, x, y, size)
+    for point in points:
+        vertices.append([char, point])
+    drawText(canvas, vertices)
 
-def drawTriangle(canvas, x, y, size):
-    taskList = []
-    for point in triangle(x, y, size):
-        taskList.append(['+', point])
-    drawText(canvas, taskList)
-
-def drawSquare(canvas, x, y, size):
-    taskList = []
-    for point in square(x, y, size):
-        taskList.append(['+', point])
-    drawText(canvas, taskList)
-
-def drawPentagon(canvas, x, y, size):
-    taskList = []
-    for point in pentagon(x, y, size):
-        taskList.append(['+', point])
-    drawText(canvas, taskList)
-
-def drawHexagon(canvas, x, y, size):
-    taskList = []
-    for point in hexagon(x, y, size):
-        taskList.append(['+', point])
-    drawText(canvas, taskList)
-
-drawTriangle(canvas, 160, 120, 50)
-drawSquare(canvas, 480, 120, 50)
-drawPentagon(canvas, 480, 360, 50)
-drawHexagon(canvas, 160, 360, 50)
+drawShape(canvas, '3', 3, 160, 120, 50)
+drawShape(canvas, '4', 4, 480, 120, 50)
+drawShape(canvas, '5', 5, 480, 360, 50)
+drawShape(canvas, '6', 6, 160, 360, 50)
 
 fileType = 'PNG'
 fileName = 'output.png'
