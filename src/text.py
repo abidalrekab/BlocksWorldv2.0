@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 import math
 import random
 
-def drawText(canvas, vertices):
+def draw(canvas, vertices):
     for task in vertices:
         char = task[0]
         coordinates = task[1]
@@ -51,7 +51,7 @@ def drawRegularPolygon(canvas, char, nrNodes, x, y, size):
     points = regularPolygon(nrNodes, x, y, size)
     for point in points:
         vertices.append([char, point])
-    drawText(canvas, vertices)
+    draw(canvas, vertices)
 
 def drawRandomPolygon(seed, canvas, char, nrNodes, x, y, size):
     vertices = []
@@ -60,7 +60,25 @@ def drawRandomPolygon(seed, canvas, char, nrNodes, x, y, size):
     points = randomPolygon(seed, nrNodes, x, y, size)
     for point in points:
         vertices.append([char, point])
-    drawText(canvas, vertices)
+    draw(canvas, vertices)
+
+def rotate(points, x, y, angle):
+    output = []
+
+    radAngle = (angle / 360.0) * 2.0 * math.pi
+    c = math.cos(radAngle)
+    s = math.sin(radAngle)
+
+    for point in points:
+        xi = point[0] - x
+        yi = point[1] - y
+
+        xir = xi * c - yi * s + x
+        yir = xi * s + yi * c + y
+
+        output.append((xir, yir))
+
+    return output
 
 imageSize = (640, 480)
 imageMode = 'L'
@@ -80,21 +98,20 @@ vertices = [
     ['+', (5, 65)],
     ['+', (5, 75)],
 ]
-drawText(canvas, vertices)
+draw(canvas, vertices)
 
-drawText(canvas, [['+', (160, 120)]])
-drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
-drawRegularPolygon(canvas, '4', 4, 480, 120, 50)
-drawRegularPolygon(canvas, '5', 5, 480, 360, 50)
-drawRegularPolygon(canvas, '6', 6, 160, 360, 50)
-drawRegularPolygon(canvas, '7', 7, 320, 240, 50)
-
-seed = 1
-drawRandomPolygon(seed, canvas, '3r', 3, 160, 120, 200)
-drawRandomPolygon(seed, canvas, '4r', 4, 480, 120, 200)
-drawRandomPolygon(seed, canvas, '5r', 5, 480, 360, 200)
-drawRandomPolygon(seed, canvas, '6r', 6, 160, 360, 200)
-drawRandomPolygon(seed, canvas, '7r', 7, 320, 240, 200)
+draw(canvas, [['+', (160, 120)]])
+# drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
+vertices = []
+points = []
+points = regularPolygon(3, 160, 120, 50)
+for point in points:
+    vertices.append(['3', point])
+draw(canvas, vertices)
+points = rotate(points, 160, 120, 90.0)
+for point in points:
+    vertices.append(['3', point])
+draw(canvas, vertices)
 
 fileType = 'PNG'
 fileName = 'output.png'
