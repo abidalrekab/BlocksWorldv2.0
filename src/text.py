@@ -11,7 +11,7 @@ def drawText(canvas, taskList):
 
         canvas.text(coordinates, char)
 
-def regularTriangle(x, y, size):
+def triangle(x, y, size):
     output = []
 
     output.append((x, y - int(size / math.sqrt(3.0))))
@@ -27,6 +27,35 @@ def square(x, y, size):
     output.append((x + int(size / 2.0), y + int(size / 2.0)))
     output.append((x - int(size / 2.0), y - int(size / 2.0)))
     output.append((x + int(size / 2.0), y - int(size / 2.0)))
+
+    return output
+
+def pentagon(x, y, size):
+    output = []
+
+
+    c1 = int(size * 0.25 * (math.sqrt(5.0) - 1.0))
+    c2 = int(size * 0.25 * (math.sqrt(5.0) + 1.0))
+    s1 = int(size * 0.25 * math.sqrt(10.0 + 2.0 * math.sqrt(5.0)))
+    s2 = int(size * 0.25 * math.sqrt(10.0 - 2.0 * math.sqrt(5.0)))
+
+    output.append((x, y - size))
+    output.append((x - s1, y - c1))
+    output.append((x - s2, y + c2))
+    output.append((x + s2, y + c2))
+    output.append((x + s1, y - c1))
+
+    return output
+
+def hexagon(x, y, size):
+    output = []
+
+    output.append((x + int(size / 2.0), y - int(size * math.sqrt(3.0) / 2.0)))
+    output.append((x - int(size / 2.0), y - int(size * math.sqrt(3.0) / 2.0)))
+    output.append((x - size, y))
+    output.append((x - int(size / 2.0), y + int(size * math.sqrt(3.0) / 2.0)))
+    output.append((x + int(size / 2.0), y + int(size * math.sqrt(3.0) / 2.0)))
+    output.append((x + size, y))
 
     return output
 
@@ -55,15 +84,23 @@ canvas = ImageDraw.Draw(image)
 drawText(canvas, taskList)
 
 taskList = []
-for point in regularTriangle(160, 120, 50):
+for point in triangle(160, 120, 50):
     taskList.append(['+', point])
-
 drawText(canvas, taskList)
 
 taskList = []
 for point in square(480, 120, 50):
     taskList.append(['+', point])
+drawText(canvas, taskList)
 
+taskList = []
+for point in pentagon(480, 360, 50):
+    taskList.append(['+', point])
+drawText(canvas, taskList)
+
+taskList = []
+for point in hexagon(160, 360, 50):
+    taskList.append(['+', point])
 drawText(canvas, taskList)
 
 image.save(fileName, fileType)
