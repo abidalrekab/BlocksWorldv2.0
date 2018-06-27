@@ -9,8 +9,6 @@ from localTypes import *
 
 def draw(canvas, vertices):
     for vertex in vertices:
-        # canvas.text((vertex.point.x, vertex.point.y), vertex.char)
-        # canvas.text(list(vertex.point), vertex.char)
         # x, y = vertex.point
         x = vertex.point.x
         y = vertex.point.y
@@ -84,6 +82,14 @@ def rotate(points, x, y, angle):
 
     return output
 
+def Vertices(char, points):
+    vertices = []
+
+    for point in points:
+        vertices.append(Vertex(char, point))
+
+    return vertices
+
 imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
@@ -102,31 +108,17 @@ points = [
     Point(5, 65),
     Point(5, 75)
 ]
-
-vertices = [
-    Vertex('+', Point(5,  5)),
-    Vertex('+', Point(5, 15)),
-    Vertex('+', Point(5, 25)),
-    Vertex('+', Point(5, 35)),
-    Vertex('+', Point(5, 45)),
-    Vertex('+', Point(5, 55)),
-    Vertex('+', Point(5, 65)),
-    Vertex('+', Point(5, 75))
-]
-draw(canvas, vertices)
+draw(canvas, Vertices('+', points))
 
 draw(canvas, [Vertex('+', Point(160, 120))])
 drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
-vertices = []
+
 points = []
 points = regularPolygon(3, 160, 120, 50)
-for point in points:
-    vertices.append(Vertex('3', point))
-draw(canvas, vertices)
+draw(canvas, Vertices('3', points))
+
 points = rotate(points, 160, 120, 90.0)
-for point in points:
-    vertices.append(Vertex('3', point))
-draw(canvas, vertices)
+draw(canvas, Vertices('3', points))
 
 drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
 drawRegularPolygon(canvas, '4', 4, 480, 120, 50)
