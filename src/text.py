@@ -3,78 +3,14 @@
 
 from PIL import Image, ImageDraw
 import math
-import random
 
 from localTypes import *
+from polygon import *
 
 def draw(canvas, vertices):
     for vertex in vertices:
         x, y = vertex.point
         canvas.text((x, y), vertex.char)
-
-def regularPolygon(nrNodes, center, size):
-    output = []
-
-    x, y = center
-    radius = size / 2.0
-
-    x0 = x + radius
-    y0 = y
-    output.append(Point(x0, y0))
-
-    segment = 2 * math.pi / nrNodes
-
-    # (xi - x)^2 + (yi - y)^2 = radius^2
-    for i in range(nrNodes - 1):
-        angle = (i + 1) * segment
-
-        xi = radius * math.cos(angle) + x
-        yi = radius * math.sin(angle) + y
-        output.append(Point(xi, yi))
-
-    return output
-
-def randomPolygon(seed, nrNodes, center, size):
-    output = []
-
-    x, y = center
-    radius = size / 2.0
-
-    random.seed(seed)
-    for i in range(nrNodes):
-        xi = random.uniform(-1.0, 1.0) * radius + x
-        yi = random.uniform(-1.0, 1.0) * radius + y
-        output.append(Point(xi, yi))
-
-    return output
-
-def rotate(points, center, angle):
-    output = []
-
-    x, y = center
-
-    radAngle = (angle / 360.0) * 2.0 * math.pi
-    c = math.cos(radAngle)
-    s = math.sin(radAngle)
-
-    for point in points:
-        xi = point.x - x
-        yi = point.y - y
-
-        xir = xi * c - yi * s + x
-        yir = xi * s + yi * c + y
-
-        output.append(Point(xir, yir))
-
-    return output
-
-def Vertices(char, points):
-    vertices = []
-
-    for point in points:
-        vertices.append(Vertex(char, point))
-
-    return vertices
 
 imageSize = (640, 480)
 imageMode = 'L'
@@ -94,35 +30,29 @@ points = [
     Point(5, 65),
     Point(5, 75)
 ]
-draw(canvas, Vertices('+', points))
+draw(canvas, points2vertices('+', points))
 
 draw(canvas, [Vertex('+', Point(160, 120))])
-draw(canvas, Vertices('3', regularPolygon(3, Point(160, 120), 50)))
+draw(canvas, points2vertices('3', regularPolygon(3, Point(160, 120), 50)))
 
 points = regularPolygon(3, Point(160, 120), 50)
-draw(canvas, Vertices('3', points))
+draw(canvas, points2vertices('3', points))
 
-points = rotate(points, Point(160, 120), 90.0)
-draw(canvas, Vertices('3', points))
+points = rotatePoints(points, Point(160, 120), 90.0)
+draw(canvas, points2vertices('3', points))
 
-def drawRegularPolygon(canvas, char, nrNodes, center, size):
-    draw(canvas, Vertices(char, regularPolygon(nrNodes, center, size)))
-
-def drawRandomPolygon(seed, canvas, char, nrNodes, center, size):
-    draw(canvas, Vertices(char, randomPolygon(seed, nrNodes, center, size)))
-
-draw(canvas, Vertices('3', regularPolygon(3, Point(160, 120), 50)))
-draw(canvas, Vertices('4', regularPolygon(4, Point(480, 120), 50)))
-draw(canvas, Vertices('5', regularPolygon(5, Point(480, 360), 50)))
-draw(canvas, Vertices('6', regularPolygon(6, Point(160, 360), 50)))
-draw(canvas, Vertices('7', regularPolygon(7, Point(320, 240), 50)))
+draw(canvas, points2vertices('3', regularPolygon(3, Point(160, 120), 50)))
+draw(canvas, points2vertices('4', regularPolygon(4, Point(480, 120), 50)))
+draw(canvas, points2vertices('5', regularPolygon(5, Point(480, 360), 50)))
+draw(canvas, points2vertices('6', regularPolygon(6, Point(160, 360), 50)))
+draw(canvas, points2vertices('7', regularPolygon(7, Point(320, 240), 50)))
 
 seed = 5
-draw(canvas, Vertices('3r', randomPolygon(seed, 3, Point(160, 120), 200)))
-draw(canvas, Vertices('4r', randomPolygon(seed, 4, Point(480, 120), 200)))
-draw(canvas, Vertices('5r', randomPolygon(seed, 5, Point(480, 360), 200)))
-draw(canvas, Vertices('6r', randomPolygon(seed, 6, Point(160, 360), 200)))
-draw(canvas, Vertices('7r', randomPolygon(seed, 7, Point(320, 240), 200)))
+draw(canvas, points2vertices('3r', randomPolygon(seed, 3, Point(160, 120), 200)))
+draw(canvas, points2vertices('4r', randomPolygon(seed, 4, Point(480, 120), 200)))
+draw(canvas, points2vertices('5r', randomPolygon(seed, 5, Point(480, 360), 200)))
+draw(canvas, points2vertices('6r', randomPolygon(seed, 6, Point(160, 360), 200)))
+draw(canvas, points2vertices('7r', randomPolygon(seed, 7, Point(320, 240), 200)))
 
 fileType = 'PNG'
 fileName = 'output.png'
