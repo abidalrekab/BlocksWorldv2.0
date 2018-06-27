@@ -48,14 +48,6 @@ def randomPolygon(seed, nrNodes, center, size):
 
     return output
 
-def drawRegularPolygon(canvas, char, nrNodes, center, size):
-    points = regularPolygon(nrNodes, center, size)
-    draw(canvas, Vertices(char, points))
-
-def drawRandomPolygon(seed, canvas, char, nrNodes, center, size):
-    points = randomPolygon(seed, nrNodes, center, size)
-    draw(canvas, Vertices(char, points))
-
 def rotate(points, center, angle):
     output = []
 
@@ -105,7 +97,7 @@ points = [
 draw(canvas, Vertices('+', points))
 
 draw(canvas, [Vertex('+', Point(160, 120))])
-drawRegularPolygon(canvas, '3', 3, Point(160, 120), 50)
+draw(canvas, Vertices('3', regularPolygon(3, Point(160, 120), 50)))
 
 points = regularPolygon(3, Point(160, 120), 50)
 draw(canvas, Vertices('3', points))
@@ -113,18 +105,24 @@ draw(canvas, Vertices('3', points))
 points = rotate(points, Point(160, 120), 90.0)
 draw(canvas, Vertices('3', points))
 
-drawRegularPolygon(canvas, '3', 3, Point(160, 120), 50)
-drawRegularPolygon(canvas, '4', 4, Point(480, 120), 50)
-drawRegularPolygon(canvas, '5', 5, Point(480, 360), 50)
-drawRegularPolygon(canvas, '6', 6, Point(160, 360), 50)
-drawRegularPolygon(canvas, '7', 7, Point(320, 240), 50)
+def drawRegularPolygon(canvas, char, nrNodes, center, size):
+    draw(canvas, Vertices(char, regularPolygon(nrNodes, center, size)))
+
+def drawRandomPolygon(seed, canvas, char, nrNodes, center, size):
+    draw(canvas, Vertices(char, randomPolygon(seed, nrNodes, center, size)))
+
+draw(canvas, Vertices('3', regularPolygon(3, Point(160, 120), 50)))
+draw(canvas, Vertices('4', regularPolygon(4, Point(480, 120), 50)))
+draw(canvas, Vertices('5', regularPolygon(5, Point(480, 360), 50)))
+draw(canvas, Vertices('6', regularPolygon(6, Point(160, 360), 50)))
+draw(canvas, Vertices('7', regularPolygon(7, Point(320, 240), 50)))
 
 seed = 5
-drawRandomPolygon(seed, canvas, '3r', 3, Point(160, 120), 200)
-drawRandomPolygon(seed, canvas, '4r', 4, Point(480, 120), 200)
-drawRandomPolygon(seed, canvas, '5r', 5, Point(480, 360), 200)
-drawRandomPolygon(seed, canvas, '6r', 6, Point(160, 360), 200)
-drawRandomPolygon(seed, canvas, '7r', 7, Point(320, 240), 200)
+draw(canvas, Vertices('3r', randomPolygon(seed, 3, Point(160, 120), 200)))
+draw(canvas, Vertices('4r', randomPolygon(seed, 4, Point(480, 120), 200)))
+draw(canvas, Vertices('5r', randomPolygon(seed, 5, Point(480, 360), 200)))
+draw(canvas, Vertices('6r', randomPolygon(seed, 6, Point(160, 360), 200)))
+draw(canvas, Vertices('7r', randomPolygon(seed, 7, Point(320, 240), 200)))
 
 fileType = 'PNG'
 fileName = 'output.png'
