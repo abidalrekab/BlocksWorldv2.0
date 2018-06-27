@@ -4,6 +4,7 @@
 from PIL import Image, ImageDraw
 import math
 import random
+from localTypes import *
 
 def draw(canvas, vertices):
     for task in vertices:
@@ -117,3 +118,30 @@ fileType = 'PNG'
 fileName = 'output.png'
 
 image.save(fileName, fileType)
+
+p = Point(5, 5)
+v = Vertex('+', p)
+
+x, y = p
+print x, y
+print x
+print y
+print
+
+char, point = v
+print char, point
+print char
+print point
+print
+
+print v.char
+print v.point
+print
+
+# fail, namedtuple is immutable
+# v[0] = 'o'
+# v.char = 'o'
+# v.point.x = 10
+# v.point.y = 20
+# print v.char
+# print v.point
