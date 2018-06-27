@@ -4,6 +4,7 @@
 from PIL import Image, ImageDraw
 import math
 import random
+
 from localTypes import *
 
 def draw(canvas, vertices):
@@ -119,8 +120,8 @@ fileName = 'output.png'
 
 image.save(fileName, fileType)
 
-p = Point(5, 5)
-v = Vertex('+', p)
+p = Point()
+v = Vertex(point = p)
 
 x, y = p
 print x, y
@@ -138,10 +139,9 @@ print v.char
 print v.point
 print
 
-# fail, namedtuple is immutable
-# v[0] = 'o'
-# v.char = 'o'
-# v.point.x = 10
-# v.point.y = 20
-# print v.char
-# print v.point
+# works with recordtype
+v.char = 'o'
+v.point.x = 10
+v.point.y = 20
+print v.char
+print v.point

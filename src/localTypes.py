@@ -1,6 +1,6 @@
+# https://pypi.org/project/recordtype/
 
-import collections
+from recordtype import recordtype
 
-Point = collections.namedtuple('Point', ['x', 'y'])
-Vertex = collections.namedtuple('Vertex', ['char', 'point'])
-
+Point = recordtype('Point', 'x y', default = 0)
+Vertex = recordtype('Vertex', [('char', '+'), ('point', Point())])
