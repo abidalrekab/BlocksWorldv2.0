@@ -9,14 +9,14 @@ from localTypes import *
 
 def draw(canvas, vertices):
     for vertex in vertices:
-        # x, y = vertex.point
-        x = vertex.point.x
-        y = vertex.point.y
+        x, y = vertex.point
         canvas.text((x, y), vertex.char)
 
-def regularPolygon(nrNodes, x, y, size):
-    radius = size / 2.0
+def regularPolygon(nrNodes, center, size):
     output = []
+
+    x, y = center
+    radius = size / 2.0
 
     x0 = x + radius
     y0 = y
@@ -34,9 +34,11 @@ def regularPolygon(nrNodes, x, y, size):
 
     return output
 
-def randomPolygon(seed, nrNodes, x, y, size):
-    radius = size / 2.0
+def randomPolygon(seed, nrNodes, center, size):
     output = []
+
+    x, y = center
+    radius = size / 2.0
 
     random.seed(seed)
     for i in range(nrNodes):
@@ -46,26 +48,18 @@ def randomPolygon(seed, nrNodes, x, y, size):
 
     return output
 
-def drawRegularPolygon(canvas, char, nrNodes, x, y, size):
-    vertices = []
-    points = []
+def drawRegularPolygon(canvas, char, nrNodes, center, size):
+    points = regularPolygon(nrNodes, center, size)
+    draw(canvas, Vertices(char, points))
 
-    points = regularPolygon(nrNodes, x, y, size)
-    for point in points:
-        vertices.append(Vertex(char, point))
-    draw(canvas, vertices)
+def drawRandomPolygon(seed, canvas, char, nrNodes, center, size):
+    points = randomPolygon(seed, nrNodes, center, size)
+    draw(canvas, Vertices(char, points))
 
-def drawRandomPolygon(seed, canvas, char, nrNodes, x, y, size):
-    vertices = []
-    points = []
-
-    points = randomPolygon(seed, nrNodes, x, y, size)
-    for point in points:
-        vertices.append(Vertex(char, point))
-    draw(canvas, vertices)
-
-def rotate(points, x, y, angle):
+def rotate(points, center, angle):
     output = []
+
+    x, y = center
 
     radAngle = (angle / 360.0) * 2.0 * math.pi
     c = math.cos(radAngle)
@@ -111,27 +105,26 @@ points = [
 draw(canvas, Vertices('+', points))
 
 draw(canvas, [Vertex('+', Point(160, 120))])
-drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
+drawRegularPolygon(canvas, '3', 3, Point(160, 120), 50)
 
-points = []
-points = regularPolygon(3, 160, 120, 50)
+points = regularPolygon(3, Point(160, 120), 50)
 draw(canvas, Vertices('3', points))
 
-points = rotate(points, 160, 120, 90.0)
+points = rotate(points, Point(160, 120), 90.0)
 draw(canvas, Vertices('3', points))
 
-drawRegularPolygon(canvas, '3', 3, 160, 120, 50)
-drawRegularPolygon(canvas, '4', 4, 480, 120, 50)
-drawRegularPolygon(canvas, '5', 5, 480, 360, 50)
-drawRegularPolygon(canvas, '6', 6, 160, 360, 50)
-drawRegularPolygon(canvas, '7', 7, 320, 240, 50)
+drawRegularPolygon(canvas, '3', 3, Point(160, 120), 50)
+drawRegularPolygon(canvas, '4', 4, Point(480, 120), 50)
+drawRegularPolygon(canvas, '5', 5, Point(480, 360), 50)
+drawRegularPolygon(canvas, '6', 6, Point(160, 360), 50)
+drawRegularPolygon(canvas, '7', 7, Point(320, 240), 50)
 
 seed = 5
-drawRandomPolygon(seed, canvas, '3r', 3, 160, 120, 200)
-drawRandomPolygon(seed, canvas, '4r', 4, 480, 120, 200)
-drawRandomPolygon(seed, canvas, '5r', 5, 480, 360, 200)
-drawRandomPolygon(seed, canvas, '6r', 6, 160, 360, 200)
-drawRandomPolygon(seed, canvas, '7r', 7, 320, 240, 200)
+drawRandomPolygon(seed, canvas, '3r', 3, Point(160, 120), 200)
+drawRandomPolygon(seed, canvas, '4r', 4, Point(480, 120), 200)
+drawRandomPolygon(seed, canvas, '5r', 5, Point(480, 360), 200)
+drawRandomPolygon(seed, canvas, '6r', 6, Point(160, 360), 200)
+drawRandomPolygon(seed, canvas, '7r', 7, Point(320, 240), 200)
 
 fileType = 'PNG'
 fileName = 'output.png'
