@@ -1,6 +1,7 @@
 # https://pypi.org/project/recordtype/
 
 import math
+
 from recordtype import recordtype
 
 Point = recordtype('Point', 'x y', default = 0)

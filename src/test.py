@@ -1,16 +1,7 @@
-# https://pypi.org/project/Pillow/
-# https://pillow.readthedocs.io/en/5.1.x/reference/ImageDraw.html?highlight=draw
 
-from PIL import Image, ImageDraw
-import math
-
+from draw import *
 from localTypes import *
 from polygon import *
-
-def draw(canvas, vertices):
-    for vertex in vertices:
-        x, y = vertex.point
-        canvas.text((x, y), vertex.char)
 
 imageSize = (640, 480)
 imageMode = 'L'
