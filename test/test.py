@@ -1,7 +1,10 @@
 
-from draw import *
-from localTypes import *
-from polygon import *
+import sys
+sys.path.append('../')
+
+from src.draw import *
+from src.localTypes import *
+from src.polygon import *
 
 imageSize = (640, 480)
 imageMode = 'L'
