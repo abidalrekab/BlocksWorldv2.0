@@ -40,5 +40,5 @@ setup(
         'Source code': 'https://github.com/takanokage/blocksWorld',
         'Issues': 'https://github.com/takanokage/blocksWorld/issues',
         },
-    version = '0.0.2',
+    version = '0.0.3',
 )
