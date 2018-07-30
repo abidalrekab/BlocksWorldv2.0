@@ -1,3 +1,7 @@
+# Copyright (c) 2018 Dan Petre
+
+# The MIT License (MIT)
+
 # https://pypi.org/project/Pillow/
 # https://pillow.readthedocs.io/en/5.1.x/reference/ImageDraw.html?highlight=draw
 

@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Dan Petre
+
+# The MIT License (MIT)
 
 import random
 

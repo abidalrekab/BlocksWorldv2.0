@@ -1,0 +1,8 @@
+# Copyright (c) 2018 Dan Petre
+
+# The MIT License (MIT)
+
+include README.rst
+include LICENSE.txt
+
+include blocksWorld/*.py

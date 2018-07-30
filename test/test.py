@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
-import sys
-sys.path.append('../')
+# Copyright (c) 2018 Dan Petre
 
-from src.draw import *
-from src.localTypes import *
-from src.polygon import *
+# The MIT License (MIT)
+
+from PIL import Image, ImageDraw
+
+# from blocksWorld import *
+from blocksWorld import draw
+from blocksWorld.localTypes import *
+from blocksWorld.polygon import *
 
 imageSize = (640, 480)
 imageMode = 'L'
