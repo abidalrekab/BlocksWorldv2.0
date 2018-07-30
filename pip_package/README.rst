@@ -1,6 +1,6 @@
-# Copyright (c) 2018 Dan Petre
+Copyright (c) 2018 Dan Petre
 
-# The MIT License (MIT)
+The MIT License (MIT)
 
 About This Project
 ##################
@@ -15,12 +15,13 @@ Core features
 Supported platforms
 ===================
 
-The package has been tested on Ubuntu 16.04 only, Python 2.7.
+ - Ubuntu 16.04, Python 2.7.
+ - Mac 10.13.6, Python 2.7.
 
 Resources
 =========
 
-* Website: 
+* Website:
 * Code: `https://github.com/takanokage/blocksWorld <https://github.com/takanokage/blocksWorld>`_
 * Document: `https://github.com/takanokage/blocksWorld/wiki <https://github.com/takanokage/blocksWorld/wiki>`_
 * License: `The MIT license <https://opensource.org/licenses/MIT>`_
