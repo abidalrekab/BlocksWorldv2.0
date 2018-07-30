@@ -15,8 +15,8 @@ Core features
 Supported platforms
 ===================
 
- - Ubuntu 16.04, Python 2.7.
- - Mac 10.13.6, Python 2.7.
+* Ubuntu 16.04, Python 2.7.
+* Mac 10.13.6, Python 2.7.
 
 Resources
 =========
