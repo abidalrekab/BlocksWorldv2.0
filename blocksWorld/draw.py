@@ -7,7 +7,7 @@
 
 from PIL import Image, ImageDraw
 
-from localTypes import *
+# from localTypes import *
 
 def draw(canvas, vertices):
     for vertex in vertices:

@@ -20,6 +20,7 @@ setup(
         "Operating System :: MacOS",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.5" ,
         "Topic :: Education",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Mathematics",
@@ -27,18 +28,21 @@ setup(
         "Topic :: Utilities",
     ],
     description = ("BlocksWorld is a tool for generating simple test images."),
-    install_requires=['pillow', 'recordtype'],
+    install_requires=['pillow', 'recordtype', 'numpy'],
     include_package_data=True,
     keywords = "blocks world",
     license = "MIT",
     long_description=open('README.rst').read(),
     name = "blocksWorld",
-    packages=['blocksWorld', ],
+    packages=['blocksWorld', 'test'],
     url = "https://github.com/takanokage/blocksWorld",
     project_urls={
         'Documentation': 'https://github.com/takanokage/blocksWorld/wiki',
         'Source code': 'https://github.com/takanokage/blocksWorld',
         'Issues': 'https://github.com/takanokage/blocksWorld/issues',
+        'Unittest': 'https://github.com/takanokage/blocksWorld/test'
         },
     version = '0.0.4',
+    test_suite='test',
+
 )

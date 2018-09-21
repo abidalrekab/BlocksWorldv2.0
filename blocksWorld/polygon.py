@@ -4,7 +4,7 @@
 
 import random
 
-from localTypes import *
+from blocksWorld.localTypes import *
 
 def regularPolygon(nrNodes, center, size):
     output = []
