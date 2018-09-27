@@ -34,7 +34,7 @@ setup(
     license = "MIT",
     long_description=open('README.rst').read(),
     name = "blocksWorld",
-    packages=['blocksWorld', 'test'],
+    packages=['blocksWorld'],
     url = "https://github.com/takanokage/blocksWorld",
     project_urls={
         'Documentation': 'https://github.com/takanokage/blocksWorld/wiki',
