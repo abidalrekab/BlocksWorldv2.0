@@ -69,6 +69,28 @@ class TestRegularPolygon(unittest.TestCase):
             self.assertAlmostEqual(50 / 2, dist)
         print('\nDistance from the center to every vertex of the regular polygon is same as radius: PASS.')
 
+    draw(canvas, points2vertices('3', regularPolygon(3, Point(160, 120), 50)))
+    draw(canvas, points2vertices('4', regularPolygon(4, Point(480, 120), 50)))
+    draw(canvas, points2vertices('5', regularPolygon(5, Point(480, 360), 50)))
+    draw(canvas, points2vertices('6', regularPolygon(6, Point(160, 360), 50)))
+    draw(canvas, points2vertices('7', regularPolygon(7, Point(320, 240), 50)))
+
+    seed = 5
+    draw(canvas, points2vertices('3r', randomPolygon(seed, 3, Point(160, 120), 200)))
+    draw(canvas, points2vertices('4r', randomPolygon(seed, 4, Point(480, 120), 200)))
+    draw(canvas, points2vertices('5r', randomPolygon(seed, 5, Point(480, 360), 200)))
+    draw(canvas, points2vertices('6r', randomPolygon(seed, 6, Point(160, 360), 200)))
+    draw(canvas, points2vertices('7r', randomPolygon(seed, 7, Point(320, 240), 200)))
+
+    fileType = 'PNG'
+    fileName = 'polygon.png'
+
+    image.save(fileName, fileType)
+
+    with open("polygon.png", "rb") as imageFile:
+        f = imageFile.read()
+        b = bytearray(f)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,5 @@
 import unittest
 
-# from blocksWorld import *
 from blocksWorld import *
 
 imageSize = (640, 480)
@@ -42,6 +41,15 @@ class TestDraw(unittest.TestCase):
             x1, y1 = outPoints[i]
             self.assertFalse(1 <= x1 <= x and 1 <= y1 <= y)
         print('\nPoints cannot be drawn as the dimentions are not in the range of the output image size: PASS.')
+
+    fileType = 'PNG'
+    fileName = 'draw.png'
+
+    image.save(fileName, fileType)
+
+    with open("draw.png", "rb") as imageFile:
+        f = imageFile.read()
+        b = bytearray(f)
 
 
 if __name__ == '__main__':

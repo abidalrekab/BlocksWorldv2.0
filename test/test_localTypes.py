@@ -1,11 +1,18 @@
 import unittest
 import numpy as np
 
-# from blocksWorld import *
-from numpy import random
 
-from blocksWorld.localTypes import *
+from PIL import Image, ImageDraw
+from localTypes import *
+from draw import *
 
+imageSize = (640, 480)
+imageMode = 'L'
+imageBackground = 'white'
+
+image = Image.new(imageMode, imageSize, imageBackground)
+
+canvas = ImageDraw.Draw(image)
 
 single_point = [
     Point(10, 10)
@@ -100,6 +107,22 @@ class TestLocalTypes(unittest.TestCase):
             for i in range(len(points)):
                 self.assertTrue(return_angle(points[i], rotated_points[i]), math.pi)
         print('\nrotatePoints with a set of multiple points and some random point as centre: PASS.')
+
+    draw(canvas, points2vertices('+', points))
+
+    draw(canvas, [Vertex('+', Point(160, 120))])
+
+    points = rotatePoints(points, Point(160, 120), 180.0)
+    draw(canvas, points2vertices('+', points))
+
+    fileType = 'PNG'
+    fileName = 'localTypes.png'
+
+    image.save(fileName, fileType)
+
+    with open("localTypes.png", "rb") as imageFile:
+        f = imageFile.read()
+        b = bytearray(f)
 
 
 if __name__ == '__main__':
