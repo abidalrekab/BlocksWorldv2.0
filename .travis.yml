@@ -11,8 +11,8 @@ install:
 # command to run tests
 script:
   - ./build.sh
-  - pip install dist/*
+  - python -m pip install dist/*
   - ./test/test_draw.py
   - ./test/test_localTypes.py
   - ./test/test_polygon.py
-  - pip uninstall -y blocksWorld
+  - python -m pip uninstall -y blocksWorld
