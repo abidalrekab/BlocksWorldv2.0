@@ -1,10 +1,10 @@
+#!/usr/bin/env python
+
 import unittest
 import numpy as np
 
-
 from PIL import Image, ImageDraw
-from localTypes import *
-from draw import *
+from blocksWorld import *
 
 imageSize = (640, 480)
 imageMode = 'L'

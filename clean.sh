@@ -19,3 +19,5 @@ rm -rf ./.pytest_cache/
 rm -rf ./.eggs/
 
 rm -rf blocksWorld.egg-info
+
+find . -iname .DS_Store -delete
