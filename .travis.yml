@@ -1,8 +1,18 @@
 language: python
+
 python:
-    -"2.7"
-    -"3.5"
-  
-cache: pip
-install: "pip install numpy" 
-script: pytest test
+  - "2.7"
+  - "3.5"
+  - "3.6"
+
+# command to install dependencies
+install:
+
+# command to run tests
+script:
+  - build.sh
+  - pip install --user dist/*
+  - ./test/test_draw.py
+  - ./test/test_localTypes.py
+  - ./test/test_polygon.py
+  - pip uninstall blocksWorld
