@@ -11,7 +11,7 @@ install:
 # command to run tests
 script:
   - build.sh
-  - pip install --user dist/*
+  - pip install dist/*
   - ./test/test_draw.py
   - ./test/test_localTypes.py
   - ./test/test_polygon.py
