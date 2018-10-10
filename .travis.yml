@@ -2,8 +2,6 @@ language: python
 
 python:
   - "2.7"
-  - "3.5"
-  - "3.6"
 
 # command to install dependencies
 install:
@@ -11,8 +9,8 @@ install:
 # command to run tests
 script:
   - ./build.sh
-  - python -m pip install dist/*
+  - pip install dist/*
   - ./test/test_draw.py
   - ./test/test_localTypes.py
   - ./test/test_polygon.py
-  - python -m pip uninstall -y blocksWorld
+  - pip uninstall -y blocksWorld
