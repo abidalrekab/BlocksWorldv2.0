@@ -10,6 +10,7 @@ install:
 
 # command to run tests
 script:
+  - ls -l
   - build.sh
   - pip install dist/*
   - ./test/test_draw.py
