@@ -5,6 +5,11 @@
 # https://pypi.org/project/Pillow/
 # https://pillow.readthedocs.io/en/5.1.x/reference/ImageDraw.html?highlight=draw
 
+"""
+This module handles drawing.
+Currently it can only draw localTypes.Vertex.
+"""
+
 from PIL import Image, ImageDraw
 
 from localTypes import *

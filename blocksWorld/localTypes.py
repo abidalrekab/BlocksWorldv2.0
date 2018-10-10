@@ -4,6 +4,14 @@
 
 # https://pypi.org/project/recordtype/
 
+"""
+This module defines the following data types and methods:
+- Point
+- Vertex - a Point with a label assigned to it.
+- points2Vertices
+- rotatePoints
+"""
+
 import math
 
 from recordtype import recordtype
@@ -12,6 +20,10 @@ Point = recordtype('Point', 'x y', default = 0)
 Vertex = recordtype('Vertex', [('char', '+'), ('point', Point())])
 
 def points2vertices(char, points):
+    """
+    Attach a label to all of the input points before drawing.
+    """
+
     output = []
 
     for point in points:
@@ -20,6 +32,10 @@ def points2vertices(char, points):
     return output
 
 def rotatePoints(points, center, angle):
+    """
+    Rotate a list of points.
+    """
+
     output = []
 
     x, y = center

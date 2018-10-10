@@ -2,11 +2,20 @@
 
 # The MIT License (MIT)
 
+"""
+This module offers a collection of methods for generating polygons.
+"""
+
 import random
 
 from localTypes import *
 
 def regularPolygon(nrNodes, center, size):
+    """
+    Return a list of 2D points representing the vertices of a regular polygon.
+    An edge is implied between consecutive vertices.
+    """
+
     output = []
 
     x, y = center
@@ -28,7 +37,36 @@ def regularPolygon(nrNodes, center, size):
 
     return output
 
+def convexPolygon(nrNodes, center, size):
+    """
+    TODO
+    Return a list of 2D points representing the vertices of a iregular convex polygon.
+    An edge is implied between consecutive vertices.
+    """
+
+    output = []
+
+    return output
+
+def concavePolygon(nrNodes, center, size):
+    """
+    TODO
+    Return a list of 2D points representing the vertices of a concave polygon.
+    An edge is implied between consecutive vertices.
+    No two edges cross each other.
+    """
+
+    output = []
+
+    return output
+
 def randomPolygon(seed, nrNodes, center, size):
+    """
+    Return a list of 2D points representing the vertices of a random polygon.
+    An edge is implied between consecutive vertices.
+    Crossing edges are allowed.
+    """
+
     output = []
 
     x, y = center
