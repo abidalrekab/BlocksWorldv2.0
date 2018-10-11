@@ -6,7 +6,7 @@ import importlib
 
 from blocksWorld import *
 from blocksWorld.draw import *
-from blocksWorld.localTypes import *
+from blocksWorld.transform import *
 from blocksWorld.polygon import *
 
 globals().update(importlib.import_module('blocksWorld').__dict__)
