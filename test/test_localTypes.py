@@ -45,20 +45,6 @@ def return_angle(pt1, pt2):
 
 class TestLocalTypes(unittest.TestCase):
 
-    # Unit Test for testing points2vertices module
-    def test_points2verticesequals(self):
-        expected = []
-        if len(points) == 1:
-            expected = [Vertex(char='T', point=Point(x=5, y=5))]
-            result = points2vertices('T', points)
-            self.assertEqual(expected, result)
-        else:
-            for i in range(len(points)):
-                expected.append(Vertex('T', Point(x=points[i].x, y=points[i].y)))
-            result = points2vertices('T', points)
-            self.assertEqual(expected, result)
-        print('\npoints2vertices with one point and a lot of points: PASS.')
-
     # Unit Tests for testing rotatePoints module
     # Rotation with a point from the set as centre
     def test_rotatePointsequals1(self):
@@ -108,12 +94,12 @@ class TestLocalTypes(unittest.TestCase):
                 self.assertTrue(return_angle(points[i], rotated_points[i]), math.pi)
         print('\nrotatePoints with a set of multiple points and some random point as centre: PASS.')
 
-    draw(canvas, points2vertices('+', points))
+    draw(canvas, points, '+')
 
-    draw(canvas, [Vertex('+', Point(160, 120))])
+    draw(canvas, [Point(160, 120)], '+')
 
     points = rotatePoints(points, Point(160, 120), 180.0)
-    draw(canvas, points2vertices('+', points))
+    draw(canvas, points, '+')
 
     fileType = 'PNG'
     fileName = 'localTypes.png'

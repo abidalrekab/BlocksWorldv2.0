@@ -14,16 +14,16 @@ from PIL import Image, ImageDraw
 
 from localTypes import *
 
-def draw(canvas, vertices):
+def draw(canvas, points, char):
     """
-    Draw a list of vertices.
+    Draw a list of points.
     No edges.
     No fill.
     """
 
-    for vertex in vertices:
-        x, y = vertex.point
-        canvas.text((x, y), vertex.char)
+    for point in points:
+        x, y = point
+        canvas.text((x, y), char)
 
 def drawWire(canvas, points):
     """

@@ -17,19 +17,6 @@ import math
 from recordtype import recordtype
 
 Point = recordtype('Point', 'x y', default = 0)
-Vertex = recordtype('Vertex', [('char', '+'), ('point', Point())])
-
-def points2vertices(char, points):
-    """
-    Attach a label to all of the input points before drawing.
-    """
-
-    output = []
-
-    for point in points:
-        output.append(Vertex(char, point))
-
-    return output
 
 def rotatePoints(points, center, angle):
     """

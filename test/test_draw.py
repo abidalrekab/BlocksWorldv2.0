@@ -29,7 +29,6 @@ points = [
             Point(5, 75)
         ]
 
-
 class TestDraw(unittest.TestCase):
 
     def testPointInImageDimensions(self):

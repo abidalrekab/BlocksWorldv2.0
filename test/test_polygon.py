@@ -71,18 +71,18 @@ class TestRegularPolygon(unittest.TestCase):
             self.assertAlmostEqual(50 / 2, dist)
         print('\nDistance from the center to every vertex of the regular polygon is same as radius: PASS.')
 
-    draw(canvas, points2vertices('3', regularPolygon(3, Point(160, 120), 50)))
-    draw(canvas, points2vertices('4', regularPolygon(4, Point(480, 120), 50)))
+    draw(canvas, regularPolygon(3, Point(160, 120), 50), '3')
+    draw(canvas, regularPolygon(4, Point(480, 120), 50), '4')
     drawWire(canvas, regularPolygon(5, Point(480, 360), 50))
-    draw(canvas, points2vertices('6', regularPolygon(6, Point(160, 360), 50)))
-    draw(canvas, points2vertices('7', regularPolygon(7, Point(320, 240), 50)))
+    draw(canvas, regularPolygon(6, Point(160, 360), 50), '6')
+    draw(canvas, regularPolygon(7, Point(320, 240), 50), '7')
 
     seed = 5
-    draw(canvas, points2vertices('3r', randomPolygon(seed, 3, Point(160, 120), 200)))
-    draw(canvas, points2vertices('4r', randomPolygon(seed, 4, Point(480, 120), 200)))
-    draw(canvas, points2vertices('5r', randomPolygon(seed, 5, Point(480, 360), 200)))
-    draw(canvas, points2vertices('6r', randomPolygon(seed, 6, Point(160, 360), 200)))
-    draw(canvas, points2vertices('7r', randomPolygon(seed, 7, Point(320, 240), 200)))
+    draw(canvas, randomPolygon(seed, 3, Point(160, 120), 200), '3r')
+    draw(canvas, randomPolygon(seed, 4, Point(480, 120), 200), '4r')
+    draw(canvas, randomPolygon(seed, 5, Point(480, 360), 200), '5r')
+    draw(canvas, randomPolygon(seed, 6, Point(160, 360), 200), '6r')
+    draw(canvas, randomPolygon(seed, 7, Point(320, 240), 200), '7r')
 
     fileType = 'PNG'
     fileName = 'polygon.png'
