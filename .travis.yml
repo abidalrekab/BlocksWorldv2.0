@@ -11,6 +11,6 @@ script:
   - ./build.sh
   - pip install dist/*
   - ./test/test_draw.py
-  - ./test/test_localTypes.py
+  - ./test/test_transform.py
   - ./test/test_polygon.py
   - pip uninstall -y blocksWorld
