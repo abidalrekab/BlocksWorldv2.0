@@ -43,6 +43,6 @@ setup(
         'Issues': 'https://github.com/takanokage/blocksWorld/issues',
         'Unittest': 'https://github.com/takanokage/blocksWorld/test'
         },
-    version = '0.0.5',
+    version = '0.0.6',
     test_suite='test',
 )
