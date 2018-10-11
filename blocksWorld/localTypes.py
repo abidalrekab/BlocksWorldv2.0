@@ -13,10 +13,7 @@ This module defines the following data types and methods:
 """
 
 import math
-
-from recordtype import recordtype
-
-Point = recordtype('Point', 'x y', default = 0)
+import numpy as np
 
 def rotatePoints(points, center, angle):
     """
@@ -25,19 +22,18 @@ def rotatePoints(points, center, angle):
 
     output = []
 
-    x, y = center
-
     radAngle = (angle / 360.0) * 2.0 * math.pi
     c = math.cos(radAngle)
     s = math.sin(radAngle)
 
     for point in points:
-        xi = point.x - x
-        yi = point.y - y
 
-        xir = xi * c - yi * s + x
-        yir = xi * s + yi * c + y
+        x = point[0] - center[0]
+        y = point[1] - center[1]
 
-        output.append(Point(xir, yir))
+        xr = x * c - y * s + center[0]
+        yr = x * s + y * c + center[1]
+
+        output.append(np.array([xr, yr]))
 
     return output

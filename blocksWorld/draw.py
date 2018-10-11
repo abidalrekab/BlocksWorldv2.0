@@ -10,9 +10,9 @@ This module handles drawing.
 Currently it can only draw localTypes.Vertex.
 """
 
-from PIL import Image, ImageDraw
+import numpy as np
 
-from localTypes import *
+from PIL import Image, ImageDraw
 
 def draw(canvas, points, char):
     """
@@ -22,7 +22,8 @@ def draw(canvas, points, char):
     """
 
     for point in points:
-        x, y = point
+        x = point[0]
+        y = point[1]
         canvas.text((x, y), char)
 
 def drawWire(canvas, points):
@@ -38,9 +39,16 @@ def drawWire(canvas, points):
     print
     for i in range(size):
         print i, (i + 1) % size
-        x0, y0 = points[i]
-        x1, y1 = points[(i + 1) % size]
+        p0 = points[i]
+        p1 = points[(i + 1) % size]
+
+        x0 = p0[0]
+        y0 = p0[1]
+        x1 = p1[0]
+        y1 = p1[1]
+
         canvas.line([(x0, y0), (x1, y1)])
+        # canvas.line([p0, p1])
 
 def drawSolid(canvas, points, color):
     """

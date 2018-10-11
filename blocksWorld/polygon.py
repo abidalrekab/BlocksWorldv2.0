@@ -6,9 +6,9 @@
 This module offers a collection of methods for generating polygons.
 """
 
+import math
+import numpy as np
 import random
-
-from localTypes import *
 
 def regularPolygon(nrNodes, center, size):
     """
@@ -18,12 +18,14 @@ def regularPolygon(nrNodes, center, size):
 
     output = []
 
-    x, y = center
+    x = center[0]
+    y = center[1]
+
     radius = size / 2.0
 
     x0 = x + radius
     y0 = y
-    output.append(Point(x0, y0))
+    output.append(np.array([x0, y0]))
 
     segment = 2 * math.pi / nrNodes
 
@@ -33,7 +35,7 @@ def regularPolygon(nrNodes, center, size):
 
         xi = radius * math.cos(angle) + x
         yi = radius * math.sin(angle) + y
-        output.append(Point(xi, yi))
+        output.append(np.array([xi, yi]))
 
     return output
 
@@ -69,13 +71,15 @@ def randomPolygon(seed, nrNodes, center, size):
 
     output = []
 
-    x, y = center
+    x = center[0]
+    y = center[1]
+
     radius = size / 2.0
 
     random.seed(seed)
     for i in range(nrNodes):
         xi = random.uniform(-1.0, 1.0) * radius + x
         yi = random.uniform(-1.0, 1.0) * radius + y
-        output.append(Point(xi, yi))
+        output.append(np.array([xi, yi]))
 
     return output
