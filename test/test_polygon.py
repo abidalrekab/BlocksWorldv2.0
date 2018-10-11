@@ -73,7 +73,7 @@ class TestRegularPolygon(unittest.TestCase):
 
     draw(canvas, points2vertices('3', regularPolygon(3, Point(160, 120), 50)))
     draw(canvas, points2vertices('4', regularPolygon(4, Point(480, 120), 50)))
-    draw(canvas, points2vertices('5', regularPolygon(5, Point(480, 360), 50)))
+    drawWire(canvas, regularPolygon(5, Point(480, 360), 50))
     draw(canvas, points2vertices('6', regularPolygon(6, Point(160, 360), 50)))
     draw(canvas, points2vertices('7', regularPolygon(7, Point(320, 240), 50)))
 

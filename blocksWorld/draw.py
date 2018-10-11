@@ -27,12 +27,20 @@ def draw(canvas, vertices):
 
 def drawWire(canvas, points):
     """
-    TODO
     Draw the edges between the provided points.
     No labels.
     An edge is implied between consecutive vertices.
     No fill.
     """
+
+    size = len(points)
+    print size
+    print
+    for i in range(size):
+        print i, (i + 1) % size
+        x0, y0 = points[i]
+        x1, y1 = points[(i + 1) % size]
+        canvas.line([(x0, y0), (x1, y1)])
 
 def drawSolid(canvas, points, color):
     """
