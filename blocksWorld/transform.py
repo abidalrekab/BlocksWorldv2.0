@@ -6,16 +6,13 @@
 
 """
 This module defines the following data types and methods:
-- Point
-- Vertex - a Point with a label assigned to it.
-- points2Vertices
 - rotatePoints
 """
 
 import math
 import numpy as np
 
-def rotatePoints(points, center, angle):
+def rotate(points, center, angle):
     """
     Rotate a list of points.
     """

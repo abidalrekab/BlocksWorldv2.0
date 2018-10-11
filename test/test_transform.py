@@ -46,7 +46,7 @@ class TestLocalTypes(unittest.TestCase):
     center = np.array([160, 120])
     draw(canvas, [center], '+')
 
-    points = rotatePoints(points, center, 180.0)
+    points = rotate(points, center, 180.0)
     draw(canvas, points, '+')
 
     fileType = 'PNG'
