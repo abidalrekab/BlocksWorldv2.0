@@ -94,6 +94,5 @@ class TestRegularPolygon(unittest.TestCase):
         f = imageFile.read()
         b = bytearray(f)
 
-
 if __name__ == '__main__':
     unittest.main()

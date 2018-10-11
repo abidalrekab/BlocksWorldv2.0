@@ -50,14 +50,13 @@ class TestLocalTypes(unittest.TestCase):
     draw(canvas, points, '+')
 
     fileType = 'PNG'
-    fileName = 'localTypes.png'
+    fileName = 'transform.png'
 
     image.save(fileName, fileType)
 
-    with open("localTypes.png", "rb") as imageFile:
+    with open(fileName, "rb") as imageFile:
         f = imageFile.read()
         b = bytearray(f)
-
 
 if __name__ == '__main__':
     unittest.main()
