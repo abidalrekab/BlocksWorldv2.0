@@ -1,8 +1,14 @@
 #!/usr/bin/env python
+"""
+         This module Test for Valid Image with the given boundaries
+
+"""
 
 import unittest
 
 from blocksWorld import *
+
+
 
 imageSize = (640, 480)
 x, y = imageSize
@@ -30,20 +36,31 @@ points = [
         ]
 
 class TestDraw(unittest.TestCase):
+    
+    """
+     Testing for points inside the Boundary
 
+    """
+    
     def testPointInImageDimensions(self):
         for i in range(len(points)):
             x1 = points[i][0]
             y1 = points[i][1]
             self.assertTrue(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\nPoints can be drawn as the dimentions are in the range of the output image size: PASS.')
+        print('\n PASS:Points can be drawn as the dimentions are in the range of the output image size: PASS')
 
     def testPointOutOfImageDimensions(self):
+        
+        """
+        Testing for points outside the Boundary.
+
+        """
+
         for i in range(len(outPoints)):
             x1 = outPoints[i][0]
             y1 = outPoints[i][1]
             self.assertFalse(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\nPoints cannot be drawn as the dimentions are not in the range of the output image size: PASS.')
+        print('\nPASS:Points cannot be drawn as the dimentions are not in the range of the output image size.')
 
     fileType = 'PNG'
     fileName = 'draw.png'

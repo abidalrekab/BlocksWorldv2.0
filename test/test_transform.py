@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-
+"""
+This module test the rotation of vertices for a given Polygon.
+"""
 import unittest
 import numpy as np
 
@@ -40,6 +42,10 @@ def return_angle(p0, p1):
     return np.rad2deg((a0 - a1) % (2 * math.pi))
 
 class TestLocalTypes(unittest.TestCase):
+
+    """
+    This class tests for rotation of vertices for 180 degrees
+    """
 
     draw(canvas, points, '+')
 

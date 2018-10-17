@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+  This module tests the function of Polygon vertices Generation.
+"""
 
 import unittest
 
@@ -34,26 +37,26 @@ class TestRegularPolygon(unittest.TestCase):
         # check for 0 nodes
         with self.assertRaises(Exception) as context:
             regularPolygon(0, np.array([160, 120]), 50)
-        print('\nThrows '+str(context.exception)+' with 0 nodes: PASS.')
+        print('\nPASS :Throws '+str(context.exception)+' with 0 nodes.')
 
     def test_regularPolygon1or2Nodes(self):
         # check for less than 3 nodes
         result = regularPolygon(len(single_point), np.array([random.randint(1, 640), random.randint(1, 480)]),
                                 random.randint(0, 480))
         self.assertLessEqual(len(result), 2)
-        print('\nCannot form a polygon with less than 3 nodes: PASS.')
+        print('\nPASS :Cannot form a polygon with less than 3 nodes.')
 
     def test_regularPolygonMoreNodes(self):
         # check for more than 2 nodes
         result = regularPolygon(len(points), np.array([random.randint(1, 640), random.randint(1, 480)]),
                                 random.randint(0, 480))
         self.assertGreater(len(result), 2)
-        print('\nCan form a polygon with 3 or more nodes: PASS.')
+        print('\n PASS :Can form a polygon with 3 or more nodes.')
 
     def test_regularPolygonPoints(self):
         # check for number of nodes and number of points generated
         self.assertEqual(5, len(regularPolygon(5, np.array([160, 120]), 50)))
-        print('\nNumber of nodes given is equal to the number of points generated: PASS.')
+        print('\n PASS:Number of nodes given is equal to the number of points generated.')
 
     def test_regularPolygonSize(self):
         # check for size 0
@@ -61,7 +64,7 @@ class TestRegularPolygon(unittest.TestCase):
         for i in range(len(polygon)):
             self.assertEqual(160, polygon[i][0])
             self.assertEqual(120, polygon[i][1])
-        print('\nCannot form a polygon with size 0, as all the generated points are same: PASS.')
+        print('\nPASS:Cannot form a polygon with size 0, as all the generated points are same.')
 
     def test_regularPolygonDistances(self):
         # check for distance between center and every vertex
@@ -70,7 +73,15 @@ class TestRegularPolygon(unittest.TestCase):
             x2, y2 = np.array([160, 120])
             dist = math.hypot(x2 - x1, y2 - y1)
             self.assertAlmostEqual(50 / 2, dist)
-        print('\nDistance from the center to every vertex of the regular polygon is same as radius: PASS.')
+        print('\n PASS:Distance from the center to every vertex of the regular polygon is same as radius.')
+
+
+        """
+        
+         Ploting Images for regular Polygon  and Random Polygon
+                
+        """
+
 
     draw(canvas, regularPolygon(3, np.array([160, 120]), 50), '3')
     draw(canvas, regularPolygon(4, np.array([480, 120]), 50), '4')
