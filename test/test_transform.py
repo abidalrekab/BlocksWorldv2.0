@@ -1,68 +1,55 @@
 #!/usr/bin/env python
 """
-This module test the rotation of vertices for a given Polygon.
+This module test the rotation of vertices for a given points.
 """
 import unittest
-import numpy as np
+import os
 
-from PIL import Image, ImageDraw
 from blocksWorld import *
 
 imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
 
-image = Image.new(imageMode, imageSize, imageBackground)
+fileType = 'PNG'
+fileDir = os.path.dirname(os.path.realpath('__file__'))
+destination = os.path.join(fileDir, '../data/')
 
-canvas = ImageDraw.Draw(image)
+points = np.array([
+    [50,  5],
+    [50, 15],
+    [50, 25],
+    [50, 35],
+    [50, 45],
+    [50, 55],
+    [50, 65],
+    [50, 75]
+])
 
-single_point = [
-    np.array([10, 10])
-    ]
 
-points = [
-    np.array([5,  5]),
-    np.array([5, 15]),
-    np.array([5, 25]),
-    np.array([5, 35]),
-    np.array([5, 45]),
-    np.array([5, 55]),
-    np.array([5, 65]),
-    np.array([5, 75])
-    ]
-
-def return_angle(p0, p1):
-    """
-    Finds the angle between two points
-    """
-
-    a0 = np.arctan2(*p0[::-1])
-    a1 = np.arctan2(*p1[::-1])
-
-    return np.rad2deg((a0 - a1) % (2 * math.pi))
-
-class TestLocalTypes(unittest.TestCase):
+class test_transform(unittest.TestCase):
 
     """
     This class tests for rotation of vertices for 180 degrees
     """
+    # Reference image for rotate.
+    def test_rotate(self):
+        image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
 
-    draw(canvas, points, '+')
+        draw(canvas, points, '+')
 
-    center = np.array([160, 120])
-    draw(canvas, [center], '+')
+        center = np.array([180, 140])
+        draw(canvas, [center], '-')
 
-    points = rotate(points, center, 180.0)
-    draw(canvas, points, '+')
+        rotatedPoints = rotate(points, center, 180.0)
+        draw(canvas, rotatedPoints, 'X')
 
-    fileType = 'PNG'
-    fileName = 'transform.png'
+        fileName = 'test_rotate.png'
 
-    image.save(fileName, fileType)
+        image.save(destination + fileName, fileType)
+        image.close()
 
-    with open(fileName, "rb") as imageFile:
-        f = imageFile.read()
-        b = bytearray(f)
 
 if __name__ == '__main__':
     unittest.main()

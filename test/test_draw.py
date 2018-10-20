@@ -5,9 +5,9 @@
 """
 
 import unittest
+import os
 
 from blocksWorld import *
-
 
 
 imageSize = (640, 480)
@@ -15,14 +15,9 @@ x, y = imageSize
 imageMode = 'L'
 imageBackground = 'white'
 
-image = Image.new(imageMode, imageSize, imageBackground)
-
-canvas = ImageDraw.Draw(image)
-
-outPoints = [
-                np.array([645, 5]),
-                np.array([5, 485])
-            ]
+fileType = 'PNG'
+fileDir = os.path.dirname(os.path.realpath('__file__'))
+destination = os.path.join(fileDir, '../data/')
 
 points = [
             np.array([5,  5]),
@@ -35,41 +30,22 @@ points = [
             np.array([5, 75])
         ]
 
+
 class TestDraw(unittest.TestCase):
     
     """
      Testing for points inside the Boundary
 
     """
-    
-    def testPointInImageDimensions(self):
+
+    def test_draw(self):
         for i in range(len(points)):
-            x1 = points[i][0]
-            y1 = points[i][1]
-            self.assertTrue(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\n PASS:Points can be drawn as the dimentions are in the range of the output image size: PASS')
+            image = Image.new(imageMode, imageSize, imageBackground)
+            canvas = ImageDraw.Draw(image)
+            draw(canvas, (points[0], points[1]), 'A')
+            fileName = 'test_draw.png'
+            image.save(destination+fileName, fileType)
 
-    def testPointOutOfImageDimensions(self):
-        
-        """
-        Testing for points outside the Boundary.
-
-        """
-
-        for i in range(len(outPoints)):
-            x1 = outPoints[i][0]
-            y1 = outPoints[i][1]
-            self.assertFalse(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\nPASS:Points cannot be drawn as the dimentions are not in the range of the output image size.')
-
-    fileType = 'PNG'
-    fileName = 'draw.png'
-
-    image.save(fileName, fileType)
-
-    with open("draw.png", "rb") as imageFile:
-        f = imageFile.read()
-        b = bytearray(f)
 
 if __name__ == '__main__':
     unittest.main()
