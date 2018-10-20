@@ -13,7 +13,10 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-destination = os.path.join(fileDir, '../data/')
+directory = os.path.join(fileDir, '../data')
+
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
 points = np.array([
     [50,  5],
@@ -47,7 +50,7 @@ class test_transform(unittest.TestCase):
 
         fileName = 'test_rotate.png'
 
-        image.save(destination + fileName, fileType)
+        image.save(directory+"/"+fileName, fileType)
         image.close()
 
 

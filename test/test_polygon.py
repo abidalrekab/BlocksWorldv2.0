@@ -15,7 +15,10 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-destination = os.path.join(fileDir, '../data/')
+directory = os.path.join(fileDir, '../data')
+
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
 points = np.array([
     [5,  5],
@@ -47,7 +50,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_regularPolygon.png'
 
-        regularImage.save(destination+fileName, fileType)
+        regularImage.save(directory+"/"+fileName, fileType)
         regularImage.close()
 
 
@@ -71,7 +74,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_randomPolygon.png'
 
-        randomImage.save(destination+fileName, fileType)
+        randomImage.save(directory+"/"+fileName, fileType)
         randomImage.close()
 
 

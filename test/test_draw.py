@@ -17,7 +17,10 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-destination = os.path.join(fileDir, '../data/')
+directory = os.path.join(fileDir, '../data')
+
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
 points = [
             np.array([5,  5]),
@@ -44,7 +47,7 @@ class TestDraw(unittest.TestCase):
             canvas = ImageDraw.Draw(image)
             draw(canvas, (points[0], points[1]), 'A')
             fileName = 'test_draw.png'
-            image.save(destination+fileName, fileType)
+            image.save(directory+"/"+fileName, fileType)
 
 
 if __name__ == '__main__':
