@@ -13,7 +13,7 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-directory = os.path.join(fileDir, '../data')
+directory = os.path.join(fileDir, '../data/transform')
 
 if not os.path.exists(directory):
     os.makedirs(directory)
@@ -43,7 +43,7 @@ class test_transform(unittest.TestCase):
         draw(canvas, points, '+')
 
         center = np.array([180, 140])
-        draw(canvas, [center], '-')
+        draw(canvas, [center], 'center')
 
         rotatedPoints = rotate(points, center, 180.0)
         draw(canvas, rotatedPoints, 'X')

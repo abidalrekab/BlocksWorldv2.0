@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
          This module Test for Valid Image with the given boundaries
-
+         TODO drawSolid and drawPattern
 """
 
 import unittest
@@ -17,7 +17,7 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-directory = os.path.join(fileDir, '../data')
+directory = os.path.join(fileDir, '../data/draw')
 
 if not os.path.exists(directory):
     os.makedirs(directory)
@@ -37,10 +37,10 @@ points = [
 class TestDraw(unittest.TestCase):
     
     """
-     Testing for points inside the Boundary
+     Plotting images for draw and drawWire
 
     """
-
+    # Reference image for draw
     def test_draw(self):
         for i in range(len(points)):
             image = Image.new(imageMode, imageSize, imageBackground)
@@ -48,6 +48,14 @@ class TestDraw(unittest.TestCase):
             draw(canvas, (points[0], points[1]), 'A')
             fileName = 'test_draw.png'
             image.save(directory+"/"+fileName, fileType)
+
+    # Reference image for drawWire
+    def test_drawWire(self):
+        image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
+        drawWire(canvas, points)
+        fileName = 'test_drawWire.png'
+        image.save(directory+"/"+fileName, fileType)
 
 
 if __name__ == '__main__':
