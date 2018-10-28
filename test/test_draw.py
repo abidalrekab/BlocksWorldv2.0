@@ -1,22 +1,26 @@
 #!/usr/bin/env python
+"""
+         This module Test for Valid Image with the given boundaries
+         TODO drawPattern
+"""
 
 import unittest
+import os
 
 from blocksWorld import *
+
 
 imageSize = (640, 480)
 x, y = imageSize
 imageMode = 'L'
 imageBackground = 'white'
 
-image = Image.new(imageMode, imageSize, imageBackground)
+fileType = 'PNG'
+fileDir = os.path.dirname(os.path.realpath('__file__'))
+directory = os.path.join(fileDir, '../data/draw')
 
-canvas = ImageDraw.Draw(image)
-
-outPoints = [
-                np.array([645, 5]),
-                np.array([5, 485])
-            ]
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
 points = [
             np.array([5,  5]),
@@ -29,30 +33,51 @@ points = [
             np.array([5, 75])
         ]
 
+
 class TestDraw(unittest.TestCase):
+    
+    """
+     Plotting images for draw and drawWire
 
-    def testPointInImageDimensions(self):
+    """
+
+    # Reference image for draw
+    def test_draw(self):
         for i in range(len(points)):
-            x1 = points[i][0]
-            y1 = points[i][1]
-            self.assertTrue(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\nPoints can be drawn as the dimentions are in the range of the output image size: PASS.')
+            image = Image.new(imageMode, imageSize, imageBackground)
+            canvas = ImageDraw.Draw(image)
+            draw(canvas, (points[0], points[1]), 'A')
+            fileName = 'test_draw.png'
+            image.save(directory+"/"+fileName, fileType)
 
-    def testPointOutOfImageDimensions(self):
-        for i in range(len(outPoints)):
-            x1 = outPoints[i][0]
-            y1 = outPoints[i][1]
-            self.assertFalse(1 <= x1 <= x and 1 <= y1 <= y)
-        print('\nPoints cannot be drawn as the dimentions are not in the range of the output image size: PASS.')
+    # Reference image for drawWire
+    def test_drawWire(self):
+        image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
+        drawWire(canvas, points)
+        fileName = 'test_drawWire.png'
+        image.save(directory+"/"+fileName, fileType)
 
-    fileType = 'PNG'
-    fileName = 'draw.png'
+    # Reference image for drawSolid
+    def test_drawSolid(self):
+        solidImage = Image.new('RGB', imageSize, imageBackground)
+        solidCanvas = ImageDraw.Draw(solidImage)
 
-    image.save(fileName, fileType)
+        '''
+        for different representations of colors see 
+        "https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html#color-names"
+        '''
+        drawSolid(solidCanvas, regularPolygon(3, np.array([160, 120]), 50), 'red')
+        drawSolid(solidCanvas, regularPolygon(4, np.array([480, 120]), 90), 'blue')
+        drawSolid(solidCanvas, regularPolygon(5, np.array([420, 360]), 60), 'green')
+        drawSolid(solidCanvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
+        drawSolid(solidCanvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
-    with open("draw.png", "rb") as imageFile:
-        f = imageFile.read()
-        b = bytearray(f)
+        fileName = 'test_drawSolid.png'
+
+        solidImage.save(directory + "/" + fileName, fileType)
+        solidImage.close()
+
 
 if __name__ == '__main__':
     unittest.main()

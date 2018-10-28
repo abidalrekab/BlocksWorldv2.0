@@ -52,12 +52,13 @@ def drawWire(canvas, points):
 
 def drawSolid(canvas, points, color):
     """
-    TODO
     Draw the edges between the provided points.
     No labels.
     An edge is implied between consecutive vertices.
     Solid color fill.
     """
+    polygonVertices = tuple(map(tuple, points))
+    canvas.polygon(polygonVertices, fill=color, outline = 'black')
 
 def drawPattern(canvas, points, pattern):
     """

@@ -1,62 +1,58 @@
 #!/usr/bin/env python
-
+"""
+This module test the rotation of vertices for a given points.
+"""
 import unittest
-import numpy as np
+import os
 
-from PIL import Image, ImageDraw
 from blocksWorld import *
 
 imageSize = (640, 480)
 imageMode = 'L'
 imageBackground = 'white'
 
-image = Image.new(imageMode, imageSize, imageBackground)
+fileType = 'PNG'
+fileDir = os.path.dirname(os.path.realpath('__file__'))
+directory = os.path.join(fileDir, '../data/transform')
 
-canvas = ImageDraw.Draw(image)
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
-single_point = [
-    np.array([10, 10])
-    ]
+points = np.array([
+    [50,  5],
+    [50, 15],
+    [50, 25],
+    [50, 35],
+    [50, 45],
+    [50, 55],
+    [50, 65],
+    [50, 75]
+])
 
-points = [
-    np.array([5,  5]),
-    np.array([5, 15]),
-    np.array([5, 25]),
-    np.array([5, 35]),
-    np.array([5, 45]),
-    np.array([5, 55]),
-    np.array([5, 65]),
-    np.array([5, 75])
-    ]
 
-def return_angle(p0, p1):
+class test_transform(unittest.TestCase):
+
     """
-    Finds the angle between two points
+    This class tests for rotation of vertices for 180 degrees
     """
+    # Reference image for rotate.
+    def test_rotate(self):
+        image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
 
-    a0 = np.arctan2(*p0[::-1])
-    a1 = np.arctan2(*p1[::-1])
+        draw(canvas, points, '+')
 
-    return np.rad2deg((a0 - a1) % (2 * math.pi))
+        center = np.array([180, 140])
+        draw(canvas, [center], 'center')
 
-class TestLocalTypes(unittest.TestCase):
+        rotatedPoints = rotate(points, center, 180.0)
+        draw(canvas, rotatedPoints, 'X')
 
-    draw(canvas, points, '+')
+        fileName = 'test_rotate.png'
 
-    center = np.array([160, 120])
-    draw(canvas, [center], '+')
+        image.save(directory+"/"+fileName, fileType)
+        image.close()
 
-    points = rotate(points, center, 180.0)
-    draw(canvas, points, '+')
-
-    fileType = 'PNG'
-    fileName = 'transform.png'
-
-    image.save(fileName, fileType)
-
-    with open(fileName, "rb") as imageFile:
-        f = imageFile.read()
-        b = bytearray(f)
 
 if __name__ == '__main__':
     unittest.main()
