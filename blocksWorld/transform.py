@@ -34,3 +34,20 @@ def rotate(points, center, angle):
         output.append(np.array([xr, yr]))
 
     return output
+
+def transform(points, distance, rotation_angle):
+    """
+    Transforms a list of points
+    """
+    output = []
+
+    angle = (rotation_angle / 360.0) * 2.0 * math.pi
+
+    for point in points:
+        x1 = point[0]
+        y1 = point[1]
+        xi = (distance * math.cos(angle)) + x1
+        yi = (distance * math.sin(angle)) + y1
+        output.append(np.array([xi, yi]))
+
+    return output
