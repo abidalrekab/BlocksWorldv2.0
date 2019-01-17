@@ -35,6 +35,24 @@ def rotate(points, center, angle):
 
     return output
 
+def transform(points, distance, rotation_angle):
+    """
+    Transforms a list of points
+    """
+    output = []
+
+    angle = (rotation_angle / 360.0) * 2.0 * math.pi
+    
+    for point in points:
+        x1 = point[0]
+        y1 = point[1]
+
+        xi = (distance * math.cos(angle)) + x1
+        yi = (distance * math.sin(angle)) + y1
+        output.append(np.array([xi, yi]))
+
+    return output
+
 def scale(center, points, scaling):
     """
     Scales a list of points
@@ -47,6 +65,7 @@ def scale(center, points, scaling):
     for point in points:
         x1 = point[0]
         y1 = point[1]
+
         n = math.sqrt(math.pow((x1-x0), 2) + math.pow((x1-x0), 2))
         m = scaling * n
         xi = (scaling * (x1-x0)) +x0
@@ -54,3 +73,4 @@ def scale(center, points, scaling):
         output.append(np.array([xi, yi]))
 
     return output
+
