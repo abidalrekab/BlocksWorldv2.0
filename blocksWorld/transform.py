@@ -34,3 +34,23 @@ def rotate(points, center, angle):
         output.append(np.array([xr, yr]))
 
     return output
+
+def scale(center, points, scaling):
+    """
+    Scales a list of points
+    """
+    output = []
+
+    x0 = center[0]
+    y0 = center[1]
+
+    for point in points:
+        x1 = point[0]
+        y1 = point[1]
+        n = math.sqrt(math.pow((x1-x0), 2) + math.pow((x1-x0), 2))
+        m = scaling * n
+        xi = (scaling * (x1-x0)) +x0
+        yi = (scaling * (y1-y0)) + y0
+        output.append(np.array([xi, yi]))
+
+    return output
