@@ -10,7 +10,7 @@ install:
 script:
   - ./build.sh
   - pip install dist/*
-  - ./test/test_draw.py
-  - ./test/test_transform.py
-  - ./test/test_polygon.py
+  - ./test/draw.py
+  - ./test/transform.py
+  - ./test/polygon.py
   - pip uninstall -y blocksWorld

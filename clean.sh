@@ -20,6 +20,8 @@ rm -rf ./.eggs/
 
 rm -rf blocksWorld.egg-info
 
+rm -rf ./.idea
+
 rm -rf data_expected
 
 rm -rf data_result

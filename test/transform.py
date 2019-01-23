@@ -81,10 +81,31 @@ class test_transform(unittest.TestCase):
         result_image = Image.new(imageMode, imageSize, imageBackground)
         result_canvas = ImageDraw.Draw(result_image)
 
-        draw(result_canvas, regularPolygon(4, (120, 340), 100), "black")
+
         draw(result_canvas, transform(regularPolygon(4, (120, 340), 100), 240, 0), "black")
         draw(result_canvas, transform(regularPolygon(4, (120, 340), 100), 240, -90), "black")
         draw(result_canvas, transform(regularPolygon(4, (120, 340), 100), 339.4, -45), "black")
+
+        result_image.save(resultDirectory + "/" + fileName, fileType)
+        result_image.close()
+
+        # Expected image for transform
+        expected_image = Image.new(imageMode, imageSize, imageBackground)
+        expected_canvas = ImageDraw.Draw(expected_image)
+
+
+        draw(expected_canvas, ((410., 340.), (360., 390.), (310., 340.), (360., 290.)), "black")
+        draw(expected_canvas, ((170., 100.), (120., 150.), (70., 100.), (120., 50.)), "black")
+        draw(expected_canvas, ((409.99204153, 100.00795847), (359.99204153, 150.00795847),
+                               (309.99204153, 100.00795847), (359.99204153, 50.00795847)), "black")
+
+        expected_image.save(expectedDirectory + "/" + fileName, fileType)
+        expected_image.close()
+
+        result = resultDirectory + "/" + fileName
+        expected = expectedDirectory + "/" + fileName
+
+        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
 
     def test_scale(self):
         fileName = 'test_scale.png'
@@ -108,15 +129,7 @@ class test_transform(unittest.TestCase):
         result_image.close()
 
 
-        # Expected image for transform
-        expected_image = Image.new(imageMode, imageSize, imageBackground)
-        expected_canvas = ImageDraw.Draw(expected_image)
 
-        draw(expected_canvas, ((170.2, 340.2), (120., 390.), (70., 340.), (120., 292)), "black")
-        draw(expected_canvas, ((410., 340.), (360., 390.), (310., 340.), (360., 290.)), "black")
-        draw(expected_canvas, ((170., 100.), (120., 150.), (70., 100.), (120., 50.)), "black")
-        draw(expected_canvas, ((409.99204153, 100.00795847), (359.99204153, 150.00795847),
-                               (309.99204153, 100.00795847), (359.99204153, 50.00795847)), "black")
 
         #Expected image for scaling
         expected_image = Image.new(imageMode, imageSize, imageBackground)
@@ -138,7 +151,7 @@ class test_transform(unittest.TestCase):
         expected = expectedDirectory + "/" + fileName
 
 
-        self.assertTrue(open(result, "rb").read() != open(expected, "rb").read())
+        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
 
 
 if __name__ == '__main__':
