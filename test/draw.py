@@ -17,10 +17,11 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-directory = os.path.join(fileDir, '../data/draw')
+resultDirectory = os.path.join(fileDir, '../data/result/draw')
+expectedDirectory = os.path.join(fileDir, '../data/expected/draw')
 
-if not os.path.exists(directory):
-    os.makedirs(directory)
+if not os.path.exists(resultDirectory):
+    os.makedirs(resultDirectory)
 
 points = [
             np.array([5,  5]),
@@ -37,28 +38,42 @@ points = [
 class TestDraw(unittest.TestCase):
     
     """
-     Plotting images for draw and drawWire
+     Plotting images for draw , drawWire and drawSolid
 
     """
 
-    # Reference image for draw
+    # Result image for draw
     def test_draw(self):
         for i in range(len(points)):
             image = Image.new(imageMode, imageSize, imageBackground)
             canvas = ImageDraw.Draw(image)
             draw(canvas, (points[0], points[1]), 'A')
             fileName = 'test_draw.png'
-            image.save(directory+"/"+fileName, fileType)
+            image.save(resultDirectory+"/"+fileName, fileType)
+            image.close()
 
-    # Reference image for drawWire
+            result = resultDirectory + "/" + fileName
+            expected = expectedDirectory + "/" + fileName
+
+            # Test for resultant images with reference data
+            self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+
+    # Result image for drawWire
     def test_drawWire(self):
         image = Image.new(imageMode, imageSize, imageBackground)
         canvas = ImageDraw.Draw(image)
         drawWire(canvas, points)
         fileName = 'test_drawWire.png'
-        image.save(directory+"/"+fileName, fileType)
+        image.save(resultDirectory + "/" + fileName, fileType)
+        image.close()
 
-    # Reference image for drawSolid
+        result = resultDirectory + "/" + fileName
+        expected = expectedDirectory + "/" + fileName
+
+        # Test for resultant images with reference data
+        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+
+    # Result image for drawSolid
     def test_drawSolid(self):
         solidImage = Image.new('RGB', imageSize, imageBackground)
         solidCanvas = ImageDraw.Draw(solidImage)
@@ -75,8 +90,14 @@ class TestDraw(unittest.TestCase):
 
         fileName = 'test_drawSolid.png'
 
-        solidImage.save(directory + "/" + fileName, fileType)
+        solidImage.save(resultDirectory + "/" + fileName, fileType)
         solidImage.close()
+
+        result = resultDirectory + "/" + fileName
+        expected = expectedDirectory + "/" + fileName
+
+        # Test for resultant images with reference data
+        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
 
 
 if __name__ == '__main__':

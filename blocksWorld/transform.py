@@ -35,7 +35,7 @@ def rotate(points, center, angle):
 
     return output
 
-def transform(points, distance, rotation_angle):
+def translate(points, distance, rotation_angle):
     """
     Transforms a list of points
     """
