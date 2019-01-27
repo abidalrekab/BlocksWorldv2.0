@@ -22,6 +22,6 @@ rm -rf blocksWorld.egg-info
 
 rm -rf ./.idea
 
-rm -rf data/result
+rm -rf data
 
 find . -iname .DS_Store -delete
