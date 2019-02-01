@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b089060a-b8cd-4b39-94f6-08f8dc01ed8d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_draw.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_draw.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_drawSolid.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_drawSolid.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_drawWire.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_drawWire.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_RandomRotatedPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_RandomRotatedPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_randomPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_randomPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularRotatedPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularRotatedPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularRotatedWiredPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularRotatedWiredPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularWiredPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularWiredPolygon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_shape.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_shape.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_rotate.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_rotate.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_scale.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_scale.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_translate.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_translate.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +26,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/draw.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="226">
@@ -66,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="165">
+              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -83,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="120">
+              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -125,7 +115,6 @@
       <list>
         <option value="$PROJECT_DIR$/blocksWorld/polygon.py" />
         <option value="$PROJECT_DIR$/blocksWorld/blocksWorld.py" />
-        <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/test/test_transform.py" />
         <option value="$PROJECT_DIR$/blocksWorld/transform.py" />
         <option value="$PROJECT_DIR$/blocksWorld/draw.py" />
@@ -134,6 +123,8 @@
         <option value="$PROJECT_DIR$/test/transform.py" />
         <option value="$PROJECT_DIR$/test/polygon.py" />
         <option value="$PROJECT_DIR$/test/draw.py" />
+        <option value="$PROJECT_DIR$/build.sh" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -160,6 +151,11 @@
               <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="blocksWorld" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -191,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Bash.clean.sh">
+  <component name="RunManager" selected="Python tests.Unittests in draw.py">
     <configuration name="clean.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="blocksWorld" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -201,6 +197,27 @@
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/clean.sh" />
       <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="draw" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="blocksWorld" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/blocksWorld" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/blocksWorld/draw.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests in draw.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -231,20 +248,6 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in test" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="blocksWorld" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Unittests in transform.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="blocksWorld" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -261,11 +264,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in draw.py" />
+        <item itemvalue="Python.draw" />
         <item itemvalue="Bash.clean.sh" />
         <item itemvalue="Python tests.Unittests in transform.py" />
         <item itemvalue="Python tests.Unittests in polygon.py" />
-        <item itemvalue="Python tests.Unittests in draw.py" />
-        <item itemvalue="Python tests.Unittests in test" />
       </list>
     </recent_temporary>
   </component>
@@ -283,9 +286,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_draw_py - 2019.01.27 at 13h 57m 38s.xml">
-      <configuration name="Unittests in draw.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_polygon_py - 2019.01.27 at 13h 57m 42s.xml">
       <configuration name="Unittests in polygon.py" configurationId="tests" />
     </history-entry>
@@ -313,6 +313,9 @@
     <history-entry file="Unittests_in_transform_py - 2019.01.31 at 18h 45m 45s.xml">
       <configuration name="Unittests in transform.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_draw_py - 2019.01.31 at 18h 56m 56s.xml">
+      <configuration name="Unittests in draw.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -327,7 +330,7 @@
     <frame x="40" y="23" width="1339" height="805" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4987715" visible="true" weight="0.23141123" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4987715" visible="true" weight="0.23141123" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5012285" side_tool="true" weight="0.2169576" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -338,7 +341,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32771084" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32678822" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4969651" visible="true" weight="0.32398316" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4969651" visible="true" weight="0.32398316" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5030349" side_tool="true" weight="0.32398316" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32891566" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -484,13 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup.cfg">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -505,13 +501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-24">
           <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -543,6 +532,20 @@
           <folding>
             <element signature="e#125#140#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
         </state>
       </provider>
     </entry>

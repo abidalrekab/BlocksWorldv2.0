@@ -6,3 +6,4 @@
 
 python  setup.py bdist_wheel
 
+echo name
