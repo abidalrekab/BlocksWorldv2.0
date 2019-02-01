@@ -14,7 +14,7 @@ imageBackground = 'white'
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
 resultDirectory = os.path.join(fileDir, './data/result/transform')
-expectedDirectory = os.path.join(fileDir, './data_expected/transform')
+expectedDirectory = os.path.join(fileDir, 'data_expected/transform')
 
 if not os.path.exists(resultDirectory):
     os.makedirs(resultDirectory)
