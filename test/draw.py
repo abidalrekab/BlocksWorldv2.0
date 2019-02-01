@@ -17,8 +17,8 @@ imageBackground = 'white'
 
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
-resultDirectory = os.path.join(fileDir, '../data/result/draw')
-expectedDirectory = os.path.join(fileDir, '../data_expected/draw')
+resultDirectory = os.path.join(fileDir, './data/result/draw')
+expectedDirectory = os.path.join(fileDir, './data_expected/draw')
 
 if not os.path.exists(resultDirectory):
     os.makedirs(resultDirectory)
