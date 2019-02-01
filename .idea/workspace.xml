@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b089060a-b8cd-4b39-94f6-08f8dc01ed8d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/test/draw.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/draw.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/polygon.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/polygon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/transform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_draw.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_draw.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_drawSolid.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_drawSolid.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/draw/test_drawWire.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/draw/test_drawWire.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_RandomRotatedPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_RandomRotatedPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_randomPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_randomPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularRotatedPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularRotatedPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularRotatedWiredPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularRotatedWiredPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_regularWiredPolygon.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_regularWiredPolygon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/polygon/test_shape.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/polygon/test_shape.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_rotate.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_rotate.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_scale.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_scale.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_expected/transform/test_translate.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocksWorld/data_expected/transform/test_translate.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +39,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/draw.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="226">
               <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
               <folding>
                 <element signature="e#125#140#0" expanded="true" />
@@ -151,32 +161,6 @@
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="blocksWorld" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="result" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="blocksWorld" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="result" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="draw" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -188,6 +172,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blocksWorld" />
       <recent name="$PROJECT_DIR$/test" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -454,7 +439,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/data_expected/transform/test_scale.png" />
+    <entry file="file://$PROJECT_DIR$/blocksWorld/data_expected/transform/test_scale.png" />
     <entry file="file://$PROJECT_DIR$/data_result/transform/test_scale.png" />
     <entry file="file://$PROJECT_DIR$/data/draw/test_drawPattern.png" />
     <entry file="file://$PROJECT_DIR$/data/result/draw/test_drawWire.png" />
@@ -553,7 +538,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/draw.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="226">
           <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
           <folding>
             <element signature="e#125#140#0" expanded="true" />
