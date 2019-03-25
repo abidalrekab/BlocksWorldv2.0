@@ -1,7 +1,6 @@
 .vscode
 *.pyc
-*.png
 .DS_Store
 blocksWorld.egg-info
 build
-dist
+d
