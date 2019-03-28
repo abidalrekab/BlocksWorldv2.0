@@ -25,4 +25,3 @@ Resources
 * Code: `https://github.com/takanokage/blocksWorld <https://github.com/takanokage/blocksWorld>`_
 * Documentation: `https://github.com/takanokage/blocksWorld/wiki <https://github.com/takanokage/blocksWorld/wiki>`_
 * License: `The MIT license <https://opensource.org/licenses/MIT>`_
-
