@@ -18,6 +18,25 @@ Supported platforms
 * Ubuntu 16.04, Python 2.7.
 * Mac 10.13.6, Python 2.7.
 
+Build from source prerequisites
+===============================
+
+* Python 3.5+
+
+.. code-block:: bash
+
+    $ sudo apt install python-setuptools
+    $ sudo apt install python-pip
+    $ pip install wheel
+
+* Python 2.7+
+
+.. code-block:: bash
+
+    $ sudo apt install python3-pip
+    $ sudo apt install python3-setuptools
+    $ pip3 install wheel
+
 Resources
 =========
 
