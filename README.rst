@@ -21,7 +21,7 @@ Supported platforms
 Build from source prerequisites
 ===============================
 
-* Python 3.5+
+* Python 2.7+
 
 .. code-block:: bash
 
@@ -29,7 +29,7 @@ Build from source prerequisites
     $ sudo apt install python-pip
     $ pip install wheel
 
-* Python 2.7+
+* Python 3.5+
 
 .. code-block:: bash
 
