@@ -15,11 +15,22 @@ Core features
 Supported platforms
 ===================
 
-* Ubuntu 16.04, Python 2.7.
-* Mac 10.13.6, Python 2.7.
+* Ubuntu 16.04, Python 3.5+
+
+Might work on other configurations however at this time the focus will be on a single platform until the project matures a bit.
 
 Build from source prerequisites
 ===============================
+
+* Python 3.5+
+
+.. code-block:: bash
+
+    $ sudo apt install python3-pip
+    $ sudo apt install python3-setuptools
+    $ pip3 install wheel
+
+Similarly, for those who like to experiment:
 
 * Python 2.7+
 
@@ -29,13 +40,19 @@ Build from source prerequisites
     $ sudo apt install python-pip
     $ pip install wheel
 
-* Python 3.5+
+Build wheel:
 
-.. code-block:: bash
+`./build.sh`.
 
-    $ sudo apt install python3-pip
-    $ sudo apt install python3-setuptools
-    $ pip3 install wheel
+Install locally built wheel:
+
+`$ pip install --user dist/*`
+
+or, if your pip doesn't automatically use python3:
+
+`$ python3 -m pip install --user dist/*`
+
+Notice the use of the `--user` option. You can install system wide using `sudo` but the project is still in very early stages so installing as user can keep your system files clean(er).
 
 Resources
 =========
