@@ -35,10 +35,10 @@ def drawWire(canvas, points):
     """
 
     size = len(points)
-    print size
+    print(size)
     print
     for i in range(size):
-        print i, (i + 1) % size
+        print(i, (i + 1) % size)
         p0 = points[i]
         p1 = points[(i + 1) % size]
 
