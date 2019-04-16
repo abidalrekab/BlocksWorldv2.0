@@ -7,6 +7,9 @@
 import unittest
 import os
 
+import sys
+sys.path.insert(0, "..")
+
 from blocksWorld import *
 
 
@@ -44,19 +47,23 @@ class TestDraw(unittest.TestCase):
 
     # Result image for draw
     def test_draw(self):
+        fileName = 'test_draw.png'
+        image = Image.new(imageMode, imageSize, imageBackground)
+
         for i in range(len(points)):
-            image = Image.new(imageMode, imageSize, imageBackground)
             canvas = ImageDraw.Draw(image)
             draw(canvas, (points[0], points[1]), 'A')
-            fileName = 'test_draw.png'
-            image.save(resultDirectory+"/"+fileName, fileType)
-            image.close()
 
-            result = resultDirectory + "/" + fileName
-            expected = expectedDirectory + "/" + fileName
+        image.save(resultDirectory+"/"+fileName, fileType)
+        image.close()
 
-            # Test for resultant images with reference data
-            self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+        resultFile = resultDirectory + "/" + fileName
+        expectedFile = expectedDirectory + "/" + fileName
+
+        # Test for resultant images with reference data
+        with open(resultFile, "rb") as result:
+            with open(expectedFile, "rb") as expected:
+                self.assertTrue(expected.read() == result.read())
 
     # Result image for drawWire
     def test_drawWire(self):
@@ -67,11 +74,13 @@ class TestDraw(unittest.TestCase):
         image.save(resultDirectory + "/" + fileName, fileType)
         image.close()
 
-        result = resultDirectory + "/" + fileName
-        expected = expectedDirectory + "/" + fileName
+        resultFile = resultDirectory + "/" + fileName
+        expectedFile = expectedDirectory + "/" + fileName
 
         # Test for resultant images with reference data
-        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+        with open(resultFile, "rb") as result:
+            with open(expectedFile, "rb") as expected:
+                self.assertTrue(expected.read() == result.read())
 
     # Result image for drawSolid
     def test_drawSolid(self):
@@ -93,11 +102,13 @@ class TestDraw(unittest.TestCase):
         solidImage.save(resultDirectory + "/" + fileName, fileType)
         solidImage.close()
 
-        result = resultDirectory + "/" + fileName
-        expected = expectedDirectory + "/" + fileName
+        resultFile = resultDirectory + "/" + fileName
+        expectedFile = expectedDirectory + "/" + fileName
 
         # Test for resultant images with reference data
-        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+        with open(resultFile, "rb") as result:
+            with open(expectedFile, "rb") as expected:
+                self.assertTrue(expected.read() == result.read())
 
 
 if __name__ == '__main__':
