@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-         This module Test for Valid Image with the given boundaries
+         This module tests for Valid Image with the given boundaries
          TODO drawPattern
 """
 
@@ -36,7 +36,7 @@ points = [
 
 
 class TestDraw(unittest.TestCase):
-    
+
     """
      Plotting images for draw , drawWire and drawSolid
 
@@ -79,7 +79,7 @@ class TestDraw(unittest.TestCase):
         solidCanvas = ImageDraw.Draw(solidImage)
 
         '''
-        for different representations of colors see 
+        for different representations of colors see
         "https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html#color-names"
         '''
         drawSolid(solidCanvas, regularPolygon(3, np.array([160, 120]), 50), 'red')
