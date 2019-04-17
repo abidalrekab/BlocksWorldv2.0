@@ -161,11 +161,21 @@ class test_polygon(unittest.TestCase):
         draw(randomCanvas, randomPolygon(seed, 6, np.array([160, 360]), 200), '6r')
         draw(randomCanvas, randomPolygon(seed, 7, np.array([320, 240]), 200), '7r')
 
-        fileName = 'test_randomPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         randomImage.save(outputPath+"/"+fileName, fileType)
         randomImage.close()
 
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
+
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
+
+    # Result image for randomPolygon.
+    def test_randomRotatedPolygon(self):
         # Result image for randomPolygon with rotated points
         randomRotatedImage = Image.new(imageMode, imageSize, imageBackground)
         randomRotatedCanvas = ImageDraw.Draw(randomRotatedImage)
@@ -173,13 +183,14 @@ class test_polygon(unittest.TestCase):
         center = np.array([320, 240])
         draw(randomRotatedCanvas, [center], 'center')
 
+        seed = 5
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 3, np.array([160, 120]), 50)), center, 90.0)), '3r')
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 4, np.array([480, 120]), 90)), center, 90.0)), '4r')
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 5, np.array([420, 360]), 60)), center, 90.0)), '5r')
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 6, np.array([160, 360]), 80)), center, 90.0)), '6r')
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 7, np.array([320, 160]), 70)), center, 90.0)), '7r')
 
-        fileName = 'test_RandomRotatedPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         randomRotatedImage.save(outputPath + "/" + fileName, fileType)
         randomRotatedImage.close()
