@@ -58,7 +58,8 @@ class TestDraw(unittest.TestCase):
 
     # Result image for draw
     def test_draw(self):
-        fileName = 'test_draw.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
+
         image = Image.new(imageMode, imageSize, imageBackground)
 
         for i in range(len(points)):
@@ -81,7 +82,9 @@ class TestDraw(unittest.TestCase):
         image = Image.new(imageMode, imageSize, imageBackground)
         canvas = ImageDraw.Draw(image)
         drawWire(canvas, points)
-        fileName = 'test_drawWire.png'
+
+        fileName = sys._getframe().f_code.co_name + '.png'
+
         image.save(outputPath + "/" + fileName, fileType)
         image.close()
 
@@ -108,7 +111,7 @@ class TestDraw(unittest.TestCase):
         drawSolid(solidCanvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
         drawSolid(solidCanvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
-        fileName = 'test_drawSolid.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         solidImage.save(outputPath + "/" + fileName, fileType)
         solidImage.close()

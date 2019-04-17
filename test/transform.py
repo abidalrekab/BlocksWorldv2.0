@@ -50,7 +50,7 @@ class test_transform(unittest.TestCase):
     """
 
     def test_rotate(self):
-        fileName = 'test_rotate.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         # Result image for rotate
         result_image = Image.new(imageMode, imageSize, imageBackground)
@@ -73,7 +73,7 @@ class test_transform(unittest.TestCase):
                 self.assertTrue(reference.read() == result.read())
 
     def test_translate(self):
-        fileName = 'test_translate.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         # Result image for transform
         result_image = Image.new(imageMode, imageSize, imageBackground)
@@ -95,7 +95,7 @@ class test_transform(unittest.TestCase):
                 self.assertTrue(reference.read() == result.read())
 
     def test_scale(self):
-        fileName = 'test_scale.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         # Result image for scaling
         result_image = Image.new(imageMode, imageSize, imageBackground)
