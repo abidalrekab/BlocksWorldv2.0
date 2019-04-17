@@ -24,7 +24,7 @@ imageBackground = 'white'
 fileType = 'PNG'
 fileDir = os.path.dirname(os.path.realpath('__file__'))
 resultDirectory = os.path.join(fileDir, './data/output/polygon')
-expectedDirectory = os.path.join(fileDir, 'data_expected/polygon')
+expectedDirectory = os.path.join(fileDir, './data_expected/polygon')
 
 if not os.path.exists(resultDirectory):
     os.makedirs(resultDirectory)
