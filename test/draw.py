@@ -4,19 +4,32 @@
          TODO drawPattern
 """
 
-import unittest
 import os
+import unittest
+import sys
+
+crtScriptDir = os.path.dirname(sys.argv[0])
+root = os.path.abspath(crtScriptDir)
+
+outputPath = os.path.join(root, "data/output/draw")
+outputPath = os.path.abspath(outputPath)
+
+if not os.path.exists(outputPath):
+    os.makedirs(outputPath)
+
+# referencePath = os.path.join(root, "data/reference")
+referencePath = os.path.join(root, "data_expected/draw")
+referencePath = os.path.abspath(referencePath)
 
 try:
     # try using the installed blocksWorld if available
     from blocksWorld import *
 except ImportError:
     # blocksWorld not installed
-    # assuming that this is ran from the src folder
-    import sys
-    sys.path.insert(0, "..")
+    blocksWorldPath = os.path.join(root, "..")
+    blocksWorldPath = os.path.abspath(blocksWorldPath)
+    sys.path.append(blocksWorldPath)
     from blocksWorld import *
-
 
 imageSize = (640, 480)
 x, y = imageSize
@@ -24,12 +37,6 @@ imageMode = 'L'
 imageBackground = 'white'
 
 fileType = 'PNG'
-fileDir = os.path.dirname(os.path.realpath('__file__'))
-resultDirectory = os.path.join(fileDir, './data/output/draw')
-expectedDirectory = os.path.join(fileDir, './data_expected/draw')
-
-if not os.path.exists(resultDirectory):
-    os.makedirs(resultDirectory)
 
 points = [
             np.array([5,  5]),
@@ -59,11 +66,11 @@ class TestDraw(unittest.TestCase):
             canvas = ImageDraw.Draw(image)
             draw(canvas, (points[0], points[1]), 'A')
 
-        image.save(resultDirectory+"/"+fileName, fileType)
+        image.save(outputPath+"/"+fileName, fileType)
         image.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
@@ -76,11 +83,11 @@ class TestDraw(unittest.TestCase):
         canvas = ImageDraw.Draw(image)
         drawWire(canvas, points)
         fileName = 'test_drawWire.png'
-        image.save(resultDirectory + "/" + fileName, fileType)
+        image.save(outputPath + "/" + fileName, fileType)
         image.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
@@ -104,11 +111,11 @@ class TestDraw(unittest.TestCase):
 
         fileName = 'test_drawSolid.png'
 
-        solidImage.save(resultDirectory + "/" + fileName, fileType)
+        solidImage.save(outputPath + "/" + fileName, fileType)
         solidImage.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:

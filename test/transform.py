@@ -2,17 +2,32 @@
 """
 This module test the rotation of vertices for a given points.
 """
-import unittest
+
 import os
+import unittest
+import sys
+
+crtScriptDir = os.path.dirname(sys.argv[0])
+root = os.path.abspath(crtScriptDir)
+
+outputPath = os.path.join(root, "data/output/transform")
+outputPath = os.path.abspath(outputPath)
+
+if not os.path.exists(outputPath):
+    os.makedirs(outputPath)
+
+# referencePath = os.path.join(root, "data/reference")
+referencePath = os.path.join(root, "data_expected/transform")
+referencePath = os.path.abspath(referencePath)
 
 try:
     # try using the installed blocksWorld if available
     from blocksWorld import *
 except ImportError:
     # blocksWorld not installed
-    # assuming that this is ran from the src folder
-    import sys
-    sys.path.insert(0, "..")
+    blocksWorldPath = os.path.join(root, "..")
+    blocksWorldPath = os.path.abspath(blocksWorldPath)
+    sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
 imageSize = (640, 480)
@@ -20,13 +35,6 @@ imageMode = 'L'
 imageBackground = 'white'
 
 fileType = 'PNG'
-fileDir = os.path.dirname(os.path.realpath('__file__'))
-resultDirectory = os.path.join(fileDir, './data/output/transform')
-expectedDirectory = os.path.join(fileDir, './data_expected/transform')
-
-if not os.path.exists(resultDirectory):
-    os.makedirs(resultDirectory)
-
 
 points = np.array([
     [320,  250],
@@ -54,11 +62,11 @@ class test_transform(unittest.TestCase):
         rotatedPoints = rotate(points, center, 90.0)
 
         draw(result_canvas, rotatedPoints, 'X')
-        result_image.save(resultDirectory + "/" + fileName, fileType)
+        result_image.save(outputPath + "/" + fileName, fileType)
         result_image.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
@@ -76,11 +84,11 @@ class test_transform(unittest.TestCase):
         draw(result_canvas, translate(regularPolygon(4, (120, 340), 100), 240, -90), "black")
         draw(result_canvas, translate(regularPolygon(4, (120, 340), 100), 339.4, -45), "black")
 
-        result_image.save(resultDirectory + "/" + fileName, fileType)
+        result_image.save(outputPath + "/" + fileName, fileType)
         result_image.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
@@ -101,11 +109,11 @@ class test_transform(unittest.TestCase):
         drawWire(result_canvas, scale(np.array([80, 60]), (regularPolygon(5, np.array([80, 60]), 70)), 1.3))
         drawWire(result_canvas, scale(np.array([480, 380]), (regularPolygon(4, np.array([480, 380]), 70)), 2))
 
-        result_image.save(resultDirectory + "/" + fileName, fileType)
+        result_image.save(outputPath + "/" + fileName, fileType)
         result_image.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:

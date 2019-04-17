@@ -4,17 +4,32 @@
   TODO test_concavePolygon and test_convexPolygon
 """
 
-import unittest
+
 import os
+import unittest
+import sys
+
+crtScriptDir = os.path.dirname(sys.argv[0])
+root = os.path.abspath(crtScriptDir)
+
+outputPath = os.path.join(root, "data/output/polygon")
+outputPath = os.path.abspath(outputPath)
+
+if not os.path.exists(outputPath):
+    os.makedirs(outputPath)
+
+# referencePath = os.path.join(root, "data/reference")
+referencePath = os.path.join(root, "data_expected/polygon")
+referencePath = os.path.abspath(referencePath)
 
 try:
     # try using the installed blocksWorld if available
     from blocksWorld import *
 except ImportError:
     # blocksWorld not installed
-    # assuming that this is ran from the src folder
-    import sys
-    sys.path.insert(0, "..")
+    blocksWorldPath = os.path.join(root, "..")
+    blocksWorldPath = os.path.abspath(blocksWorldPath)
+    sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
 imageSize = (640, 480)
@@ -22,12 +37,6 @@ imageMode = 'L'
 imageBackground = 'white'
 
 fileType = 'PNG'
-fileDir = os.path.dirname(os.path.realpath('__file__'))
-resultDirectory = os.path.join(fileDir, './data/output/polygon')
-expectedDirectory = os.path.join(fileDir, './data_expected/polygon')
-
-if not os.path.exists(resultDirectory):
-    os.makedirs(resultDirectory)
 
 points = np.array([
     [5,  5],
@@ -60,7 +69,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_regularPolygon.png'
 
-        regularImage.save(resultDirectory+"/"+fileName, fileType)
+        regularImage.save(outputPath+"/"+fileName, fileType)
         regularImage.close()
 
         # Result image for regularPolygon with rotated points
@@ -78,7 +87,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_regularRotatedPolygon.png'
 
-        regularRotatedImage.save(resultDirectory + "/" + fileName, fileType)
+        regularRotatedImage.save(outputPath + "/" + fileName, fileType)
         regularRotatedImage.close()
 
         # Result image for regularPolygon with wire
@@ -93,7 +102,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_regularWiredPolygon.png'
 
-        regularWiredImage.save(resultDirectory + "/" + fileName, fileType)
+        regularWiredImage.save(outputPath + "/" + fileName, fileType)
         regularWiredImage.close()
 
         # Result image for regularPolygon using rotated points with wire
@@ -111,7 +120,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_regularRotatedWiredPolygon.png'
 
-        regularRotatedWiredImage.save(resultDirectory + "/" + fileName, fileType)
+        regularRotatedWiredImage.save(outputPath + "/" + fileName, fileType)
         regularRotatedWiredImage.close()
 
         # Result image for combined shapes
@@ -123,11 +132,11 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_shape.png'
 
-        shapeImage.save(resultDirectory + "/" + fileName, fileType)
+        shapeImage.save(outputPath + "/" + fileName, fileType)
         shapeImage.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
@@ -155,7 +164,7 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_randomPolygon.png'
 
-        randomImage.save(resultDirectory+"/"+fileName, fileType)
+        randomImage.save(outputPath+"/"+fileName, fileType)
         randomImage.close()
 
         # Result image for randomPolygon with rotated points
@@ -173,11 +182,11 @@ class test_polygon(unittest.TestCase):
 
         fileName = 'test_RandomRotatedPolygon.png'
 
-        randomRotatedImage.save(resultDirectory + "/" + fileName, fileType)
+        randomRotatedImage.save(outputPath + "/" + fileName, fileType)
         randomRotatedImage.close()
 
-        resultFile = resultDirectory + "/" + fileName
-        referenceFile = expectedDirectory + "/" + fileName
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
 
         # compare results agains reference data
         with open(resultFile, "rb") as result:
