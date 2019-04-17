@@ -7,10 +7,15 @@
 import unittest
 import os
 
-import sys
-sys.path.insert(0, "..")
-
-from blocksWorld import *
+try:
+    # try using the installed blocksWorld if available
+    from blocksWorld import *
+except ImportError:
+    # blocksWorld not installed
+    # assuming that this is ran from the src folder
+    import sys
+    sys.path.insert(0, "..")
+    from blocksWorld import *
 
 
 imageSize = (640, 480)
@@ -58,12 +63,12 @@ class TestDraw(unittest.TestCase):
         image.close()
 
         resultFile = resultDirectory + "/" + fileName
-        expectedFile = expectedDirectory + "/" + fileName
+        referenceFile = expectedDirectory + "/" + fileName
 
-        # Test for resultant images with reference data
+        # compare results agains reference data
         with open(resultFile, "rb") as result:
-            with open(expectedFile, "rb") as expected:
-                self.assertTrue(expected.read() == result.read())
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
 
     # Result image for drawWire
     def test_drawWire(self):
@@ -75,12 +80,12 @@ class TestDraw(unittest.TestCase):
         image.close()
 
         resultFile = resultDirectory + "/" + fileName
-        expectedFile = expectedDirectory + "/" + fileName
+        referenceFile = expectedDirectory + "/" + fileName
 
-        # Test for resultant images with reference data
+        # compare results agains reference data
         with open(resultFile, "rb") as result:
-            with open(expectedFile, "rb") as expected:
-                self.assertTrue(expected.read() == result.read())
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
 
     # Result image for drawSolid
     def test_drawSolid(self):
@@ -103,12 +108,12 @@ class TestDraw(unittest.TestCase):
         solidImage.close()
 
         resultFile = resultDirectory + "/" + fileName
-        expectedFile = expectedDirectory + "/" + fileName
+        referenceFile = expectedDirectory + "/" + fileName
 
-        # Test for resultant images with reference data
+        # compare results agains reference data
         with open(resultFile, "rb") as result:
-            with open(expectedFile, "rb") as expected:
-                self.assertTrue(expected.read() == result.read())
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
 
 
 if __name__ == '__main__':

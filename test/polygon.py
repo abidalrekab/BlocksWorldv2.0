@@ -7,7 +7,15 @@
 import unittest
 import os
 
-from blocksWorld import *
+try:
+    # try using the installed blocksWorld if available
+    from blocksWorld import *
+except ImportError:
+    # blocksWorld not installed
+    # assuming that this is ran from the src folder
+    import sys
+    sys.path.insert(0, "..")
+    from blocksWorld import *
 
 imageSize = (640, 480)
 imageMode = 'L'
@@ -118,11 +126,13 @@ class test_polygon(unittest.TestCase):
         shapeImage.save(resultDirectory + "/" + fileName, fileType)
         shapeImage.close()
 
-        result = resultDirectory + "/" + fileName
-        expected = expectedDirectory + "/" + fileName
+        resultFile = resultDirectory + "/" + fileName
+        referenceFile = expectedDirectory + "/" + fileName
 
-        # Test for resultant images with reference data
-        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
 
     # def test_convexPolygon(self):
     # TODO
@@ -166,11 +176,13 @@ class test_polygon(unittest.TestCase):
         randomRotatedImage.save(resultDirectory + "/" + fileName, fileType)
         randomRotatedImage.close()
 
-        result = resultDirectory + "/" + fileName
-        expected = expectedDirectory + "/" + fileName
+        resultFile = resultDirectory + "/" + fileName
+        referenceFile = expectedDirectory + "/" + fileName
 
-        # Test for resultant images with reference data
-        self.assertTrue(open(result, "rb").read() == open(expected, "rb").read())
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
 
 
 if __name__ == '__main__':
