@@ -27,7 +27,7 @@ setup(
         "Topic :: Utilities",
     ],
     description = ("BlocksWorld is a tool for generating simple test images."),
-    install_requires=['pillow', 'recordtype', 'numpy'],
+    install_requires=['pillow>=6.0.0', 'recordtype', 'numpy'],
     include_package_data=True,
     keywords = "blocks world",
     license = "MIT",
