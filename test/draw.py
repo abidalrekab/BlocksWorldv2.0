@@ -17,8 +17,7 @@ outputPath = os.path.abspath(outputPath)
 if not os.path.exists(outputPath):
     os.makedirs(outputPath)
 
-# referencePath = os.path.join(root, "data/reference")
-referencePath = os.path.join(root, "data_expected/draw")
+referencePath = os.path.join(root, "data/reference/draw")
 referencePath = os.path.abspath(referencePath)
 
 try:

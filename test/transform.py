@@ -16,8 +16,7 @@ outputPath = os.path.abspath(outputPath)
 if not os.path.exists(outputPath):
     os.makedirs(outputPath)
 
-# referencePath = os.path.join(root, "data/reference")
-referencePath = os.path.join(root, "data_expected/transform")
+referencePath = os.path.join(root, "data/reference/transform")
 referencePath = os.path.abspath(referencePath)
 
 try:
