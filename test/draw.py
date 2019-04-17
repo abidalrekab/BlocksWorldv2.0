@@ -50,21 +50,19 @@ points = [
 
 
 class TestDraw(unittest.TestCase):
-
     """
-     Plotting images for draw , drawWire and drawSolid
-
+    Plotting images for draw , drawWire and drawSolid
     """
 
     # Result image for draw
     def test_draw(self):
-        fileName = sys._getframe().f_code.co_name + '.png'
-
         image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
 
         for i in range(len(points)):
-            canvas = ImageDraw.Draw(image)
             draw(canvas, (points[0], points[1]), 'A')
+
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         image.save(outputPath+"/"+fileName, fileType)
         image.close()
@@ -81,6 +79,7 @@ class TestDraw(unittest.TestCase):
     def test_drawWire(self):
         image = Image.new(imageMode, imageSize, imageBackground)
         canvas = ImageDraw.Draw(image)
+
         drawWire(canvas, points)
 
         fileName = sys._getframe().f_code.co_name + '.png'
@@ -98,23 +97,23 @@ class TestDraw(unittest.TestCase):
 
     # Result image for drawSolid
     def test_drawSolid(self):
-        solidImage = Image.new('RGB', imageSize, imageBackground)
-        solidCanvas = ImageDraw.Draw(solidImage)
+        image = Image.new('RGB', imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
 
         '''
         for different representations of colors see
         "https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html#color-names"
         '''
-        drawSolid(solidCanvas, regularPolygon(3, np.array([160, 120]), 50), 'red')
-        drawSolid(solidCanvas, regularPolygon(4, np.array([480, 120]), 90), 'blue')
-        drawSolid(solidCanvas, regularPolygon(5, np.array([420, 360]), 60), 'green')
-        drawSolid(solidCanvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
-        drawSolid(solidCanvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
+        drawSolid(canvas, regularPolygon(3, np.array([160, 120]), 50), 'red')
+        drawSolid(canvas, regularPolygon(4, np.array([480, 120]), 90), 'blue')
+        drawSolid(canvas, regularPolygon(5, np.array([420, 360]), 60), 'green')
+        drawSolid(canvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
+        drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
         fileName = sys._getframe().f_code.co_name + '.png'
 
-        solidImage.save(outputPath + "/" + fileName, fileType)
-        solidImage.close()
+        image.save(outputPath + "/" + fileName, fileType)
+        image.close()
 
         resultFile = outputPath + "/" + fileName
         referenceFile = referencePath + "/" + fileName
