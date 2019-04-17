@@ -2,19 +2,12 @@ language: python
 
 dist: xenial
 
-# python:
-#   - "3.5"
-
 # command to install dependencies
 install:
 
 # command to run tests
 script:
-  - python --version
-  - python3 --version
   - ./build.sh
   - pip install dist/*
-  - python3 test/draw.py
-  - python3 test/transform.py
-  - python3 test/polygon.py
+  - ./test/test.sh
   - pip uninstall -y blocksWorld
