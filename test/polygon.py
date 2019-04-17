@@ -49,9 +49,8 @@ points = np.array([
 ])
 
 class test_polygon(unittest.TestCase):
-
     """
-        Ploting Images for different types of polygons.
+    Ploting Images for different types of polygons.
     """
 
     # Result images for regularPolygon.
@@ -66,11 +65,20 @@ class test_polygon(unittest.TestCase):
         draw(regularCanvas, regularPolygon(6, np.array([160, 360]), 80), '6')
         draw(regularCanvas, regularPolygon(7, np.array([320, 160]), 70), '7')
 
-        fileName = 'test_regularPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         regularImage.save(outputPath+"/"+fileName, fileType)
         regularImage.close()
 
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
+
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
+
+    def test_regularRotatedPolygon(self):
         # Result image for regularPolygon with rotated points
         regularRotatedImage = Image.new(imageMode, imageSize, imageBackground)
         regularRotatedCanvas = ImageDraw.Draw(regularRotatedImage)
@@ -84,11 +92,20 @@ class test_polygon(unittest.TestCase):
         draw(regularRotatedCanvas, (rotate((regularPolygon(6, np.array([160, 360]), 80)), center, 45.0)), '6r')
         draw(regularRotatedCanvas, (rotate((regularPolygon(7, np.array([320, 160]), 70)), center, 45.0)), '7r')
 
-        fileName = 'test_regularRotatedPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         regularRotatedImage.save(outputPath + "/" + fileName, fileType)
         regularRotatedImage.close()
 
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
+
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
+
+    def test_regularWiredPolygon(self):
         # Result image for regularPolygon with wire
         regularWiredImage = Image.new(imageMode, imageSize, imageBackground)
         regularWiredCanvas = ImageDraw.Draw(regularWiredImage)
@@ -99,11 +116,20 @@ class test_polygon(unittest.TestCase):
         drawWire(regularWiredCanvas, regularPolygon(6, np.array([160, 360]), 80))
         drawWire(regularWiredCanvas, regularPolygon(7, np.array([320, 160]), 70))
 
-        fileName = 'test_regularWiredPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         regularWiredImage.save(outputPath + "/" + fileName, fileType)
         regularWiredImage.close()
 
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
+
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
+
+    def test_regularRotatedWiredPolygon(self):
         # Result image for regularPolygon using rotated points with wire
         regularRotatedWiredImage = Image.new(imageMode, imageSize, imageBackground)
         regularRotatedWiredCanvas = ImageDraw.Draw(regularRotatedWiredImage)
@@ -117,19 +143,30 @@ class test_polygon(unittest.TestCase):
         drawWire(regularRotatedWiredCanvas, (rotate((regularPolygon(6, np.array([160, 360]), 80)), center, 45.0)))
         drawWire(regularRotatedWiredCanvas, (rotate((regularPolygon(7, np.array([320, 160]), 70)), center, 45.0)))
 
-        fileName = 'test_regularRotatedWiredPolygon.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         regularRotatedWiredImage.save(outputPath + "/" + fileName, fileType)
         regularRotatedWiredImage.close()
 
+        resultFile = outputPath + "/" + fileName
+        referenceFile = referencePath + "/" + fileName
+
+        # compare results agains reference data
+        with open(resultFile, "rb") as result:
+            with open(referenceFile, "rb") as reference:
+                self.assertTrue(reference.read() == result.read())
+
+    def test_shape(self):
         # Result image for combined shapes
         shapeImage = Image.new(imageMode, imageSize, imageBackground)
         shapeCanvas = ImageDraw.Draw(shapeImage)
 
+        center = np.array([320, 240])
+
         drawWire(shapeCanvas, (rotate((regularPolygon(3, np.array([320, 240]), 110)), np.array([450, 200]), 30.0)))
         drawWire(shapeCanvas, (rotate((regularPolygon(4, np.array([320, 240]), 120)), center, 45.0)))
 
-        fileName = 'test_shape.png'
+        fileName = sys._getframe().f_code.co_name + '.png'
 
         shapeImage.save(outputPath + "/" + fileName, fileType)
         shapeImage.close()
@@ -148,9 +185,7 @@ class test_polygon(unittest.TestCase):
     # def test_concavePolygon(self):
     # TODO
 
-    # Result image for randomPolygon.
     def test_randomPolygon(self):
-        # Result image for randomPolygon
         randomImage = Image.new(imageMode, imageSize, imageBackground)
         randomCanvas = ImageDraw.Draw(randomImage)
 
@@ -174,9 +209,7 @@ class test_polygon(unittest.TestCase):
             with open(referenceFile, "rb") as reference:
                 self.assertTrue(reference.read() == result.read())
 
-    # Result image for randomPolygon.
     def test_randomRotatedPolygon(self):
-        # Result image for randomPolygon with rotated points
         randomRotatedImage = Image.new(imageMode, imageSize, imageBackground)
         randomRotatedCanvas = ImageDraw.Draw(randomRotatedImage)
 
