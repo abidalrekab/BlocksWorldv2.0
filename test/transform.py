@@ -7,16 +7,16 @@ import os
 import unittest
 import sys
 
-crtScriptDir = os.path.dirname(sys.argv[0])
+crtScriptDir = os.path.dirname(os.getcwd())
 root = os.path.abspath(crtScriptDir)
 
-outputPath = os.path.join(root, "data/output/transform")
+outputPath = os.path.join(root, "test/data/output/transform")
 outputPath = os.path.abspath(outputPath)
 
 if not os.path.exists(outputPath):
     os.makedirs(outputPath)
 
-referencePath = os.path.join(root, "data/reference/transform")
+referencePath = os.path.join(root, "test/data/reference/transform")
 referencePath = os.path.abspath(referencePath)
 
 try:
