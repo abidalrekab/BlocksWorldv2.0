@@ -20,8 +20,6 @@ drawReferencePath = os.path.abspath(drawReferencePath)
 drawOutputPath = os.path.join(outputPath, "draw")
 drawOutputPath = os.path.abspath(drawOutputPath)
 
-# fileType = '.png'
-
 # Result image for draw
 
 
