@@ -7,10 +7,10 @@ import os
 import unittest
 import sys
 
-from test import FileName, root
-from test import drawReferencePath, drawOutputPath
+from set_para import FileName, root
+from set_para import drawReferencePath, drawOutputPath
 from dataSet import points
-from test import get_image, Validate
+from set_para import get_image, Validate
 
 if not os.path.exists(drawOutputPath):
     os.makedirs(drawOutputPath)
