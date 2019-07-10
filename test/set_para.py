@@ -43,7 +43,8 @@ def validate(reference_file, result_file):
     inputs : the path to the reference file, path to resultant file
     returns : True or False
     """
-
+    print(result_file)
+    print(reference_file)
     with open(result_file, "rb") as result:
         with open(reference_file, "rb") as reference:
             assert(reference.read() == result.read())

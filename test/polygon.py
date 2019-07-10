@@ -13,6 +13,7 @@ from set_para import polygonOutputPath
 from set_para import get_image, get_path, validate
 
 if not os.path.exists(polygonOutputPath):
+    print("Yes")
     os.makedirs(polygonOutputPath)
 
 try:
@@ -34,7 +35,7 @@ class test_polygon(unittest.TestCase):
     # Result images for regularPolygon.
     def test_regularPolygon(self):
         # Result image for regularPolygon
-        regularImage, regularCanvas = get_image('L', (480, 640), 'white')
+        regularImage, regularCanvas = get_image('L', (640, 480), 'white')
 
         draw(regularCanvas, regularPolygon(3, np.array([160, 120]), 50), '3')
         draw(regularCanvas, regularPolygon(4, np.array([480, 120]), 90), '4')
@@ -44,15 +45,14 @@ class test_polygon(unittest.TestCase):
 
         image_name = filename(sys._getframe().f_code.co_name)
         result_file, reference_file = get_path(image_name)
-
         regularImage.save(result_file)
         regularImage.close()
         # compare results against reference data
         validate(reference_file, result_file)
 
-    def ttest_regularRotatedPolygon(self):
+    def test_regularRotatedPolygon(self):
         # Result image for regularPolygon with rotated points
-        regularRotatedImage, regularRotatedCanvas = get_image('L', (480, 640), 'white')
+        regularRotatedImage, regularRotatedCanvas = get_image('L', (640, 480), 'white')
 
         center = np.array([320, 240])
         draw(regularRotatedCanvas, [center], 'center')
@@ -71,9 +71,9 @@ class test_polygon(unittest.TestCase):
         # compare results against reference data
         validate(reference_file, result_file)
 
-    def ttest_regularWiredPolygon(self):
+    def test_regularWiredPolygon(self):
         # Result image for regularPolygon with wire
-        regularWiredImage, regularWiredCanvas = get_image('L', (480, 640), 'white')
+        regularWiredImage, regularWiredCanvas = get_image('L', (640, 480), 'white')
 
         drawWire(regularWiredCanvas, regularPolygon(3, np.array([160, 120]), 50))
         drawWire(regularWiredCanvas, regularPolygon(4, np.array([480, 120]), 90))
@@ -92,7 +92,7 @@ class test_polygon(unittest.TestCase):
 
     def ttest_regularRotatedWiredPolygon(self):
         # Result image for regularPolygon using rotated points with wire
-        regularRotatedWiredImage, regularRotatedWiredCanvas = get_image('L', (480, 640), 'white')
+        regularRotatedWiredImage, regularRotatedWiredCanvas = get_image('L', (640, 480), 'white')
         center = np.array([320, 240])
         draw(regularRotatedWiredCanvas, [center], 'center')
 
@@ -111,9 +111,9 @@ class test_polygon(unittest.TestCase):
         # compare results against reference data
         validate(reference_file, result_file)
 
-    def ttest_polygonshape(self):
+    def test_Polygonshape(self):
         # Result image for combined shapes
-        shapeImage, shapeCanvas = get_image('L', (480, 640), 'white')
+        shapeImage, shapeCanvas = get_image('L', (640, 480), 'white')
         center = np.array([320, 240])
 
         drawWire(shapeCanvas, (rotate((regularPolygon(3, np.array([320, 240]), 110)), np.array([450, 200]), 30.0)))
@@ -138,7 +138,7 @@ class test_polygon(unittest.TestCase):
 
     def ttest_randomPolygon(self):
 
-        randomImage, randomCanvas= get_image('L', (480, 640), 'white')
+        randomImage, randomCanvas= get_image('L', (640, 480), 'white')
         seed = 5
         draw(randomCanvas, randomPolygon(seed, 3, np.array([160, 120]), 200), '3r')
         draw(randomCanvas, randomPolygon(seed, 4, np.array([480, 120]), 200), '4r')
@@ -157,7 +157,7 @@ class test_polygon(unittest.TestCase):
 
     def ttest_randomRotatedPolygon(self):
 
-        randomRotatedImage, randomRotatedCanvas = get_image('L', (480, 640), 'white')
+        randomRotatedImage, randomRotatedCanvas = get_image('L', (640, 480), 'white')
 
         center = np.array([320, 240])
         draw(randomRotatedCanvas, [center], 'center')
