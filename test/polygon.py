@@ -8,18 +8,12 @@
 import os
 import unittest
 import sys
+from set_para import filename, root
+from set_para import polygonOutputPath
+from set_para import get_image, get_path, validate
 
-crtScriptDir = os.path.dirname(os.getcwd())
-root = os.path.abspath(crtScriptDir)
-
-outputPath = os.path.join(root, "test/data/output/polygon")
-outputPath = os.path.abspath(outputPath)
-
-if not os.path.exists(outputPath):
-    os.makedirs(outputPath)
-
-referencePath = os.path.join(root, "test/data/reference/polygon")
-referencePath = os.path.abspath(referencePath)
+if not os.path.exists(polygonOutputPath):
+    os.makedirs(polygonOutputPath)
 
 try:
     # try using the installed blocksWorld if available
@@ -31,33 +25,16 @@ except ImportError:
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
-imageSize = (640, 480)
-imageMode = 'L'
-imageBackground = 'white'
-
-fileType = 'PNG'
-
-points = np.array([
-    [5,  5],
-    [5, 15],
-    [5, 25],
-    [5, 35],
-    [5, 45],
-    [5, 55],
-    [5, 65],
-    [5, 75]
-])
 
 class test_polygon(unittest.TestCase):
     """
-    Ploting Images for different types of polygons.
+    Plotting Images for different types of polygons.
     """
 
     # Result images for regularPolygon.
     def test_regularPolygon(self):
         # Result image for regularPolygon
-        regularImage = Image.new(imageMode, imageSize, imageBackground)
-        regularCanvas = ImageDraw.Draw(regularImage)
+        regularImage, regularCanvas = get_image('L', (480, 640), 'white')
 
         draw(regularCanvas, regularPolygon(3, np.array([160, 120]), 50), '3')
         draw(regularCanvas, regularPolygon(4, np.array([480, 120]), 90), '4')
@@ -65,50 +42,40 @@ class test_polygon(unittest.TestCase):
         draw(regularCanvas, regularPolygon(6, np.array([160, 360]), 80), '6')
         draw(regularCanvas, regularPolygon(7, np.array([320, 160]), 70), '7')
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        regularImage.save(outputPath+"/"+fileName, fileType)
+        regularImage.save(image_name)
         regularImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
+        result_file, reference_file = get_path(image_name)
 
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        # compare results against reference data
+        validate(reference_file,result_file)
 
     def test_regularRotatedPolygon(self):
         # Result image for regularPolygon with rotated points
-        regularRotatedImage = Image.new(imageMode, imageSize, imageBackground)
-        regularRotatedCanvas = ImageDraw.Draw(regularRotatedImage)
+        regularRotatedImage, regularRotatedCanvas = get_image('L', (480, 640), 'white')
 
         center = np.array([320, 240])
         draw(regularRotatedCanvas, [center], 'center')
-
         draw(regularRotatedCanvas, (rotate((regularPolygon(3, np.array([160, 120]), 50)), center, 45.0)), '3r')
         draw(regularRotatedCanvas, (rotate((regularPolygon(4, np.array([480, 120]), 90)), center, 45.0)), '4r')
         draw(regularRotatedCanvas, (rotate((regularPolygon(5, np.array([420, 360]), 60)), center, 45.0)), '5r')
         draw(regularRotatedCanvas, (rotate((regularPolygon(6, np.array([160, 360]), 80)), center, 45.0)), '6r')
         draw(regularRotatedCanvas, (rotate((regularPolygon(7, np.array([320, 160]), 70)), center, 45.0)), '7r')
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        regularRotatedImage.save(outputPath + "/" + fileName, fileType)
+        regularRotatedImage.save(image_name)
         regularRotatedImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
     def test_regularWiredPolygon(self):
         # Result image for regularPolygon with wire
-        regularWiredImage = Image.new(imageMode, imageSize, imageBackground)
-        regularWiredCanvas = ImageDraw.Draw(regularWiredImage)
+        regularWiredImage, regularWiredCanvas = get_image('L', (480, 640), 'white')
 
         drawWire(regularWiredCanvas, regularPolygon(3, np.array([160, 120]), 50))
         drawWire(regularWiredCanvas, regularPolygon(4, np.array([480, 120]), 90))
@@ -116,24 +83,18 @@ class test_polygon(unittest.TestCase):
         drawWire(regularWiredCanvas, regularPolygon(6, np.array([160, 360]), 80))
         drawWire(regularWiredCanvas, regularPolygon(7, np.array([320, 160]), 70))
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        regularWiredImage.save(outputPath + "/" + fileName, fileType)
+        regularWiredImage.save(image_name)
         regularWiredImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
     def test_regularRotatedWiredPolygon(self):
         # Result image for regularPolygon using rotated points with wire
-        regularRotatedWiredImage = Image.new(imageMode, imageSize, imageBackground)
-        regularRotatedWiredCanvas = ImageDraw.Draw(regularRotatedWiredImage)
-
+        regularRotatedWiredImage, regularRotatedWiredCanvas = get_image('L', (480, 640), 'white')
         center = np.array([320, 240])
         draw(regularRotatedWiredCanvas, [center], 'center')
 
@@ -143,52 +104,43 @@ class test_polygon(unittest.TestCase):
         drawWire(regularRotatedWiredCanvas, (rotate((regularPolygon(6, np.array([160, 360]), 80)), center, 45.0)))
         drawWire(regularRotatedWiredCanvas, (rotate((regularPolygon(7, np.array([320, 160]), 70)), center, 45.0)))
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        regularRotatedWiredImage.save(outputPath + "/" + fileName, fileType)
+        regularRotatedWiredImage.save(image_name)
         regularRotatedWiredImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
-
-    def test_shape(self):
+    def test_polygonshape(self):
         # Result image for combined shapes
-        shapeImage = Image.new(imageMode, imageSize, imageBackground)
-        shapeCanvas = ImageDraw.Draw(shapeImage)
-
+        shapeImage, shapeCanvas = get_image('L', (480, 640), 'white')
         center = np.array([320, 240])
 
         drawWire(shapeCanvas, (rotate((regularPolygon(3, np.array([320, 240]), 110)), np.array([450, 200]), 30.0)))
         drawWire(shapeCanvas, (rotate((regularPolygon(4, np.array([320, 240]), 120)), center, 45.0)))
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        shapeImage.save(outputPath + "/" + fileName, fileType)
+        shapeImage.save(image_name)
         shapeImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+    def test_convexPolygon(self):
+        pass
+        # TODO
 
-    # def test_convexPolygon(self):
-    # TODO
-
-    # def test_concavePolygon(self):
-    # TODO
+    def test_concavePolygon(self):
+        pass
+        # TODO
 
     def test_randomPolygon(self):
-        randomImage = Image.new(imageMode, imageSize, imageBackground)
-        randomCanvas = ImageDraw.Draw(randomImage)
 
+        randomImage, randomCanvas= get_image('L', (480, 640), 'white')
         seed = 5
         draw(randomCanvas, randomPolygon(seed, 3, np.array([160, 120]), 200), '3r')
         draw(randomCanvas, randomPolygon(seed, 4, np.array([480, 120]), 200), '4r')
@@ -196,22 +148,18 @@ class test_polygon(unittest.TestCase):
         draw(randomCanvas, randomPolygon(seed, 6, np.array([160, 360]), 200), '6r')
         draw(randomCanvas, randomPolygon(seed, 7, np.array([320, 240]), 200), '7r')
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        randomImage.save(outputPath+"/"+fileName, fileType)
+        randomImage.save(image_name)
         randomImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
     def test_randomRotatedPolygon(self):
-        randomRotatedImage = Image.new(imageMode, imageSize, imageBackground)
-        randomRotatedCanvas = ImageDraw.Draw(randomRotatedImage)
+
+        randomRotatedImage, randomRotatedCanvas = get_image('L', (480, 640), 'white')
 
         center = np.array([320, 240])
         draw(randomRotatedCanvas, [center], 'center')
@@ -223,18 +171,14 @@ class test_polygon(unittest.TestCase):
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 6, np.array([160, 360]), 80)), center, 90.0)), '6r')
         draw(randomRotatedCanvas, (rotate((randomPolygon(seed, 7, np.array([320, 160]), 70)), center, 90.0)), '7r')
 
-        fileName = sys._getframe().f_code.co_name + '.png'
+        image_name = filename(sys._getframe().f_code.co_name)
 
-        randomRotatedImage.save(outputPath + "/" + fileName, fileType)
+        randomRotatedImage.save(image_name)
         randomRotatedImage.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        result_file, reference_file = get_path(image_name)
+        # compare results against reference data
+        validate(reference_file, result_file)
 
 
 if __name__ == '__main__':

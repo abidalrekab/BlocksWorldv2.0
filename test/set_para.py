@@ -69,7 +69,20 @@ def get_path(image_name):
      from which test is being called ) reference folder, image name!
     outputs: full path to resultant, and reference files.
     """
-    result_file = os.path.join(drawOutputPath, image_name)
-    reference_file = os.path.join(drawReferencePath, image_name)
+
+    if image_name.find('draw') != -1:
+
+        result_file = os.path.join(drawOutputPath, image_name)
+        reference_file = os.path.join(drawReferencePath, image_name)
+
+    elif image_name.find('Polygon') != -1:
+
+        result_file = os.path.join(polygonOutputPath, image_name)
+        reference_file = os.path.join(polygonReferencePath, image_name)
+
+    elif image_name.find('transform') != -1:
+
+        result_file = os.path.join(transformOutputPath, image_name)
+        reference_file = os.path.join(transformReferencePath, image_name)
 
     return result_file, reference_file
