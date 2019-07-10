@@ -7,10 +7,10 @@ import os
 import unittest
 import sys
 
-from set_para import FileName, root
-from set_para import drawReferencePath, drawOutputPath
+from set_para import filename, root
+from set_para import drawOutputPath
 from dataSet import points
-from set_para import get_image, Validate
+from set_para import get_image, get_path, validate
 
 if not os.path.exists(drawOutputPath):
     os.makedirs(drawOutputPath)
@@ -25,6 +25,7 @@ except ImportError:
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
+
 class TestDraw(unittest.TestCase):
     """
     Plotting images for draw , drawWire and drawSolid
@@ -34,9 +35,8 @@ class TestDraw(unittest.TestCase):
     def test_draw(self):
 
         """ Create the file name and its saving path, and specify the reference file to compare to."""
-        fileName = FileName(sys._getframe().f_code.co_name)
-        resultFile    = os.path.join(drawOutputPath, fileName)
-        referenceFile = os.path.join(drawReferencePath, fileName)
+        image_name = filename(sys._getframe().f_code.co_name)
+        result_file, reference_file = get_path(image_name)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
@@ -48,21 +48,20 @@ class TestDraw(unittest.TestCase):
 
         """ saving the file and closing it """
 
-        image.save(resultFile)
+        image.save(result_file)
         image.close()
 
-        """ valiate the resulant file against the reference images"""
+        """ validate the resultant file against the reference images"""
 
-        Validate(referenceFile, resultFile)
+        validate(reference_file, result_file)
 
     # Result image for drawWire
     def test_drawWire(self):
 
         """ Create the file name and its saving path, and specify the reference file to compare to."""
 
-        fileName = FileName(sys._getframe().f_code.co_name)
-        resultFile    = os.path.join(drawOutputPath, fileName)
-        referenceFile = os.path.join(drawReferencePath, fileName)
+        image_name = filename(sys._getframe().f_code.co_name)
+        result_file, reference_file = get_path(image_name)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
@@ -77,26 +76,25 @@ class TestDraw(unittest.TestCase):
 
         """ saving the file and closing it """
 
-        image.save(resultFile)
+        image.save(result_file)
         image.close()
 
-        """ valiate the resulant file against the reference images"""
+        """ validate the resultant file against the reference images"""
 
-        Validate(referenceFile, resultFile)
+        validate(reference_file, result_file)
 
     # Result image for drawSolid
     def test_drawSolid(self):
 
         """ Create the file name and its saving path, and specify the reference file to compare to."""
 
-        fileName = FileName(sys._getframe().f_code.co_name)
-        resultFile    = os.path.join(drawOutputPath, fileName)
-        referenceFile = os.path.join(drawReferencePath, fileName)
+        image_name = filename(sys._getframe().f_code.co_name)
+        result_file, reference_file = get_path(image_name)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
 
-        image, canvas = get_image('RGB',(640,480),'white')
+        image, canvas = get_image('RGB', (640, 480), 'white')
 
         '''
         for different representations of colors see
@@ -109,12 +107,12 @@ class TestDraw(unittest.TestCase):
         drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
         """ saving the file and closing it """
-        image.save(resultFile)
+        image.save(result_file)
         image.close()
 
-        """ valiate the resulant file against the reference images"""
+        """ validate the resultant file against the reference images"""
 
-        Validate(referenceFile, resultFile)
+        validate(reference_file, result_file)
 
 
 if __name__ == '__main__':
