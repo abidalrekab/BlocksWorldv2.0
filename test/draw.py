@@ -9,7 +9,7 @@ import sys
 
 from set_para import filename, root
 from set_para import drawOutputPath
-from dataSet import points
+from dataSet import draw_points
 from set_para import get_image, get_path, validate
 
 if not os.path.exists(drawOutputPath):
@@ -43,8 +43,8 @@ class TestDraw(unittest.TestCase):
 
         image, canvas = get_image('L', (15,90),'white')
 
-        for i in range(len(points) - 1):
-            draw(canvas, (points[i + 0], points[i + 1]), 'A')
+        for i in range(len(draw_points) - 1):
+            draw(canvas, (draw_points[i + 0], draw_points[i + 1]), 'A')
 
         """ saving the file and closing it """
 

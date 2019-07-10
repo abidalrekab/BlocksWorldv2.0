@@ -1,5 +1,5 @@
 import numpy as np
-points = [
+draw_points = [
             np.array([5,  5]),
             np.array([5, 15]),
             np.array([5, 25]),
@@ -9,3 +9,9 @@ points = [
             np.array([5, 65]),
             np.array([5, 75])
         ]
+transform_points = np.array([
+    [320,  250],
+    [320,  260],
+    [320,  270],
+    [320,  280],
+])
