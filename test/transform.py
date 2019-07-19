@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-This module test the rotation of vertices for a given points.
+    This module test the rotation of vertices for a given points.
 """
 
 import os
@@ -49,7 +49,7 @@ class test_transform(unittest.TestCase):
     This class tests for rotation of vertices for 180 degrees
     """
 
-    def test_rotate(self):
+    def rotate(self):
         fileName = sys._getframe().f_code.co_name + '.png'
 
         # Result image for rotate

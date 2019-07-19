@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 """
-         This module tests for Valid Image with the given boundaries
-         TODO drawPattern
+    This module tests for Valid Image with the given boundaries
+    TODO drawPattern
 """
 
 import os
 import unittest
 import sys
+from test import *
 
-crtScriptDir = os.path.dirname(sys.argv[0])
-root = os.path.abspath(crtScriptDir)
+drawReferencePath = os.path.join(referencePath, "draw")
+drawReferencePath = os.path.abspath(drawReferencePath)
 
-outputPath = os.path.join(root, "data/output/draw")
-outputPath = os.path.abspath(outputPath)
+drawOutputPath = os.path.join(outputPath, "draw")
+drawOutputPath = os.path.abspath(drawOutputPath)
 
-if not os.path.exists(outputPath):
-    os.makedirs(outputPath)
-
-referencePath = os.path.join(root, "data/reference/draw")
-referencePath = os.path.abspath(referencePath)
+if not os.path.exists(drawOutputPath):
+    os.makedirs(drawOutputPath)
 
 try:
     # try using the installed blocksWorld if available
@@ -30,14 +28,26 @@ except ImportError:
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
-imageSize = (640, 480)
-x, y = imageSize
-imageMode = 'L'
-imageBackground = 'white'
+class TestDraw(unittest.TestCase):
+    """
+    Plotting images for draw , drawWire and drawSolid
+    """
 
-fileType = 'PNG'
+    # Result image for draw
+    def test_draw(self):
+        fileName = FileName(sys._getframe().f_code.co_name)
 
-points = [
+        resultFile    = os.path.join(drawOutputPath, fileName)
+        referenceFile = os.path.join(drawReferencePath, fileName)
+
+        imageSize = (15, 90)
+        imageMode = 'L'
+        imageBackground = 'white'
+
+        image = Image.new(imageMode, imageSize, imageBackground)
+        canvas = ImageDraw.Draw(image)
+
+        points = [
             np.array([5,  5]),
             np.array([5, 15]),
             np.array([5, 25]),
@@ -48,56 +58,51 @@ points = [
             np.array([5, 75])
         ]
 
+        for i in range(len(points) - 1):
+            draw(canvas, (points[i + 0], points[i + 1]), 'A')
 
-class TestDraw(unittest.TestCase):
-    """
-    Plotting images for draw , drawWire and drawSolid
-    """
-
-    # Result image for draw
-    def test_draw(self):
-        image = Image.new(imageMode, imageSize, imageBackground)
-        canvas = ImageDraw.Draw(image)
-
-        for i in range(len(points)):
-            draw(canvas, (points[0], points[1]), 'A')
-
-        fileName = sys._getframe().f_code.co_name + '.png'
-
-        image.save(outputPath+"/"+fileName, fileType)
+        image.save(resultFile)
         image.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        Validate(referenceFile, resultFile)
 
     # Result image for drawWire
     def test_drawWire(self):
+        fileName = FileName(sys._getframe().f_code.co_name)
+
+        resultFile    = os.path.join(drawOutputPath, fileName)
+        referenceFile = os.path.join(drawReferencePath, fileName)
+
+        imageSize = (640, 480)
+        imageMode = 'L'
+        imageBackground = 'white'
+
         image = Image.new(imageMode, imageSize, imageBackground)
         canvas = ImageDraw.Draw(image)
 
-        drawWire(canvas, points)
+        drawWire(canvas, regularPolygon(3, np.array([160, 120]), 50))
+        drawWire(canvas, regularPolygon(4, np.array([480, 120]), 90))
+        drawWire(canvas, regularPolygon(5, np.array([420, 360]), 60))
+        drawWire(canvas, regularPolygon(6, np.array([160, 360]), 80))
+        drawWire(canvas, regularPolygon(7, np.array([320, 160]), 70))
 
-        fileName = sys._getframe().f_code.co_name + '.png'
-
-        image.save(outputPath + "/" + fileName, fileType)
+        image.save(resultFile)
         image.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        Validate(referenceFile, resultFile)
 
     # Result image for drawSolid
     def test_drawSolid(self):
-        image = Image.new('RGB', imageSize, imageBackground)
+        fileName = FileName(sys._getframe().f_code.co_name)
+
+        resultFile    = os.path.join(drawOutputPath, fileName)
+        referenceFile = os.path.join(drawReferencePath, fileName)
+
+        imageSize = (640, 480)
+        imageMode = 'RGB'
+        imageBackground = 'white'
+
+        image = Image.new(imageMode, imageSize, imageBackground)
         canvas = ImageDraw.Draw(image)
 
         '''
@@ -110,18 +115,10 @@ class TestDraw(unittest.TestCase):
         drawSolid(canvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
         drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
-        fileName = sys._getframe().f_code.co_name + '.png'
-
-        image.save(outputPath + "/" + fileName, fileType)
+        image.save(resultFile)
         image.close()
 
-        resultFile = outputPath + "/" + fileName
-        referenceFile = referencePath + "/" + fileName
-
-        # compare results agains reference data
-        with open(resultFile, "rb") as result:
-            with open(referenceFile, "rb") as reference:
-                self.assertTrue(reference.read() == result.read())
+        Validate(referenceFile, resultFile)
 
 
 if __name__ == '__main__':
