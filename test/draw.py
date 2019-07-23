@@ -6,6 +6,7 @@
 import os
 import unittest
 import sys
+from test import *
 
 from set_para import filename, root
 from set_para import drawOutputPath
@@ -24,7 +25,6 @@ except ImportError:
     blocksWorldPath = os.path.abspath(blocksWorldPath)
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
-
 
 class TestDraw(unittest.TestCase):
     """
@@ -113,7 +113,6 @@ class TestDraw(unittest.TestCase):
         """ validate the resultant file against the reference images"""
 
         validate(reference_file, result_file)
-
 
 if __name__ == '__main__':
     unittest.main()

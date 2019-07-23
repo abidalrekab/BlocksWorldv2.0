@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-  This module tests the function of Polygon vertices Generation.
-  TODO test_concavePolygon and test_convexPolygon
+    This module tests the function of Polygon vertices Generation.
+    TODO test_concavePolygon and test_convexPolygon
 """
 
 

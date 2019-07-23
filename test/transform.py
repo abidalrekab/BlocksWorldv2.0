@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-This module test the rotation of vertices for a given points.
+    This module test the rotation of vertices for a given points.
 """
 
 import os
@@ -23,10 +23,6 @@ except ImportError:
     blocksWorldPath = os.path.abspath(blocksWorldPath)
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
-
-
-
-
 
 class test_transform(unittest.TestCase):
 
