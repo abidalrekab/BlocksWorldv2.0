@@ -6,5 +6,4 @@ dist
 .DS_Store
 ._*
 test/data/output
-.idea/workspace.xml
 .idea
