@@ -31,7 +31,9 @@ class test_transform(unittest.TestCase):
     """
     points = transformPoints
     def test_rotateTransform(self):
-        """ This function is to test rotated points in 2D"""
+        """ T
+        his function is to test rotated points in 2D
+        """
         # first create an empty white image
         resultImage, resultCanvas = getImage('L', (640, 480), 'white')
         # get the name through the module name
@@ -83,7 +85,6 @@ class test_transform(unittest.TestCase):
 
         resultImage.save(resultFile)
         resultImage.close()
-
         validate(resultFile,resultFile)
 
 

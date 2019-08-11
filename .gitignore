@@ -7,3 +7,4 @@ dist
 ._*
 test/data/output
 .idea
+.pytest_cache

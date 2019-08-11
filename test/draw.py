@@ -38,32 +38,40 @@ class TestDraw(unittest.TestCase):
         image_name = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(image_name)
 
-        ''' This function is to create an empty image with a specific dimension
-            with white background, and black/white colored '''
+        """ 
+        This function is to create an empty image with a specific dimension with white background, 
+        and black/white colored 
+        """
 
         image, canvas = getImage('L', (15, 90), 'white')
 
         for i in range(len(drawPoints) - 1):
             draw(canvas, (drawPoints[i + 0], drawPoints[i + 1]), 'A')
 
-        """ saving the file and closing it """
+        """ 
+        saving the file and closing it 
+        """
 
         image.save(resultFile)
         image.close()
 
-        """ validate the resultant file against the reference images"""
+        # validate the resultant file against the reference images
 
         validate(referenceFile, resultFile)
 
     # Result image for drawWire
     def test_drawWire(self):
-        """ Create the file name and its saving path, and specify the reference file to compare to."""
+        """
+        Create the file name and its saving path, and specify the reference file to compare to.
+        """
 
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
 
-        ''' This function is to create an empty image with a specific dimension
-            with white background, and black/white colored '''
+        """ 
+        This function is to create an empty image with a specific dimension
+            with white background, and black/white colored     
+        """
 
         image, canvas = getImage('L', (640, 480), 'white')
 
@@ -73,12 +81,16 @@ class TestDraw(unittest.TestCase):
         drawWire(canvas, regularPolygon(6, np.array([160, 360]), 80))
         drawWire(canvas, regularPolygon(7, np.array([320, 160]), 70))
 
-        """ saving the file and closing it """
+        """ 
+        saving the file and closing it 
+        """
 
         image.save(resultFile)
         image.close()
 
-        """ validate the resultant file against the reference images"""
+        """ 
+        validate the resultant file against the reference images
+        """
 
         validate(referenceFile, resultFile)
 
@@ -89,26 +101,32 @@ class TestDraw(unittest.TestCase):
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
 
-        ''' This function is to create an empty image with a specific dimension
-            with white background, and black/white colored '''
+        """
+        This function is to create an empty image with a specific dimension
+            with white background, and black/white colored 
+        """
 
         image, canvas = getImage('RGB', (640, 480), 'white')
 
-        '''
-        for different representations of colors see
+        """ 
+                for different representations of colors see
         "https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html#color-names"
-        '''
+        """
         drawSolid(canvas, regularPolygon(3, np.array([160, 120]), 50), 'red')
         drawSolid(canvas, regularPolygon(4, np.array([480, 120]), 90), 'blue')
         drawSolid(canvas, regularPolygon(5, np.array([420, 360]), 60), 'green')
         drawSolid(canvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
         drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
-        """ saving the file and closing it """
+        """ 
+        saving the file and closing it 
+        """
         image.save(resultFile)
         image.close()
 
-        """ validate the resultant file against the reference images"""
+        """ 
+        validate the resultant file against the reference images 
+        """
 
         validate(referenceFile, resultFile)
 
