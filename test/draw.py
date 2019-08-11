@@ -34,23 +34,22 @@ class TestDraw(unittest.TestCase):
 
     # Result image for draw
     def test_draw(self):
-        """ Create the file name and its saving path, and specify the reference file to compare to."""
+        """
+        This test is to draw a number of vertices labeled as 'A'
+        """
+
+        # Create the file name and its saving path, and specify the reference file to compare to.
         image_name = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(image_name)
 
-        """ 
-        This function is to create an empty image with a specific dimension with white background, 
-        and black/white colored 
-        """
+        # create an empty image with a specific dimension with white background, and black/white colored
 
         image, canvas = getImage('L', (15, 90), 'white')
 
         for i in range(len(drawPoints) - 1):
             draw(canvas, (drawPoints[i + 0], drawPoints[i + 1]), 'A')
 
-        """ 
-        saving the file and closing it 
-        """
+        # saving the file and closing it
 
         image.save(resultFile)
         image.close()
@@ -61,17 +60,17 @@ class TestDraw(unittest.TestCase):
 
     # Result image for drawWire
     def test_drawWire(self):
+
         """
-        Create the file name and its saving path, and specify the reference file to compare to.
+        This test is to draw a line between two vertices
         """
 
+        # Create the file name and its saving path, and specify the reference file to compare to.
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
 
-        """ 
-        This function is to create an empty image with a specific dimension
-            with white background, and black/white colored     
-        """
+
+        # create an empty image with a specific dimension with white background, and black/white colored
 
         image, canvas = getImage('L', (640, 480), 'white')
 
@@ -81,34 +80,31 @@ class TestDraw(unittest.TestCase):
         drawWire(canvas, regularPolygon(6, np.array([160, 360]), 80))
         drawWire(canvas, regularPolygon(7, np.array([320, 160]), 70))
 
-        """ 
-        saving the file and closing it 
-        """
+        # saving the file and closing it
 
         image.save(resultFile)
         image.close()
 
-        """ 
-        validate the resultant file against the reference images
-        """
+        # validate the resultant file against the reference images
 
         validate(referenceFile, resultFile)
 
     # Result image for drawSolid
     def test_drawSolid(self):
-        """ Create the file name and its saving path, and specify the reference file to compare to."""
+        """
+        This test is to create polygons filled with a particular color: red, blue,...ect.
+        """
+
+        # first, Create the file name and its saving path, and specify the reference file to compare to.
 
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
 
-        """
-        This function is to create an empty image with a specific dimension
-            with white background, and black/white colored 
-        """
+        # Next, create an empty image with a specific dimension with white background, and black/white colored
 
         image, canvas = getImage('RGB', (640, 480), 'white')
 
-        """ 
+        """
                 for different representations of colors see
         "https://pillow.readthedocs.io/en/3.0.x/reference/ImageColor.html#color-names"
         """
@@ -118,15 +114,12 @@ class TestDraw(unittest.TestCase):
         drawSolid(canvas, regularPolygon(6, np.array([160, 360]), 80), 'black')
         drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
-        """ 
-        saving the file and closing it 
-        """
+        # saving the file and closing it
+
         image.save(resultFile)
         image.close()
 
-        """ 
-        validate the resultant file against the reference images 
-        """
+        # validate the resultant file against the reference images
 
         validate(referenceFile, resultFile)
 
