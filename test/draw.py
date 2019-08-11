@@ -26,6 +26,7 @@ except ImportError:
     sys.path.append(blocksWorldPath)
     from blocksWorld import *
 
+
 class TestDraw(unittest.TestCase):
     """
     Plotting images for draw , drawWire and drawSolid
@@ -33,10 +34,9 @@ class TestDraw(unittest.TestCase):
 
     # Result image for draw
     def test_draw(self):
-
         """ Create the file name and its saving path, and specify the reference file to compare to."""
         image_name = fileName(sys._getframe().f_code.co_name)
-        resultFile, reference_file = getPath(image_name)
+        resultFile, referenceFile = getPath(image_name)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
@@ -53,15 +53,14 @@ class TestDraw(unittest.TestCase):
 
         """ validate the resultant file against the reference images"""
 
-        validate(reference_file, resultFile)
+        validate(referenceFile, resultFile)
 
     # Result image for drawWire
     def test_drawWire(self):
-
         """ Create the file name and its saving path, and specify the reference file to compare to."""
 
-        image_name = fileName(sys._getframe().f_code.co_name)
-        result_file, reference_file = getPath(image_name)
+        imageName = fileName(sys._getframe().f_code.co_name)
+        resultFile, referenceFile = getPath(imageName)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
@@ -76,20 +75,19 @@ class TestDraw(unittest.TestCase):
 
         """ saving the file and closing it """
 
-        image.save(result_file)
+        image.save(resultFile)
         image.close()
 
         """ validate the resultant file against the reference images"""
 
-        validate(reference_file, result_file)
+        validate(referenceFile, resultFile)
 
     # Result image for drawSolid
     def test_drawSolid(self):
-
         """ Create the file name and its saving path, and specify the reference file to compare to."""
 
-        image_name = fileName(sys._getframe().f_code.co_name)
-        result_file, reference_file = getPath(image_name)
+        imageName = fileName(sys._getframe().f_code.co_name)
+        resultFile, referenceFile = getPath(imageName)
 
         ''' This function is to create an empty image with a specific dimension
             with white background, and black/white colored '''
@@ -107,12 +105,13 @@ class TestDraw(unittest.TestCase):
         drawSolid(canvas, regularPolygon(7, np.array([320, 160]), 70), 'brown')
 
         """ saving the file and closing it """
-        image.save(result_file)
+        image.save(resultFile)
         image.close()
 
         """ validate the resultant file against the reference images"""
 
-        validate(reference_file, result_file)
+        validate(referenceFile, resultFile)
+
 
 if __name__ == '__main__':
     unittest.main()
