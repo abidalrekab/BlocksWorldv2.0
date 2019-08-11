@@ -6,10 +6,10 @@
 import os
 import unittest
 import sys
-from dataSet import transform_points
-from set_para import filename, root
-from set_para import transformOutputPath
-from set_para import get_image, get_path, validate
+from dataSet import transformPoints
+from PathsModule import fileName, root
+from PathsModule import transformOutputPath
+from PathsModule import getImage, getPath, validate
 
 if not os.path.exists(transformOutputPath):
     os.makedirs(transformOutputPath)
@@ -29,15 +29,15 @@ class test_transform(unittest.TestCase):
     """
     This class tests for rotation of vertices for 180 degrees
     """
-    points = transform_points
+    points = transformPoints
     def test_rotate_transform(self):
         """ This function is to test rotated points in 2D"""
         # first create an empty white image
-        result_image, result_canvas = get_image('L', (640, 480), 'white')
+        result_image, result_canvas = getImage('L', (640, 480), 'white')
         # get the name through the module name
-        image_name = filename(sys._getframe().f_code.co_name)
-        # call function get_path from set_para.py to set the path for results and reference folder location
-        result_file, reference_file = get_path(image_name)
+        image_name = fileName(sys._getframe().f_code.co_name)
+        # call function get_path from PathsModule.py to set the path for results and reference folder location
+        result_file, reference_file = getPath(image_name)
         # plot the points with no rotation
         draw(result_canvas, self.points, '+')
         # specify the centre for rotation and draw it.
@@ -54,11 +54,11 @@ class test_transform(unittest.TestCase):
 
     def test_translate_transform(self):
 
-        image_name = filename(sys._getframe().f_code.co_name)
-        result_file, reference_file = get_path(image_name)
+        image_name = fileName(sys._getframe().f_code.co_name)
+        result_file, reference_file = getPath(image_name)
 
         # Result image for transform
-        result_image, result_canvas = get_image('L', (640, 480), 'white')
+        result_image, result_canvas = getImage('L', (640, 480), 'white')
 
         draw(result_canvas, translate(regularPolygon(4, (120, 340), 100), 240, 0), "black")
         draw(result_canvas, translate(regularPolygon(4, (120, 340), 100), 240, -90), "black")
@@ -68,11 +68,11 @@ class test_transform(unittest.TestCase):
         result_image.close()
         validate(result_file,result_file)
     def test_scale_transform(self):
-        image_name = filename(sys._getframe().f_code.co_name)
-        result_file, reference_file = get_path(image_name)
+        image_name = fileName(sys._getframe().f_code.co_name)
+        result_file, reference_file = getPath(image_name)
 
         # Result image for transform
-        result_image, result_canvas = get_image('L', (640, 480), 'white')
+        result_image, result_canvas = getImage('L', (640, 480), 'white')
 
         drawSolid(result_canvas, regularPolygon(3, np.array([320, 240]), 50), 'black')
         drawSolid(result_canvas, regularPolygon(5, np.array([80, 60]), 70), 'black')
