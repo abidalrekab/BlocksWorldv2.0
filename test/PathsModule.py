@@ -1,10 +1,20 @@
 #!/usr/bin/env python
-"""
-    This module helps with the tests.
-"""
 import os
 import sys
 from PIL import Image, ImageDraw
+"""
+    This module helps with the tests. 
+    - provides root, output path, and reference path directories for 
+        - draw
+        - polygon
+        - transform   
+    - it includes three sub-functions:
+        - fileName : which create the file name based on the test being performed and add extension to it. 
+        - validate : compare whether the resultant file is resemble the reference file. 
+        - getImage : create a image with specific requirements.
+        - getPath : obtains the path to save the resultant image.
+"""
+
 crtScriptDir = os.path.dirname(sys.argv[0])
 root = os.path.abspath(crtScriptDir)
 
@@ -28,16 +38,17 @@ transformOutputPath = os.path.join(outputPath, "transform")
 transformOutputPath = os.path.abspath(transformOutputPath)
 transformReferencePath = os.path.join(referencePath, "transform")
 transformReferencePath = os.path.abspath(transformReferencePath)
-# Result image for draw
 
 
 def fileName(name):
+    """
+    This function adds the provided name with an appropriate extension.
+    """
 
     return name + '.png'
 
 
 def validate(referenceFile, resultFile):
-
     """
     compare results against reference data
     inputs : the path to the reference file, path to resultant file
