@@ -34,6 +34,9 @@ class test_polygon(unittest.TestCase):
 
     # Result images for regularPolygon.
     def test_regularPolygon(self):
+        """
+        This test draws a multi-vertices (3,4,5,6,7) at specific locations.
+        """
         # Result image for regularPolygon
         regularImage, regularCanvas = getImage('L', (640, 480), 'white')
 
@@ -72,7 +75,10 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_regularWiredPolygon(self):
-        # Result image for regularPolygon with wire
+        """
+        Result image is the same as regularPolygon but with wire connecting the vertices.
+
+        """
         regularWiredImage, regularWiredCanvas = getImage('L', (640, 480), 'white')
 
         drawWire(regularWiredCanvas, regularPolygon(3, np.array([160, 120]), 50))
@@ -91,7 +97,9 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_regularRotatedWiredPolygon(self):
-        # Result image for regularPolygon using rotated points with wire
+        """
+        Result image for regularPolygon using rotated points with wire.
+        """
         regularRotatedWiredImage, regularRotatedWiredCanvas = getImage('L', (640, 480), 'white')
         center = np.array([320, 240])
         draw(regularRotatedWiredCanvas, [center], 'center')
@@ -112,7 +120,10 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_Polygonshape(self):
-        # Result image for combined shapes
+        """
+        Result image for combined shapes
+
+        """
         shapeImage, shapeCanvas = getImage('L', (640, 480), 'white')
         center = np.array([320, 240])
 
@@ -137,6 +148,9 @@ class test_polygon(unittest.TestCase):
         # TODO
 
     def test_randomPolygon(self):
+        """
+        drawing random vertices location - un-wired
+        """
 
         randomImage, randomCanvas= getImage('L', (640, 480), 'white')
         seed = 5
@@ -155,8 +169,11 @@ class test_polygon(unittest.TestCase):
         # compare results against reference data
         validate(referenceFile, resultFile)
 
-    def ttest_randomRotatedPolygon(self):
+    def test_randomRotatedPolygon(self):
 
+        """
+        this test is to create  random vertices and rotate them
+        """
         randomRotatedImage, randomRotatedCanvas = getImage('L', (640, 480), 'white')
 
         center = np.array([320, 240])
