@@ -1,4 +1,7 @@
 import numpy as np
+"""
+This module provide the points for draw and transform tests.
+"""
 drawPoints = [
             np.array([5,  5]),
             np.array([5, 15]),
@@ -8,6 +11,7 @@ drawPoints = [
             np.array([5, 55]),
             np.array([5, 65]),
             np.array([5, 75])]
+
 transformPoints = np.array([
     [320,  250],
     [320,  260],

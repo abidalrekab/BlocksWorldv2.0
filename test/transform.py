@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-"""
-    This module test the rotation of vertices for a given points.
-"""
-
 import os
 import unittest
 import sys
@@ -10,6 +6,10 @@ from dataSet import transformPoints
 from PathsModule import fileName, root
 from PathsModule import transformOutputPath
 from PathsModule import getImage, getPath, validate
+
+"""
+    This module test the rotation of vertices for a given points.
+"""
 
 if not os.path.exists(transformOutputPath):
     os.makedirs(transformOutputPath)
@@ -31,30 +31,42 @@ class test_transform(unittest.TestCase):
     """
     points = transformPoints
     def test_rotateTransform(self):
-        """ T
-        his function is to test rotated points in 2D
         """
+        This function is to test rotated points in 2D
+        """
+
         # first create an empty white image
         resultImage, resultCanvas = getImage('L', (640, 480), 'white')
+
         # get the name through the module name
         imageName = fileName(sys._getframe().f_code.co_name)
+
         # call function get_path from PathsModule.py to set the path for results and reference folder location
         resultFile, referenceFile = getPath(imageName)
+
         # plot the points with no rotation
         draw(resultCanvas, self.points, '+')
+
         # specify the centre for rotation and draw it.
         center = np.array([180, 140])
         draw(resultCanvas, [center], 'center')
+
         # apply rotation and draw the resultant points
         rotatedPoints = rotate(self.points, center, 90.0)
         draw(resultCanvas, rotatedPoints, 'X')
+
         # save it into predetermined file.
         resultImage.save(resultFile)
         resultImage.close()
+
         # compare results against reference data
         validate(referenceFile, resultFile)
 
     def test_translateTransform(self):
+        """
+        this test perform translation on created shapes.
+
+        """
 
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
@@ -70,6 +82,11 @@ class test_transform(unittest.TestCase):
         resultImage.close()
         validate(resultFile,resultFile)
     def test_scaleTransform(self):
+
+        """
+        This test is to create polygons and performs scaling on them.
+
+        """
         imageName = fileName(sys._getframe().f_code.co_name)
         resultFile, referenceFile = getPath(imageName)
 

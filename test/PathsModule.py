@@ -2,6 +2,7 @@
 import os
 import sys
 from PIL import Image, ImageDraw
+
 """
     This module helps with the tests. 
     - provides root, output path, and reference path directories for 
@@ -41,33 +42,35 @@ transformReferencePath = os.path.abspath(transformReferencePath)
 
 
 def fileName(name):
+
     """
     This function adds the provided name with an appropriate extension.
     """
-
     return name + '.png'
 
 
 def validate(referenceFile, resultFile):
+
     """
     compare results against reference data
     inputs : the path to the reference file, path to resultant file
     returns : True or False
     """
-    print(resultFile)
-    print(referenceFile)
+
     with open(resultFile, "rb") as result:
         with open(referenceFile, "rb") as reference:
             assert(reference.read() == result.read())
 
 
 def getImage(imageMode, imageSize, imageBackground):
+
     """
     This function is to generate an image with a specific background, mode, and size
     inputs: plotting mode, image size in tuple (x,y), background color 'while' for ex.
     returns: image , and canvas objects
 
     """
+
     image = Image.new(imageMode, imageSize, imageBackground)
     canvas = ImageDraw.Draw(image)
 
@@ -75,6 +78,7 @@ def getImage(imageMode, imageSize, imageBackground):
 
 
 def getPath(imageName):
+
     """
     This function is to set a path to resultant and reference files
     inputs: path to (drawing, polygon, transform) folder, path to (drawing, polygon, transform, depends on

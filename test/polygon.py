@@ -1,16 +1,15 @@
 #!/usr/bin/env python
-"""
-    This module tests the function of Polygon vertices Generation.
-    TODO test_concavePolygon and test_convexPolygon
-"""
-
-
 import os
 import unittest
 import sys
 from PathsModule import fileName, root
 from PathsModule import polygonOutputPath
 from PathsModule import getImage, getPath, validate
+
+"""
+    This module tests the function of Polygon vertices Generation.
+    TODO test_concavePolygon and test_convexPolygon
+"""
 
 if not os.path.exists(polygonOutputPath):
     print("Yes")
@@ -28,15 +27,18 @@ except ImportError:
 
 
 class test_polygon(unittest.TestCase):
+
     """
     Plotting Images for different types of polygons.
     """
 
     # Result images for regularPolygon.
     def test_regularPolygon(self):
+
         """
         This test draws a multi-vertices (3,4,5,6,7) at specific locations.
         """
+
         # Result image for regularPolygon
         regularImage, regularCanvas = getImage('L', (640, 480), 'white')
 
@@ -50,10 +52,17 @@ class test_polygon(unittest.TestCase):
         resultFile, referenceFile = getPath(imageName)
         regularImage.save(resultFile)
         regularImage.close()
+
         # compare results against reference data
         validate(referenceFile, resultFile)
 
     def test_regularRotatedPolygon(self):
+
+        """
+        This test creates polygons with 3,4,5,6,7 edges and rotate them around a predefined centre of rotate.
+        the angle of rotation is 45.
+        """
+
         # Result image for regularPolygon with rotated points
         regularRotatedImage, regularRotatedCanvas = getImage('L', (640, 480), 'white')
 
@@ -75,6 +84,7 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_regularWiredPolygon(self):
+
         """
         Result image is the same as regularPolygon but with wire connecting the vertices.
 
@@ -97,6 +107,7 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_regularRotatedWiredPolygon(self):
+
         """
         Result image for regularPolygon using rotated points with wire.
         """
@@ -120,6 +131,7 @@ class test_polygon(unittest.TestCase):
         validate(referenceFile, resultFile)
 
     def test_Polygonshape(self):
+
         """
         Result image for combined shapes
 
@@ -148,6 +160,7 @@ class test_polygon(unittest.TestCase):
         # TODO
 
     def test_randomPolygon(self):
+
         """
         drawing random vertices location - un-wired
         """
@@ -174,6 +187,7 @@ class test_polygon(unittest.TestCase):
         """
         this test is to create  random vertices and rotate them
         """
+
         randomRotatedImage, randomRotatedCanvas = getImage('L', (640, 480), 'white')
 
         center = np.array([320, 240])
