@@ -1,0 +1,92 @@
+{
+  "layer0": [
+    {
+      "AggName": "AggregateObject0",
+      "AggCenter" : [],
+      "scale": 2,
+      "translation": [
+        1.8,
+        2,
+        5
+      ],
+      "rotation": 36,
+      "Aggobjects": [
+        {
+          "GUID": "Object",
+          "nrNodes": 3,
+          "center": [
+            20,
+            40
+          ],
+          "radii": 15,
+          "orientation": 45
+        },
+        {
+          "GUID": "Object",
+          "nrNodes": 4,
+          "center": [
+            50,
+            80
+          ],
+          "radii": 20,
+          "orientation": 45
+        },
+        {
+          "GUID": "Object",
+          "nrNodes": 5,
+          "center": [
+            120,
+            140
+          ],
+          "radii": 20,
+          "orientation": 45
+        }
+      ]
+    }
+  ],
+  "layer1": [
+    {
+      "AggName": "AggregateObject1",
+      "AggCenter" : [],
+      "scale": 2,
+      "translation": [
+        1.8,
+        2,
+        5
+      ],
+      "rotation": 36,
+      "Aggobjects": [
+        {
+          "GUID": "Object",
+          "nrNodes": 3,
+          "center": [
+            20,
+            40
+          ],
+          "radii": 15,
+          "orientation": 45
+        },
+        {
+          "GUID": "Object",
+          "nrNodes": 4,
+          "center": [
+            50,
+            80
+          ],
+          "radii": 20,
+          "orientation": 45
+        },
+        {
+          "GUID": "Object",
+          "nrNodes": 5,
+          "center": [
+            120,
+            140
+          ],
+          "radii": 20,
+          "orientation": 45
+        }
+      ]
+    }
+  ]
+}

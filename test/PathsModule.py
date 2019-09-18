@@ -19,6 +19,12 @@ from PIL import Image, ImageDraw
 crtScriptDir = os.path.dirname(sys.argv[0])
 root = os.path.abspath(crtScriptDir)
 
+AggregateOutputPath = os.path.join(root,"Aggregate")
+AggregateOutputPath = os.path.abspath(AggregateOutputPath)
+
+JsonInputPath = os.path.join(root,"Jsonfile")
+JsonInputPath = os.path.abspath(JsonInputPath)
+
 outputPath = os.path.join(root, "output")
 outputPath = os.path.abspath(outputPath)
 

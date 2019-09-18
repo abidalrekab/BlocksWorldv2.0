@@ -1,0 +1,200 @@
+{
+  "layer0": [
+    {
+      "AggCenter": [],
+      "AggName": "AggregateObject0",
+      "Aggobjects": [
+        {
+          "GUID": "object-ca8f8410-eca8-4832-a4bc-e6a79339fa62",
+          "center": [
+            20,
+            40
+          ],
+          "nrNodes": 3,
+          "orientation": 45,
+          "points": [
+            [
+              26,
+              46
+            ],
+            [
+              13,
+              41
+            ],
+            [
+              21,
+              33
+            ]
+          ],
+          "radii": 15
+        },
+        {
+          "GUID": "object-5a5ab4f9-0ed4-4780-b8aa-0724cd15e55a",
+          "center": [
+            50,
+            80
+          ],
+          "nrNodes": 4,
+          "orientation": 45,
+          "points": [
+            [
+              57,
+              87
+            ],
+            [
+              43,
+              87
+            ],
+            [
+              43,
+              73
+            ],
+            [
+              57,
+              73
+            ]
+          ],
+          "radii": 20
+        },
+        {
+          "GUID": "object-31624875-8b14-421b-ae5a-deeda4d80078",
+          "center": [
+            120,
+            140
+          ],
+          "nrNodes": 5,
+          "orientation": 45,
+          "points": [
+            [
+              127,
+              147
+            ],
+            [
+              115,
+              149
+            ],
+            [
+              110,
+              139
+            ],
+            [
+              119,
+              130
+            ],
+            [
+              129,
+              135
+            ]
+          ],
+          "radii": 20
+        }
+      ],
+      "rotation": 36,
+      "scale": 2,
+      "translation": [
+        1.8,
+        2,
+        5
+      ]
+    }
+  ],
+  "layer1": [
+    {
+      "AggCenter": [],
+      "AggName": "AggregateObject1",
+      "Aggobjects": [
+        {
+          "GUID": "object-85e4e8d1-f98c-43e6-b33f-10bb2db2db5f",
+          "center": [
+            20,
+            40
+          ],
+          "nrNodes": 3,
+          "orientation": 45,
+          "points": [
+            [
+              26,
+              46
+            ],
+            [
+              13,
+              41
+            ],
+            [
+              21,
+              33
+            ]
+          ],
+          "radii": 15
+        },
+        {
+          "GUID": "object-7c965a4c-54a0-4826-92cb-d45b3ad05f65",
+          "center": [
+            50,
+            80
+          ],
+          "nrNodes": 4,
+          "orientation": 45,
+          "points": [
+            [
+              57,
+              87
+            ],
+            [
+              43,
+              87
+            ],
+            [
+              43,
+              73
+            ],
+            [
+              57,
+              73
+            ]
+          ],
+          "radii": 20
+        },
+        {
+          "GUID": "object-e1d61c85-f5e7-4edd-b8bd-6db614d26291",
+          "center": [
+            120,
+            140
+          ],
+          "nrNodes": 5,
+          "orientation": 45,
+          "points": [
+            [
+              127,
+              147
+            ],
+            [
+              115,
+              149
+            ],
+            [
+              110,
+              139
+            ],
+            [
+              119,
+              130
+            ],
+            [
+              129,
+              135
+            ]
+          ],
+          "radii": 20
+        }
+      ],
+      "rotation": 36,
+      "scale": 2,
+      "translation": [
+        1.8,
+        2,
+        5
+      ]
+    }
+  ]
+}
