@@ -37,50 +37,62 @@ def SaveData(data):
         print("couldn't save the file")
 
 
-def GetNrObjectsAggr(data):
+def GetNrShapesInAggr(data):
     ''''
-    :param data:
-    :return:
+    This function is to obtain:
         -   Number of objects within the aggregate object
         -   Number of layers in the data set.
     '''''
+
+    # get the number of layers
     NrOfLayers = len(data.keys())
-    NrOfObjAggr = []
+
+    # initialize the number of shapes in an aggregate object to an empty list
+    NrOfShapesAggr = []
     for key, values in data.items():
-        NrOfObjAggr.append(len(values[0]["Aggobjects"]))
-    return NrOfObjAggr, NrOfLayers
+        NrOfShapesAggr.append(len(values[0]["Aggobjects"]))
+    return NrOfShapesAggr, NrOfLayers
 
 
 def GetBasicObjectInfo(data):
-    Aggrcenters = []
-    Aggrradis = []
-    AggrnrNodes = []
-    Aggrorientation = []
+    '''
+
+    :param data:
+    :return: for each an Aggregate object it returns centers, Radii, number of vertices, and orientation
+    for all basic shapes that consist of. for example:
+    [[[20,10],[20,40]],[[20,10],[30,10]]] this means that we have two aggregate objects each has two basic shapes.
+    
+    '''''
+
+    Aggrcenters = []                            # a list of centers for all shapes in all aggregate objects.
+    Aggrradii = []                              # a list of radii for all shapes in all aggregate objects.
+    AggrnrVertices = []                         # a list of vertices for all shapes in all aggregate objects.
+    Aggrorientation = []                        # a list of orientation for all shapes in all aggregate objects.
     for key, values in data.items():
         centers = []
-        radis = []
+        radii = []
         nrNodes = []
         orientation = []
-        # using get method to get key's values to aviod throwing errors.
-        for index, object in enumerate(values[0].get("Aggobjects")):
+        # using get method to get key's values to avoid throwing errors.
+        for index, object in enumerate(values[0].get("AggrObjects")):
             centers.append(object.get("center"))
-            radis.append(object.get("radii"))
-            nrNodes.append(object.get("nrNodes"))
+            radii.append(object.get("radii"))
+            nrNodes.append(object.get("nrVertices"))
             orientation.append(object.get("orientation"))
         Aggrcenters.append(centers)
-        Aggrradis.append(radis)
-        AggrnrNodes.append(nrNodes)
+        Aggrradii.append(radii)
+        AggrnrVertices.append(nrNodes)
         Aggrorientation.append(orientation)
-    return array(Aggrcenters), array(Aggrradis), array(AggrnrNodes), array(Aggrorientation)
+    return array(Aggrcenters), array(Aggrradii), array(AggrnrVertices), array(Aggrorientation)
 
 
-def createNewObject(name, layer, center, radii = 10, nrNodes = 4, rotation = 45):
-    return data[layer][0]["Aggobjects"].append({ 'GUID': name, 'center': center, 'radii': radii, 'nrNodes':nrNodes, 'orientation': rotation})
+def createNewObject(name, layer, center, radii = 10, nrVertices = 4, rotation = 45):
+    return data[layer][0]["AggrObjects"].append({ 'GUID': name, 'center': center, 'radii': radii, 'nrVertices':nrVertices, 'orientation': rotation})
 
 
 def DelObject(name):
     for key, values in data.items():
-        listOfitems = values[0]['Aggobjects']
+        listOfitems = values[0]['AggrObjects']
         for i in range(len(listOfitems)):
             print(i)
             if listOfitems[i]['GUID'] == name:
@@ -95,10 +107,10 @@ def Object2points(data):
 
         Aggrpoints = []      # the number of vertices for a single aggregate object.
 
-        for object in values[0]["Aggobjects"]:
+        for object in values[0]["AggrObjects"]:
             center = object["center"]
             size = object["radii"]
-            nrNodes = object["nrNodes"]
+            nrVertices = object["nrVertices"]
             OriAngle = object["orientation"]
             points = []
             x = center[0]
@@ -110,10 +122,10 @@ def Object2points(data):
             y0 = y
             points.append([x0, y0])
 
-            segment = 2 * math.pi / nrNodes
+            segment = 2 * math.pi / nrVertices
 
             # (xi - x)^2 + (yi - y)^2 = radius^2
-            for i in range(nrNodes - 1):
+            for i in range(nrVertices - 1):
                 angle = (i + 1) * segment
 
                 xi = round(radius * math.cos(angle) + x)
@@ -155,7 +167,7 @@ def AggregateCentroide(vertexes):
 def UpdateNames(data):
     for key, values in data.items():
         # using get method to get key's values to aviod throwing errors.
-        for index, object in enumerate(values[0].get("Aggobjects")):
+        for index, object in enumerate(values[0].get("AggrObjects")):
             object["GUID"] = 'object-' + str(uuid.uuid4())
 
 
@@ -219,24 +231,3 @@ def AggregateTranslate(points, centroids, distance = array([1,1])):
             w_final = round(dot(translationMatrix2, w_transl))
             print("the point after Translation", w_final)
 
-# load the data
-data = LoadData()
-# first update names with a unique GUID's
-UpdateNames(data)
-# obtain the parameters values to be used later to modify or create new images
-NrOfObjAggr, NrOfLayers = GetNrObjectsAggr(data)
-
-# print out the number of Aggregate object and how many basic objects they have
-print("The number of layers is {}, and the number of objects {}".format(NrOfLayers, NrOfObjAggr))
-pointee = Object2points(data)
-Aggrcenters, Aggrradis, AggrnrNodes, Aggrorientation, = GetBasicObjectInfo(data)
-centroid = AggregateCentroide(Aggrcenters)
-AggregateRotation(pointee,centroid,[30,20])
-print(Aggrcenters)
-# in a case when the user wants to create and add a new object, a layer and the object name should be specified.
-#createNewObject('object_04','layer0', [45,46], 15, 7, 80 )
-# the user can del a basic object from an Aggregate object.
-#delObject(name = 'object_01')
-for iter in range(100):
-    pass
-SaveData(data)

@@ -10,10 +10,10 @@
         5
       ],
       "rotation": 36,
-      "Aggobjects": [
+      "AggrObjects": [
         {
           "GUID": "Object",
-          "nrNodes": 3,
+          "nrVertices": 3,
           "center": [
             20,
             40
@@ -23,7 +23,7 @@
         },
         {
           "GUID": "Object",
-          "nrNodes": 4,
+          "nrVertices": 4,
           "center": [
             50,
             80
@@ -33,7 +33,7 @@
         },
         {
           "GUID": "Object",
-          "nrNodes": 5,
+          "nrVertices": 5,
           "center": [
             120,
             140
@@ -55,10 +55,10 @@
         5
       ],
       "rotation": 36,
-      "Aggobjects": [
+      "AggrObjects": [
         {
           "GUID": "Object",
-          "nrNodes": 3,
+          "nrVertices": 3,
           "center": [
             20,
             40
@@ -68,7 +68,7 @@
         },
         {
           "GUID": "Object",
-          "nrNodes": 4,
+          "nrVertices": 4,
           "center": [
             50,
             80
@@ -78,7 +78,7 @@
         },
         {
           "GUID": "Object",
-          "nrNodes": 5,
+          "nrVertices": 5,
           "center": [
             120,
             140
