@@ -6,36 +6,44 @@ import math
 from numpy import *
 
 
-JsonFileName = 'data.json'               # specify the data file name.
-JsonFileName1 = 'data1.json'             # modified data file name.
-
-# state the path to the data file.
-JsonFilepath = os.path.join(JsonInputPath, JsonFileName)
-JsonFilepath1 = os.path.join(JsonInputPath, JsonFileName1)
-
-def LoadData(path):
+def LoadData():
 
     ''''
     This function is to load json file into a python variable.
-    inputs :param path: 
+    inputs : path to the Json file. 
     :return: python data variable.
     '''''
+    # specify the data file name.
+    JsonFileName = 'data.json'
+
+    # state the path to the data file.
+    JsonFilepath = os.path.join(JsonInputPath, JsonFileName)
 
     try:
-        with open(path, 'r') as f:
+        with open(JsonFilepath, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         print('Check the file path')
 
 
-def GetNrObjectsAggr(data):
-    '''
+def SaveData(data):
+    JsonFileName1 = 'data1.json'  # modified data file name.
+    JsonFilepath1 = os.path.join(JsonInputPath, JsonFileName1)
 
+    try:
+        with open(JsonFilepath1, 'w') as f:
+            json.dump(data, f, indent=2, sort_keys=True)
+    except FileNotFoundError:
+        print("couldn't save the file")
+
+
+def GetNrObjectsAggr(data):
+    ''''
     :param data:
     :return:
         -   Number of objects within the aggregate object
         -   Number of layers in the data set.
-    '''
+    '''''
     NrOfLayers = len(data.keys())
     NrOfObjAggr = []
     for key, values in data.items():
@@ -212,7 +220,7 @@ def AggregateTranslate(points, centroids, distance = array([1,1])):
             print("the point after Translation", w_final)
 
 # load the data
-data = LoadData(JsonFilepath)
+data = LoadData()
 # first update names with a unique GUID's
 UpdateNames(data)
 # obtain the parameters values to be used later to modify or create new images
@@ -231,5 +239,4 @@ print(Aggrcenters)
 #delObject(name = 'object_01')
 for iter in range(100):
     pass
-with open(JsonFilepath1, 'w') as f:
-    json.dump(data,f, indent = 2, sort_keys= True)
+SaveData(data)

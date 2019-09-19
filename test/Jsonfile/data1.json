@@ -5,7 +5,7 @@
       "AggName": "AggregateObject0",
       "Aggobjects": [
         {
-          "GUID": "object-ca8f8410-eca8-4832-a4bc-e6a79339fa62",
+          "GUID": "object-e056c6ce-2155-4c84-a322-470d438eaebe",
           "center": [
             20,
             40
@@ -29,7 +29,7 @@
           "radii": 15
         },
         {
-          "GUID": "object-5a5ab4f9-0ed4-4780-b8aa-0724cd15e55a",
+          "GUID": "object-0b8dc668-9421-4e4b-9895-0dea138cd243",
           "center": [
             50,
             80
@@ -57,7 +57,7 @@
           "radii": 20
         },
         {
-          "GUID": "object-31624875-8b14-421b-ae5a-deeda4d80078",
+          "GUID": "object-c2df990a-835f-4a51-b453-b5a751336851",
           "center": [
             120,
             140
@@ -104,7 +104,7 @@
       "AggName": "AggregateObject1",
       "Aggobjects": [
         {
-          "GUID": "object-85e4e8d1-f98c-43e6-b33f-10bb2db2db5f",
+          "GUID": "object-07ba0630-747c-4277-adc8-8e9ee9b83948",
           "center": [
             20,
             40
@@ -128,7 +128,7 @@
           "radii": 15
         },
         {
-          "GUID": "object-7c965a4c-54a0-4826-92cb-d45b3ad05f65",
+          "GUID": "object-83b7b0b4-44de-4435-9756-c3fb2b682410",
           "center": [
             50,
             80
@@ -156,7 +156,7 @@
           "radii": 20
         },
         {
-          "GUID": "object-e1d61c85-f5e7-4edd-b8bd-6db614d26291",
+          "GUID": "object-d16412f2-ec06-4bad-a1a3-18a9dba6d2ae",
           "center": [
             120,
             140
