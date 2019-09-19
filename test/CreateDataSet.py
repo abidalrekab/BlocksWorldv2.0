@@ -229,7 +229,7 @@ print(Aggrcenters)
 #createNewObject('object_04','layer0', [45,46], 15, 7, 80 )
 # the user can del a basic object from an Aggregate object.
 #delObject(name = 'object_01')
-for iter in range(10):
+for iter in range(100):
     pass
 with open(JsonFilepath1, 'w') as f:
     json.dump(data,f, indent = 2, sort_keys= True)
