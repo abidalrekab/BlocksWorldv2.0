@@ -1,94 +1,97 @@
 {
   "layer0": [
     {
-      "AggCenter": [],
-      "AggName": "AggregateObject0",
-      "Aggobjects": [
+      "AggCenter": [
+        72.0,
+        60.0
+      ],
+      "AggrObjects": [
         {
-          "GUID": "object-e056c6ce-2155-4c84-a322-470d438eaebe",
-          "center": [
-            20,
-            40
-          ],
-          "nrNodes": 3,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-915bb2b7-6168-4383-b01f-bfdc6b39dbf8",
+          "Vertices": [
             [
               26,
-              46
+              26
             ],
             [
               13,
-              41
+              21
             ],
             [
               21,
-              33
+              13
             ]
           ],
+          "center": [
+            20,
+            20
+          ],
+          "nrVertices": 3,
+          "orientation": 45,
           "radii": 15
         },
         {
-          "GUID": "object-0b8dc668-9421-4e4b-9895-0dea138cd243",
-          "center": [
-            50,
-            80
-          ],
-          "nrNodes": 4,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-62caa0df-cb19-4457-a58a-913dbee8c751",
+          "Vertices": [
             [
               57,
-              87
+              47
             ],
             [
               43,
-              87
+              47
             ],
             [
               43,
-              73
+              33
             ],
             [
               57,
-              73
+              33
             ]
           ],
+          "center": [
+            50,
+            40
+          ],
+          "nrVertices": 4,
+          "orientation": 45,
           "radii": 20
         },
         {
-          "GUID": "object-c2df990a-835f-4a51-b453-b5a751336851",
-          "center": [
-            120,
-            140
-          ],
-          "nrNodes": 5,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-29667e29-3c99-42e5-a9cb-85ae7a19966a",
+          "Vertices": [
             [
               127,
-              147
+              107
             ],
             [
               115,
-              149
+              109
             ],
             [
               110,
-              139
+              99
             ],
             [
               119,
-              130
+              90
             ],
             [
               129,
-              135
+              95
             ]
           ],
+          "center": [
+            120,
+            100
+          ],
+          "nrVertices": 5,
+          "orientation": 45,
           "radii": 20
         }
       ],
+      "AggregateObjectName": "AggregateObject0",
       "rotation": 36,
       "scale": 2,
       "translation": [
@@ -100,18 +103,14 @@
   ],
   "layer1": [
     {
-      "AggCenter": [],
-      "AggName": "AggregateObject1",
-      "Aggobjects": [
+      "AggCenter": [
+        72.0,
+        95.0
+      ],
+      "AggrObjects": [
         {
-          "GUID": "object-07ba0630-747c-4277-adc8-8e9ee9b83948",
-          "center": [
-            20,
-            40
-          ],
-          "nrNodes": 3,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-09e83360-2ade-4565-a77f-2fbb3758c847",
+          "Vertices": [
             [
               26,
               46
@@ -125,17 +124,17 @@
               33
             ]
           ],
+          "center": [
+            20,
+            40
+          ],
+          "nrVertices": 3,
+          "orientation": 45,
           "radii": 15
         },
         {
-          "GUID": "object-83b7b0b4-44de-4435-9756-c3fb2b682410",
-          "center": [
-            50,
-            80
-          ],
-          "nrNodes": 4,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-fab052a9-1d87-4854-817d-a4db5039cc6c",
+          "Vertices": [
             [
               57,
               87
@@ -153,17 +152,17 @@
               73
             ]
           ],
+          "center": [
+            50,
+            80
+          ],
+          "nrVertices": 4,
+          "orientation": 45,
           "radii": 20
         },
         {
-          "GUID": "object-d16412f2-ec06-4bad-a1a3-18a9dba6d2ae",
-          "center": [
-            120,
-            140
-          ],
-          "nrNodes": 5,
-          "orientation": 45,
-          "points": [
+          "GUID": "object-88eff413-99ff-48c4-8cbb-4f032932e8e8",
+          "Vertices": [
             [
               127,
               147
@@ -185,9 +184,16 @@
               135
             ]
           ],
+          "center": [
+            120,
+            140
+          ],
+          "nrVertices": 5,
+          "orientation": 45,
           "radii": 20
         }
       ],
+      "AggregateObjectName": "AggregateObject1",
       "rotation": 36,
       "scale": 2,
       "translation": [

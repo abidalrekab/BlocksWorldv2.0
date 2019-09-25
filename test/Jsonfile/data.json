@@ -1,7 +1,7 @@
 {
   "layer0": [
     {
-      "AggName": "AggregateObject0",
+      "AggregateObjectName": "AggregateObject0",
       "AggCenter" : [],
       "scale": 2,
       "translation": [
@@ -15,20 +15,20 @@
           "GUID": "Object",
           "nrVertices": 3,
           "center": [
-            20,
-            40
+            120,
+            220
           ],
-          "radii": 15,
+          "radii": 35,
           "orientation": 45
         },
         {
           "GUID": "Object",
           "nrVertices": 4,
           "center": [
-            50,
-            80
+            350,
+            140
           ],
-          "radii": 20,
+          "radii": 80,
           "orientation": 45
         },
         {
@@ -36,9 +36,9 @@
           "nrVertices": 5,
           "center": [
             120,
-            140
+            100
           ],
-          "radii": 20,
+          "radii": 50,
           "orientation": 45
         }
       ]
@@ -46,7 +46,7 @@
   ],
   "layer1": [
     {
-      "AggName": "AggregateObject1",
+      "AggregateObjectName": "AggregateObject1",
       "AggCenter" : [],
       "scale": 2,
       "translation": [
