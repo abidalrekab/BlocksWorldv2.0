@@ -38,15 +38,14 @@ class CreateDataSet():
         except FileNotFoundError:
             print('Check the file path')
 
-    @property
-    def SaveData(self):
+    def SaveData(self, FileName):
         '''
             This function saves all data into a Json file to be used later to generate an exact replica to data set.
         :return:
             Nothing
         '''
 
-        JsonFileName1 = 'data1.json'  # modified data file name.
+        JsonFileName1 = FileName  # modified data file name.
         JsonFilepath1 = os.path.join(JsonInputPath, JsonFileName1)
 
         try:
@@ -56,6 +55,18 @@ class CreateDataSet():
             print("couldn't save the file")
         return 'done!'
 
+    def LoadExistingData(self, FileName):
+        # specify the data file name.
+        JsonFileName = FileName
+
+        # state the path to the data file.
+        JsonFilepath = os.path.join(self.path, JsonFileName)
+
+        try:
+            with open(JsonFilepath, 'r') as f:
+                self.data = json.load(f)
+        except FileNotFoundError:
+            print('Check the file path')
 
     def AggregateObjectParameters(self):
         '''
