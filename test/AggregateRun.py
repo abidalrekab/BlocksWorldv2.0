@@ -1,4 +1,4 @@
-from CreateDataSet import *
+from BuildDataSet import *
 #
 # load the data set
 Set1 = CreateDataSet()
