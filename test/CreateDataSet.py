@@ -9,23 +9,49 @@ import os
 
 
 class CreateDataSet():
+    '''
+    THis class contents many functions to help with creating a data set.
+        - to initialize the class and set the aggregate object parameters such as : path, load the data, obtaning
+            critical information that is important to calculate vertices and centroids.
+        - every time the user apply a transformation ( rotation, scaling, or translation ) needs to update vertices and
+            centers of each basic shape within that aggregate object.
+    '''
     def __init__(self):
+        # obtain the path to where you can save the aggregate object image
         self.AggregateOutputPath = AggregateOutputPath
+        # get the path of json file that stores the basic objects
         self.path = JsonInputPath
+        # load the json file into a variable called data
         self.data = self.LoadDefaultData()
+        # generate unique names for all basic shapes using GUID function
         self.UpdateNames()
+        # get number of shapes for every aggregate object, number of layers, and their names
         self.NrOfShapesAggr, self.NrOfLayers, self.AggregateShapeNames = self.AggregateObjectParameters()
+        # calculate the vertices from given info. [number of vertices, center, radii]---> vertices [[vertex 1][vertex 2]...[vertex n]]
         self.Vertices = self.CalculateVertices()
+        # store the vital aggregate object parameters into class param.
         self.Aggrcenters, self.Aggrradii, self.AggrnrVertices,self.Aggrorientation, self.AggrNames, self.AggrVertices  = self.GetBasicObjectInfo()
+        # now, obtain the centroid for each aggregate object.[in case we have more than one]
         self.centroid = self.AggregateCentroide()
+
+    def UpdateNames(self):
+        '''
+        This function is used to generate a unique names for basic shapes.
+        :return:
+        basic shape names in form of 'object-XXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+        '''
+        for key, values in self.data.items():
+            # using get method to get key's values to aviod throwing errors.
+            for index, object in enumerate(values[0].get("AggrObjects")):
+                object["GUID"] = 'object-' + str(uuid.uuid4())
 
     def LoadDefaultData(self):
 
-        ''''
+        '''
         This function is to load json file into a python variable.
         inputs : path to the Json file. 
         :return: python data variable.
-        '''''
+        '''
         # specify the data file name.
         JsonFileName = 'data.json'
 
@@ -56,7 +82,11 @@ class CreateDataSet():
         return 'done!'
 
     def LoadExistingData(self, FileName):
-        # specify the data file name.
+        '''
+        This function is used to load an existing data to generate the same images.
+        :return:
+        '''
+        # specify the data file name
         JsonFileName = FileName
 
         # state the path to the data file.
@@ -87,7 +117,6 @@ class CreateDataSet():
             NrOfShapesAggr.append(len(values[0]["AggrObjects"]))
             AggregateShapeNames.append(values[0]["AggregateObjectName"])
         return NrOfShapesAggr, NrOfLayers, AggregateShapeNames
-
 
     def GetBasicObjectInfo(self):
         '''
@@ -130,11 +159,27 @@ class CreateDataSet():
         return array(Aggrcenters), array(Aggrradii), array(AggrnrVertices), array(
             Aggrorientation), AggrNames, AggrVertices
 
-    def createNewObject(self, name, layer, center, radii=10, nrVertices=4, rotation=45):
+    def CreateNewObject(self, name, layer, center, radii=10, nrVertices=4, rotation=45):
+        '''
+        This function under construction
+        :param name:
+        :param layer:
+        :param center:
+        :param radii:
+        :param nrVertices:
+        :param rotation:
+        :return:
+        '''
+
         return self.data[layer][0]["AggrObjects"].append(
             {'GUID': name, 'center': center, 'radii': radii, 'nrVertices': nrVertices, 'orientation': rotation})
 
     def DelObject(self, name):
+        '''
+        This function is under construction
+        :param name:
+        :return:
+        '''
         for key, values in self.data.items():
             listOfitems = values[0]['AggrObjects']
             for i in range(len(listOfitems)):
@@ -145,6 +190,11 @@ class CreateDataSet():
                     break
 
     def CalculateVertices(self):
+        '''
+        This function basically calculate the vertices of a shape given its center, radii, orientation, and number of vertices
+        :return:
+        a set of n vertices for each shape within the aggregate object in a format [[vertix 0][vertix 1][vertix 2]...[vertix n]]
+        '''
         Vertices = []                               # the location of all vertices for all aggregate objects
         for key, values in self.data.items():
 
@@ -193,7 +243,12 @@ class CreateDataSet():
             Vertices.append(Aggrpoints)
         return list(Vertices)
 
-    def Updatecenters(self):
+    def UpdateCenters(self):
+        '''
+        This function is to compute the new centers of each shape after every a transformation happen.
+        :return:
+            [x, y] center.
+        '''
         for key, value in self.data.items():
             for element in value[0]['AggrObjects']:
                 xlist = [Center[0] for Center in element['Vertices']]
@@ -203,10 +258,13 @@ class CreateDataSet():
                 y = sum(ylist) / nr
                 element['center'] = [x, y]
 
-
-
     def UpdateVertices(self):
-
+        '''
+        This function copy the New vertices [after performing a transformation] into a data.AggrVertices
+        this is done because the way vertices are displayed and used to obtain other calculation is different.
+        :return:
+        The same format of vertices that are stored into data.
+        '''
         Vertices = self.NewVertices                            # the location of all vertices for all aggregate objects
         indicator = self.AggrnrVertices
         temp = []
@@ -222,7 +280,6 @@ class CreateDataSet():
                 start = end
         self.AggrVertices = temp
         self.Vertices = Vertices
-
 
     def AggregateCentroide(self):
         '''
@@ -252,17 +309,14 @@ class CreateDataSet():
             self.data[layerName][0]["AggCenter"] = list(centroid[idx])
         return centroid
 
-
-    def UpdateNames(self):
-        for key, values in self.data.items():
-            # using get method to get key's values to aviod throwing errors.
-            for index, object in enumerate(values[0].get("AggrObjects")):
-                object["GUID"] = 'object-' + str(uuid.uuid4())
-
-
     def AggregateRotation(self, angle):
+        '''
+        This function is to apply a rotation about centroid by a specific angle
+        :param angle:
+        :return:
+        all vertices after rotation is applied.
+        '''
         # assuming that we have only two layers
-        # translate the points to the origin
         self.NewVertices = []
         for index, centr in enumerate(self.centroid):
             tx = centr[0]
@@ -285,8 +339,14 @@ class CreateDataSet():
             self.NewVertices.append(NewAggrVertices)
 
     def AggregateScaling(self, scale=array([1, 1])):
+        '''
+        By default this function is applying scaling by 1 in both directions x, and y about the centroid
+        :param scale:
+        :return:
+        all vertices after scaling is applied.
+
+        '''
         # assuming that we have only two layers
-        # translate the points to the origin
         self.NewVertices = []
         for index, centroid in enumerate(self.centroid):
             tx = centroid[0]
@@ -308,8 +368,13 @@ class CreateDataSet():
                 NewAggrVertices.append(list(w_final[0:2]))
             self.NewVertices.append(NewAggrVertices)
 
-
-    def AggregateTranslate(self, distance=[1, 1]):
+    def AggregateTranslate(self, distance=array([1, 1])):
+        '''
+        This function is perform a translation to a specific reference point "centroid"
+        :param distance [distance x, distance y]:
+        :return:
+        all vertices after translation is applied.
+        '''
         # assuming that we have only two layers
         # translate the points to the origin
         self.NewVertices = []
@@ -335,9 +400,13 @@ class CreateDataSet():
                 NewAggrVertices.append(list(w_final[0:2]))
             self.NewVertices.append(NewAggrVertices)
 
-
     @property
     def DisplayInformation(self):
+        '''
+        This function is desgined to display all information about an agregate objects, and layers.
+        :return:
+        all info.
+        '''
         for i in range(self.NrOfLayers):
             print(
                 "-----------------------------------------------------------------------{}--------------------------------------------------".format(
@@ -358,6 +427,14 @@ class CreateDataSet():
         return 0
 
     def DisplayImage(self, saveImage = 'False', showImage = 'False'):
+        '''
+        This function is to do two tasks:
+            - save a  resultant image into a file
+            - display it to the user without saving it.
+        :param saveImage:
+        :param showImage:
+        :return:
+        '''
         if not os.path.exists(self.AggregateOutputPath):
             os.makedirs(self.AggregateOutputPath)
         imageName = 'Aggregate-'+ str(uuid.uuid4()) + '.png'

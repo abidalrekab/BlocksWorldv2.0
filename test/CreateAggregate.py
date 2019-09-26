@@ -1,39 +1,28 @@
 from CreateDataSet import *
-import numpy as np
-from PathsModule import JsonInputPath
-
 #
-# # load the data
-# data = LoadData()
-#
-# # first update names with a unique GUID's
-# UpdateNames(data)
-#
-# # obtain the parameters values to be used later to modify or create new images
-# NrOfObjAggr, NrOfLayers, AggregateShapeNames = GetNrShapesInAggr(data)
-# pointee = Object2points(data)
-# Aggrcenters, Aggrradis, AggrnrNodes, Aggrorientation, AggrNames, Vertices = GetBasicObjectInfo(data)
-# centroid = AggregateCentroide(Aggrcenters)
-#
-#
-#
-#
-#
-# # print out the number of Aggregate object and how many basic objects they have
-# #AggregateRotation(pointee,centroid,[30,20])
-# # in a case when the user wants to create and add a new object, a layer and the object name should be specified.
-# #createNewObject('object_04','layer0', [45,46], 15, 7, 80 )
-# # the user can del a basic object from an Aggregate object.
-# #delObject(name = 'object_01')
-# for iter in range(100):
-#     pass
-# SaveData(data)
+# load the data set
 Set1 = CreateDataSet()
-Set1.DisplayImage(saveImage='False',showImage='True')
+
+# show the aggregate object before applying any actions
+Set1.DisplayImage(saveImage='True',showImage='True')
+
+# apply rotation by -30 degree ( minus means clockwise direction) for first aggregate object and 10 for the second
+# in case there were more than one aggregate object.
 Set1.AggregateRotation([-30,10])
-Set1.AggregateTranslate([50,10])
-Set1.AggregateScaling([2,2])
-Set1.Updatecenters()
+# Update the aggregate object parameters
 Set1.UpdateVertices()
-Set1.DisplayImage(saveImage='False',showImage='True')
+Set1.UpdateCenters()
+# apply translation
+Set1.AggregateTranslate([50,10])
+# Update the aggregate object parameters
+Set1.UpdateVertices()
+Set1.UpdateCenters()
+# apply scaling by factor 2.
+Set1.AggregateScaling([0.5,1])
+# Update the aggregate object parameters
+Set1.UpdateVertices()
+Set1.UpdateCenters()
+# finally choose to save to a image, show or both for data set.
+Set1.DisplayImage(saveImage='True',showImage='True')
+# At the end save the whole data set into a json file so we can replicita the exact data set once again.
 Set1.SaveData('Set1.json')
