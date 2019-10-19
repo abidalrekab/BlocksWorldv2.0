@@ -2,7 +2,7 @@ from BuildDataSet import *
 #
 # load the data set
 Set1 = CreateDataSet()
-
+imageList = []
 # show the aggregate object before applying any actions
 Set1.DisplayImage(saveImage='True',showImage='True')
 
@@ -24,5 +24,5 @@ Set1.UpdateVertices()
 Set1.UpdateCenters()
 # finally choose to save to a image, show or both for data set.
 Set1.DisplayImage(saveImage='True',showImage='True')
-# At the end save the whole data set into a json file so we can replicita the exact data set once again.
+# At the end save the whole data set into a json file so we can replicate the exact data set once again.
 Set1.SaveData('Set1.json')
