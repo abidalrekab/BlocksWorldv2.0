@@ -26,7 +26,7 @@ def draw(canvas, points, char):
         canvas.text((x, y), char)
 
 
-def drawWire(canvas, points):
+def drawWire(canvas: object, points: object) -> object:
     """
     Draw the edges between the provided points.
     No labels.
