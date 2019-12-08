@@ -18,13 +18,13 @@ def GenerateCombination(N):
         combinlist.append(combin)
     return combinlist
 
-def GenerateAdjecentShapesPoints(NrObjects = 3):
+def GenerateAdjecentShapesPoints(NrObjects = 3, var = 'False'):
     Aggrpoints = []
     centers = []
     ##### these Object A parameters #######
     OriAngle   = randint(0,90)
-    center     = [randint(100, 540), randint(100, 380)]
-    size       = randint(100,150) # Now setting how many vertices in every object ( we have only three for now )
+    center     = [randint(200, 340), randint(100, 280)]
+    size       = randint(50,150) # Now setting how many vertices in every object ( we have only three for now )
     NrVertices = randint(3, 7)    # number of vertices for the first object.
     # NOw i need to generate a combination of all possible positions of the next objects
     combinations = GenerateCombination(NrVertices)
@@ -32,16 +32,26 @@ def GenerateAdjecentShapesPoints(NrObjects = 3):
     # Generate vertices as points [[vertex 1], [vertex 2], [vertex 3],...]
     pointsA = GeneratePoints(center, size, NrVertices, OriAngle)
     centers.append(center)
+    if var == 'True':
+        '''
+        here we will find the new center of an object after considering a small offset 
+        away from the central object.
+        '''
+        dis = randint(2,30)      # this is the distance that new center will be moved inward in direction
+        # of outside of baisc object.
+        size = size + dis
+    pointsB = GeneratePoints(center, size, NrVertices, OriAngle)
     Aggrpoints.append(pointsA)
     for i in range(NrObjects):
         print(len(combinations))
         verGroup = random.choice(combinations)
         print(verGroup)
         combinations.remove(verGroup)                  # to get rid of chosen item so we don't take next time
-        Px0 = pointsA[verGroup[0]]
-        Px1 = pointsA[verGroup[1]]
+        Px0 = pointsB[verGroup[0]]
+        Px1 = pointsB[verGroup[1]]
         print("Px0 {} , Px1 {} ".format(Px0, Px1))
         NrVertices = randint(3,7)  # shape 2 vertices
+        print(NrVertices)
         alpha = 2 * pi / NrVertices
         rd = round(0.5 * distance(Px1, Px0) / sin(alpha / 2))
         size = 2 * rd
@@ -75,10 +85,13 @@ def GenerateAdjecentShapesPoints(NrObjects = 3):
             cy1 = round(- cx1 * k1 + 0.5 * k2)
             cy2 = round(- cx2 * k1 + 0.5 * k2)
         #print("(cx1 , cy1) ( {} , {}) and (cx2 , cy2) ( {} , {})".format(cx1, cy1, cx2, cy2))
-        if distance([cx1, cy1], centers[0]) < size/2:
-            center = [cx2, cy2]
-        else:
+        if distance([cx1, cy1], centers[0]) >= distance([cx2, cy2], centers[0]):
             center = [cx1, cy1]
+        else:
+            center = [cx2, cy2]
+        print("the Distance between Center1, and [{},{}] {}".format(cx1,cy1, distance([cx1, cy1], centers[0])))
+        print("the Distance between Center1, and [{},{}] {}".format(cx2,cy2, distance([cx2, cy2], centers[0])))
+        print("This is the Center ---- > x {}, y {}".format(center[0], center[1]))
         OriAngle = AngleBtw2Points(center, Px0)
         points = GeneratePoints(center,size,NrVertices, OriAngle)
         centers.append(center)
@@ -88,7 +101,7 @@ def GeneratePoints(center,size, nrVertices,OriAngle):
     points = []
     x = center[0]
     y = center[1]
-    print("x {}, y {}".format(x,y))
+    #print("x {}, y {}".format(x,y))
     radius = int(size / 2.0)
 
     x0 = round(x + radius)
@@ -128,15 +141,17 @@ def AngleBtw2Points(pointA, pointB):
 if __name__ == "__main__":
     if not os.path.exists(AggregateOutputPath):
         os.makedirs(AggregateOutputPath)
-    NumberOfImages = 100
+    NumberOfImages = 1
+    color = 'blue'
     for idx in range(NumberOfImages):
         imageName = 'TestImage' + str(uuid.uuid4()) + '.png'
         resultFile = os.path.join(AggregateOutputPath, imageName)
-        image, canvas = getImage('L', (640, 480), 'white')
+        image, canvas = getImage('RGB', (640, 480), 'white')
         c, Aggpoints = GenerateAdjecentShapesPoints()
         for points in Aggpoints:
             print(points)
-            drawWire(canvas, points)
+            drawSolid(canvas, points, color)
+            #drawWire(canvas, points)
         image.save(resultFile)
 
 
