@@ -18,11 +18,13 @@ def GenerateCombination(N):
         combinlist.append(combin)
     return combinlist
 
-def GenerateAdjecentShapesPoints(NrObjects = 3, var = 'False'):
+def GenerateAdjecentShapesPoints(NrObjects = 1, var = 'False'):
+    seed(0)
     Aggrpoints = []
     centers = []
     ##### these Object A parameters #######
-    OriAngle   = randint(0,90)
+    OriAngle   = -45
+    print(OriAngle)
     center     = [randint(200, 340), randint(100, 280)]
     size       = randint(50,150) # Now setting how many vertices in every object ( we have only three for now )
     NrVertices = randint(3, 7)    # number of vertices for the first object.
@@ -142,16 +144,19 @@ if __name__ == "__main__":
     if not os.path.exists(AggregateOutputPath):
         os.makedirs(AggregateOutputPath)
     NumberOfImages = 1
-    color = 'blue'
+    color = 'red'
     for idx in range(NumberOfImages):
         imageName = 'TestImage' + str(uuid.uuid4()) + '.png'
         resultFile = os.path.join(AggregateOutputPath, imageName)
-        image, canvas = getImage('RGB', (640, 480), 'white')
+        image, canvas = getImage('L', (640, 480), 'white')
         c, Aggpoints = GenerateAdjecentShapesPoints()
         for points in Aggpoints:
             print(points)
             drawSolid(canvas, points, color)
             #drawWire(canvas, points)
+        points = Aggpoints[0]
+        for i in range(len(points) - 1):
+            draw(canvas, (points[i + 0], points[i + 1]), str(i))
         image.save(resultFile)
 
 
