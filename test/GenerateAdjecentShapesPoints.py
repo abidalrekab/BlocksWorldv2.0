@@ -37,7 +37,7 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
         ShapeNrVertices.append(NrVertices)
         if var == 'True':
             offset = random.randint(1,10)
-            print('offset', offset)
+            #print('offset', offset)
         else:
             offset = 0
 
