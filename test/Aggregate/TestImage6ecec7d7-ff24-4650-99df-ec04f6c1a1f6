@@ -1,0 +1,83 @@
+{
+ "layer0": [
+  {
+   "AggCenter": [],
+   "AggrObjects": [
+    {
+     "GUID": "object_0",
+     "Vertices": [
+      [
+       355,
+       247
+      ],
+      [
+       338,
+       266
+      ],
+      [
+       311,
+       265
+      ],
+      [
+       296,
+       244
+      ],
+      [
+       304,
+       219
+      ],
+      [
+       327,
+       209
+      ],
+      [
+       351,
+       222
+      ]
+     ],
+     "center": [
+      326,
+      239
+     ],
+     "nrVertices": 7,
+     "orientation": 16,
+     "radii": 61
+    },
+    {
+     "GUID": "object_1",
+     "Vertices": [
+      [
+       337,
+       276
+      ],
+      [
+       344,
+       301
+      ],
+      [
+       323,
+       315
+      ],
+      [
+       302,
+       299
+      ],
+      [
+       311,
+       275
+      ]
+     ],
+     "center": [
+      323.4787040951755,
+      293.0749894302617
+     ],
+     "nrVertices": 5,
+     "orientation": -52,
+     "radii": 45.966638439524125
+    }
+   ],
+   "AggregateObjectName": "TestImage6ecec7d7-ff24-4650-99df-ec04f6c1a1f6",
+   "orientation": 0
+  }
+ ]
+}
