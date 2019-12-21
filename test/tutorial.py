@@ -15,7 +15,7 @@ def AngleBtw2Points(pointA, pointB):
   changeInY = pointB[1] - pointA[1]
   return round(degrees(atan2(changeInY,changeInX)))
 
-def CentersCalculations(p1,p2,NrVertices):
+def CentersCalculations(p1,p2,NrVertices,offset):
     '''
     :param p1: the coordinate of the first point
     :param p2: the coordinate of the second point
@@ -98,7 +98,7 @@ def CentersCalculations(p1,p2,NrVertices):
     alpha = 360/ NrVertices
     a = Distance(px1, px2)
     R = 0.5 * a / sin(alpha / 2)
-    deltay = 0.5 * sqrt(4 * R ** 2 - a ** 2)
+    deltay = 0.5 * sqrt(4 * R ** 2 - a ** 2) + offset
     cx  = Rotpoint[0]
     cy1 = Rotpoint[1] - deltay
     cy2 = Rotpoint[1] + deltay
@@ -106,6 +106,15 @@ def CentersCalculations(p1,p2,NrVertices):
     #--------------------><-----------------><-------------------><------------------------><-----#
     c1 = centerx[0]
     c2 = centerx[1]
+    px12 = [xhat1, yhat1 + offset]
+    px10 = [xhat1, yhat1 - offset]
+    px23 = [xhat2, yhat2 + offset]
+    px21 = [xhat2, yhat2 - offset]
+    print("befor increase px1 {} , px2 {} ".format(px1,px2))
+    print("after increase px1 {} , px2 {} ".format(px12,px23))
+    print("after decrease px1 {} , px2 {} ".format(px10,px21))
+
+    Angle = [AngleBtw2Points(c1, px21), AngleBtw2Points(c2, px23)]
     if mode == 0:
         cx1 = c1[0]
         cy1 = c1[1]
@@ -134,8 +143,8 @@ def CentersCalculations(p1,p2,NrVertices):
     print("center 2", center2)
     print("distance between p1 {} ,p2 {} and center 1".format(Distance(p1,center1),Distance(p2,center1)))
     print("distance between p1 {} ,p2 {} and center 2".format(Distance(p1,center2),Distance(p2,center2)))
-    print("Angle center 1 and p2",AngleBtw2Points(center1,p2))
-    print("Angle center 2 and p2", AngleBtw2Points(center2,p2))
+    print("Angle center 1 and p2",Angle[0])
+    print("Angle center 2 and p2", Angle[1])
     print("Diameter R center 1", Distance(center1, p2))
     print("Diameter R center 2", Distance(center2, p2))
 
@@ -146,4 +155,4 @@ if __name__ == "__main__" :
     p1 = [334,376]
     p2 = [368,388]
     NrVertices = 7
-    cn1,cn2,R = CentersCalculations(p1,p2,NrVertices)
+    cn1,cn2,R = CentersCalculations(p1,p2,NrVertices, 4)
