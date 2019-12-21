@@ -1,4 +1,4 @@
-from random import randint, random
+from random import randint, choice, random
 from GenerateCombination import GenerateCombination
 from GeneratePoints import GeneratePoints
 from CentersCalculations import CentersCalculations
@@ -26,7 +26,7 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
     centers.append(center)
     Aggrpoints.append(points)
     for i in range(1, NrObjects + 1):
-        verGroup = random.choice(combinations)
+        verGroup = choice(combinations)
         #print(verGroup)
         combinations.remove(verGroup)                  # to get rid of chosen item so we don't take next time
         points = Aggrpoints[verGroup[0]]
