@@ -1,4 +1,4 @@
-from random import randint, choice, random
+import random
 from GenerateCombination import GenerateCombination
 from GeneratePoints import GeneratePoints
 from CentersCalculations import CentersCalculations
@@ -12,10 +12,10 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
     Raduis = []
     orientations = []
     ##### these Object A parameters #######
-    OriAngle   = randint(0,90)
-    center     = [randint(300, 340), randint(220, 260)]
-    size       = randint(50,100) # Now setting how many vertices in every object ( we have only three for now )
-    NrVertices = randint(3, 10)    # number of vertices for the first object.
+    OriAngle   = random.randint(0,90)
+    center     = [random.randint(300, 340), random.randint(220, 260)]
+    size       = random.randint(50,100) # Now setting how many vertices in every object ( we have only three for now )
+    NrVertices = random.randint(3, 10)    # number of vertices for the first object.
     ShapeNrVertices.append(NrVertices)
     Raduis.append(size)
     orientations.append(OriAngle)
@@ -26,14 +26,14 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
     centers.append(center)
     Aggrpoints.append(points)
     for i in range(1, NrObjects + 1):
-        verGroup = choice(combinations)
+        verGroup = random.choice(combinations)
         #print(verGroup)
         combinations.remove(verGroup)                  # to get rid of chosen item so we don't take next time
         points = Aggrpoints[verGroup[0]]
         Px0 = points[verGroup[1]]
         Px1 = points[verGroup[2]]
         #print("Before Px0 {} , Px1 {} , center {}".format(Px0, Px1, centers[verGroup[0]]))
-        NrVertices = randint(3,8)  # shape 2 vertices
+        NrVertices = random.randint(3,8)  # shape 2 vertices
         ShapeNrVertices.append(NrVertices)
         if var == 'True':
             offset = random.randint(1,10)
