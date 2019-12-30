@@ -1,11 +1,12 @@
 import random
+from random import seed
 from GenerateCombination import GenerateCombination
 from GeneratePoints import GeneratePoints
 from CentersCalculations import CentersCalculations
 from CenterCheck import CenterCheck
 from AngleBtw2Points import AngleBtw2Points
-
 def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
+    seed(0)
     Aggrpoints = []
     centers = []
     ShapeNrVertices = []
@@ -29,6 +30,17 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
         verGroup = random.choice(combinations)
         #print(verGroup)
         combinations.remove(verGroup)                  # to get rid of chosen item so we don't take next time
+        if NrVertices >= 4:
+            x1 = verGroup[0]
+            y1 = verGroup[1]+1
+            z1 = verGroup[2]+1
+            x2 = x1
+            if verGroup[1]-1 < 0:
+                y2 = verGroup[1] -1 + NrVertices
+            z2 = verGroup[2]-1
+            combinations.remove([verGroup[0], verGroup[1]+1, ])
+            combinations.remove([verGroup[0], verGroup[1]-1, verGroup[2]-1])
+
         points = Aggrpoints[verGroup[0]]
         Px0 = points[verGroup[1]]
         Px1 = points[verGroup[2]]
@@ -58,9 +70,12 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
         points = GeneratePoints(center,size, NrVertices, OriAngle)
         combination = GenerateCombination(NrVertices, i)
         #print(combination)
+
         combination.remove(combination[0])
-        combination.remove(combination[0])
-        combination.remove(combination[-1])
+        if NrVertices >= 4:
+            combination.remove(combination[0])
+            combination.remove(combination[-1])
+
         combinations.extend(combination)
         centers.append(center)
         Aggrpoints.append(points)
