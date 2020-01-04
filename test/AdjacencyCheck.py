@@ -156,6 +156,7 @@ def AdjacencyCheck(points, centerx):
     res1 = [idx for idx, val in enumerate(idex1) if val != 0]
     res2 = [idx for idx, val in enumerate(idex2) if val != 0]
 
+
     if len(res1) == 1 and len(res2) == 1:
         flag0 = 1
         print('touching at the same vertex {}, and {}'.format(points[0][res1[0]],points[1][res2[0]]))
@@ -163,9 +164,14 @@ def AdjacencyCheck(points, centerx):
     elif len(res1) == 1 or len(res2) == 1:
         flag0 = -1
         if len(res1) == 1:
-            print('touching at one vertex and an Edge {}', points[0][res1[0]])
+            e1 = Matrix1[res1[0]]
+            id1 = e1.index(max(e1))
+            print('touching at one vertex and an Edge {}'.format(Group2[id1], points[0][res1[0]]))
         else:
-            print('touching at one vertex and an Edge {}', points[1][res2[0]])
+            e1 = Matrix2[res2[0]]
+            id1 = e1.index(max(e1))
+
+            print('touching at one vertex and an Edge {}'.format(Group1[id1]), points[1][res2[0]])
 
     elif len(res1) == 2 and len(res2) == 2:
         flag2 = 1
@@ -180,7 +186,7 @@ def AdjacencyCheck(points, centerx):
 if __name__ == "__main__":
     points1 = [[[100,100],[200,300],[300,100]],[[450,450],[300,400],[400,200]]]
     #d = Distance(c1, c2)
-    points = [[[80,90], [170, 80], [90, 130]], [[70,130], [90,130], [110, 180], [70, 180]]]
+    points2 = [[[80,90], [170, 80], [90, 130]], [[70,130], [90,130], [110, 180], [70, 180]]]
     # a triangle and sequare adjacent
     points3 = [[[140,40],[180,100],[100,100]],[[100,100],[180,100],[180,160],[100,180]]]
     # two triangles overlapped
@@ -188,7 +194,7 @@ if __name__ == "__main__":
     # pentagon and rectangle overlapped
     points5 = [[[110,180],[180,220],[150,290],[100,290],[70,250]],[[150,180],[230,180],[230,260],[150,260]]]
     # two object touching in a vertex and an edge
-    points6 = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
+    points = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
     obj1 = points[0]
     obj2 = points[1]
     cx1 = sum([obj1[i][0] for i in range(len(obj1))]) / len(obj1)
