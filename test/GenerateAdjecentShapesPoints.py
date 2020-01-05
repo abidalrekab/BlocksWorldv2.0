@@ -5,6 +5,7 @@ from GeneratePoints import GeneratePoints
 from CentersCalculations import CentersCalculations
 from CenterCheck import CenterCheck
 from AngleBtw2Points import AngleBtw2Points
+
 def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
     seed(0)
     Aggrpoints = []
