@@ -6,14 +6,14 @@ def test(p1 ,p2, p):
         conducting testing 
         '''
         if p[0] == p1[0] :
-            print("----------------")
+            #print("----------------")
             vy = sorted([p1[1], p2[1]])
             r2 = range(vy[0] - 1, vy[1] + 1)
             if (p[1] in r2):
-                print("1---> 0 ")
+                #print("1---> 0 ")
                 return 0
             else:
-                print("1---> 2 ")
+                #print("1---> 2 ")
                 return 2
         elif p[0] > p1[0]:
             return 1
@@ -24,14 +24,14 @@ def test(p1 ,p2, p):
                 conducting testing 
         '''
         if p[1] == p1[1]:
-            print("----------------")
+            #print("----------------")
             vx = sorted([p1[0], p2[0]])
             r1 = range(vx[0] - 1, vx[1] + 1)
             if (p[0] in r1):
-                print("2 ---> 0 ")
+                #print("2 ---> 0 ")
                 return 0
             else:
-                print("2 ---> 2 ")
+                #print("2 ---> 2 ")
                 return 2
         elif p[1] > p1[1]:
             return 1
@@ -54,17 +54,17 @@ def test(p1 ,p2, p):
         elif w2 * p[1] + w1 * p[0] + b < -0.000000000000001:
             return -1
         elif (w2 * p[1] + w1 * p[0] + b) > -0.000000000000001 and (w2 * p[1] + w1 * p[0] + b) < 0.000000000000001:
-            print("----------------")
-        vx = sorted([p1[0], p2[0]])
-        vy = sorted([p1[1], p2[1]])
-        r1 = range(vx[0] - 1, vx[1] + 1)
-        r2 = range(vy[0] - 1, vy[1] + 1)
-        if (p[0] in r1) and (p[1] in r2):
-            print("3 ---> 0 ")
-            return 0
-        else:
-            print("3 ---> 2 ")
-            return 2
+            #print("----------------")
+            vx = sorted([p1[0], p2[0]])
+            vy = sorted([p1[1], p2[1]])
+            r1 = range(vx[0] - 1, vx[1] + 1)
+            r2 = range(vy[0] - 1, vy[1] + 1)
+            if (p[0] in r1) and (p[1] in r2):
+                #print("3 ---> 0 ")
+                return 0
+            else:
+                #print("3 ---> 2 ")
+                return 2
 
 
 def GenerateEdges(vertex):
@@ -84,16 +84,16 @@ def GenerateEdges(vertex):
 
 
 def AdjacencyCheck(points, centerx):
-    print(points)
+    #print(points)
     # create a group of edges for object one!
     Group1 = GenerateEdges(points[0])
-    print(Group1)
+    #print(Group1)
     # create a group of edges for object two!
     Group2 = GenerateEdges(points[1])
-    print(Group2)
+    #print(Group2)
     c2 = centerx[1]
     c1 = centerx[0]
-    print(centerx)
+    #print(centerx)
     # append the center of each object to the list of vertices.
 
     '''
@@ -103,8 +103,8 @@ def AdjacencyCheck(points, centerx):
     points[0].append(centerx[0])
     points[1].append(centerx[1])
 
-    print("points0", points[0])
-    print("points1", points[1])
+    #print("points0", points[0])
+    #print("points1", points[1])
     # initialize the flags to zero
 
     flag0 = 0   # flag0 is for indicate whether the two objects are touching
@@ -118,10 +118,10 @@ def AdjacencyCheck(points, centerx):
     Matrix2 = [[0 for x in range(len(Group1))] for x in range(len(points[1]))]
 
     for idx, x in enumerate(points[0]):
-        print(x)
+        #print(x)
         total = 0
         for idy, y in enumerate(Group2):
-            print(y)
+            #print(y)
             c2_sign = test(y[0], y[1], c2)
             x_sign = test(y[0], y[1], x)
             total += (x_sign * c2_sign)
@@ -133,9 +133,9 @@ def AdjacencyCheck(points, centerx):
             flag1 += 0
     for idx, x in enumerate(points[1]):
         total = 0
-        print(x)
+        #print(x)
         for idy, y in enumerate(Group1):
-            print(y)
+            #print(y)
             c1_sign = test(y[0], y[1], c1)
             x_sign = test(y[0], y[1], x)
             total += (x_sign * c1_sign)
@@ -147,8 +147,8 @@ def AdjacencyCheck(points, centerx):
         else:
             flag1 += 0
 
-    print(Matrix1)
-    print(Matrix2)
+    #print(Matrix1)
+    #print(Matrix2)
     idex1 = [sum(Matrix1[i]) for i in range(len(Matrix1))]
     idex2 = [sum(Matrix2[i]) for i in range(len(Matrix2))]
     # Index of Non-Zero elements in Python list
@@ -177,8 +177,8 @@ def AdjacencyCheck(points, centerx):
         flag2 = 1
         print('Adjacent at an Edge with two vertices {}, and {}'.format(points[0][res1[0]],points[0][res1[1]]))
 
-    if flag1 == 1:
-        print("overlapped with a vertex or more!!")
+    if flag1 >= 1:
+        print("overlapped with {} vertex !!".format(flag1))
 
     return flag0, flag1, flag2
 
@@ -194,7 +194,9 @@ if __name__ == "__main__":
     # pentagon and rectangle overlapped
     points5 = [[[110,180],[180,220],[150,290],[100,290],[70,250]],[[150,180],[230,180],[230,260],[150,260]]]
     # two object touching in a vertex and an edge
-    points = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
+    points6 = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
+    # two objects overlapped with more than two vertex.
+    points =  [[[40,370],[110,370],[110,430],[40,430]],[[90,310],[90,390],[50,390]]]
     obj1 = points[0]
     obj2 = points[1]
     cx1 = sum([obj1[i][0] for i in range(len(obj1))]) / len(obj1)
@@ -202,9 +204,9 @@ if __name__ == "__main__":
     cx2 = sum([obj2[i][0] for i in range(len(obj2))]) / len(obj2)
     cy2 = sum([obj2[i][1] for i in range(len(obj2))]) / len(obj2)
     centerx = [[cx1, cy1], [cx2, cy2]]
-    print(centerx)
+    #print(centerx)
     flag0, flag1, flag2 = AdjacencyCheck(points, centerx)
-    print(flag0)
-    print(flag1)
-    print(flag2)
+    print("Touching flag",    flag0)
+    print("Overlapping flag", flag1)
+    print("Adjacent flag",    flag2)
 
