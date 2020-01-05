@@ -7,7 +7,6 @@ from GenerateAdjecentShapesPoints import GenerateAdjecentShapesPoints
 from blocksWorld import drawSolid
 from CreateNewObject import CreateNewObject
 from SaveData import Save
-from adjanceyMatrix import adjanceyMatrix
 
 if __name__ == "__main__":
     # The main program parameters
@@ -29,12 +28,6 @@ if __name__ == "__main__":
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
         AggpointsShape, centersShape, RadiusShape,rotationShape, NrVerticesShape  = GenerateAdjecentShapesPoints(NrObjects, var)
-        flag = adjanceyMatrix(centersShape,RadiusShape, NrObjects)
-
-        print(flag)
-
-        #if flag != 0:
-        #    break
 
         for idy, points in enumerate(AggpointsShape):
             color = random.choice(colors)
