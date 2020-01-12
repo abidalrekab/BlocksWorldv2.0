@@ -5,8 +5,27 @@ from GeneratePoints import GeneratePoints
 from CentersCalculations import CentersCalculations
 from CenterCheck import CenterCheck
 from AngleBtw2Points import AngleBtw2Points
+from AdjacencyCheck import AdjacencyCheck
+from itertools import combinations
 
-def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
+
+def removeDuplicates(x):
+
+    '''
+    This function is to remove duplicate elements in a list.
+    :param x:
+    :return: the same list with non-duplicate elements
+    '''
+    return list(dict.fromkeys(x))
+
+
+def DeleteByIndices(lst, indices):
+
+    indices_as_set = set(indices)
+    return [ lst[i] for i in range(len(lst)) if i not in indices_as_set ]
+
+def GenerateAdjecentShapesPoints(NrObjects = 10, var = 'False', OverlapRemove = 'False'):
+
     seed(0)
     Aggrpoints = []
     centers = []
@@ -22,26 +41,16 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
     Raduis.append(size)
     orientations.append(OriAngle)
     # NOw i need to generate a combination of all possible positions of the next objects
-    combinations = GenerateCombination(NrVertices, 0)
+    combs = GenerateCombination(NrVertices, 0)
     # Generate vertices as points [[vertex 1], [vertex 2], [vertex 3],...]
     points = GeneratePoints(center, size, NrVertices, OriAngle)
     centers.append(center)
     Aggrpoints.append(points)
+    #print(combs)
     for i in range(1, NrObjects + 1):
-        verGroup = random.choice(combinations)
+        verGroup = random.choice(combs)
         #print(verGroup)
-        combinations.remove(verGroup)                  # to get rid of chosen item so we don't take next time
-        if NrVertices >= 4:
-            x1 = verGroup[0]
-            y1 = verGroup[1]+1
-            z1 = verGroup[2]+1
-            x2 = x1
-            if verGroup[1]-1 < 0:
-                y2 = verGroup[1] -1 + NrVertices
-            z2 = verGroup[2]-1
-            combinations.remove([verGroup[0], verGroup[1]+1, ])
-            combinations.remove([verGroup[0], verGroup[1]-1, verGroup[2]-1])
-
+        combs.remove(verGroup)                  # to get rid of chosen item so we don't take next time
         points = Aggrpoints[verGroup[0]]
         Px0 = points[verGroup[1]]
         Px1 = points[verGroup[2]]
@@ -77,9 +86,42 @@ def GenerateAdjecentShapesPoints(NrObjects = 4, var = 'True'):
             combination.remove(combination[0])
             combination.remove(combination[-1])
 
-        combinations.extend(combination)
+        combs.extend(combination)
         centers.append(center)
         Aggrpoints.append(points)
         #print(Aggrpoints)
         #print("centers", centers)
+
+    #__________________________________________________________________________________________________________________#
+    #  ____________________________     In this section overlapped object can be removed if enabled   _________________#
+    #print("Aggrpoints", Aggrpoints)
+    if OverlapRemove == 'True':
+        m = [x for x in range(NrObjects)]
+        comb = list(combinations(m, 2))
+        results = [list(element) for element in comb]
+        #print(results)
+        removelist = []
+        print(" We gonna compare {} combination to find overlapped object".format(len(results)))
+        for num, ele in enumerate(results):
+            print(ele)
+            print("{} from {}".format(num+1, len(results)))
+            print("{}-{}%".format('-' * num, round((num+1)/len(results) * 100,2)) )
+            G1 = Aggrpoints[ele[0]]
+            G2 = Aggrpoints[ele[1]]
+            centerx = [centers[ele[0]],centers[ele[1]]]
+            #print(centerx)
+            flag0, flag1, flag2 = AdjacencyCheck([G1,G2], centerx)
+            if flag1 >= 1:
+                removelist.append(ele[1])
+                #print("the list", removelist)
+
+        removelist = removeDuplicates(removelist)
+        print("the list", removelist)
+        Aggrpoints = DeleteByIndices(Aggrpoints, removelist)
+        centers = DeleteByIndices(centers, removelist)
+        Raduis = DeleteByIndices(Raduis, removelist)
+        orientations = DeleteByIndices(orientations, removelist)
+        ShapeNrVertices = DeleteByIndices(ShapeNrVertices, removelist)
+
+
     return Aggrpoints, centers, Raduis, orientations, ShapeNrVertices

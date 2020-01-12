@@ -83,13 +83,13 @@ def GenerateEdges(vertex):
     return combinlist
 
 
-def AdjacencyCheck(points, centerx):
+def AdjacencyCheck(coordinates, centerx):
     #print(points)
     # create a group of edges for object one!
-    Group1 = GenerateEdges(points[0])
+    Group1 = GenerateEdges(coordinates[0])
     #print(Group1)
     # create a group of edges for object two!
-    Group2 = GenerateEdges(points[1])
+    Group2 = GenerateEdges(coordinates[1])
     #print(Group2)
     c2 = centerx[1]
     c1 = centerx[0]
@@ -100,8 +100,8 @@ def AdjacencyCheck(points, centerx):
     I have done that because i want to check centers of each objects in case when two objects completely overlapped.
     
     '''
-    points[0].append(centerx[0])
-    points[1].append(centerx[1])
+    coordinates[0].append(centerx[0])
+    coordinates[1].append(centerx[1])
 
     #print("points0", points[0])
     #print("points1", points[1])
@@ -114,10 +114,10 @@ def AdjacencyCheck(points, centerx):
 
     # These matrices help me to store and indicate which point is bounded or touching the line.
 
-    Matrix1 = [[0 for x in range(len(Group2))] for x in range(len(points[0]))]
-    Matrix2 = [[0 for x in range(len(Group1))] for x in range(len(points[1]))]
+    Matrix1 = [[0 for x in range(len(Group2))] for x in range(len(coordinates[0]))]
+    Matrix2 = [[0 for x in range(len(Group1))] for x in range(len(coordinates[1]))]
 
-    for idx, x in enumerate(points[0]):
+    for idx, x in enumerate(coordinates[0]):
         #print(x)
         total = 0
         for idy, y in enumerate(Group2):
@@ -131,7 +131,7 @@ def AdjacencyCheck(points, centerx):
             flag1 += 1
         else:
             flag1 += 0
-    for idx, x in enumerate(points[1]):
+    for idx, x in enumerate(coordinates[1]):
         total = 0
         #print(x)
         for idy, y in enumerate(Group1):
@@ -159,54 +159,56 @@ def AdjacencyCheck(points, centerx):
 
     if len(res1) == 1 and len(res2) == 1:
         flag0 = 1
-        print('touching at the same vertex {}, and {}'.format(points[0][res1[0]],points[1][res2[0]]))
+        print('touching at the same vertex {}, and {}'.format(coordinates[0][res1[0]], coordinates[1][res2[0]]))
 
     elif len(res1) == 1 or len(res2) == 1:
         flag0 = -1
         if len(res1) == 1:
             e1 = Matrix1[res1[0]]
             id1 = e1.index(max(e1))
-            print('touching at one vertex and an Edge {}'.format(Group2[id1], points[0][res1[0]]))
+            print('touching at one vertex and an Edge {}'.format(Group2[id1], coordinates[0][res1[0]]))
         else:
             e1 = Matrix2[res2[0]]
             id1 = e1.index(max(e1))
 
-            print('touching at one vertex and an Edge {}'.format(Group1[id1]), points[1][res2[0]])
+            print('touching at one vertex and an Edge {}'.format(Group1[id1]), coordinates[1][res2[0]])
 
     elif len(res1) == 2 and len(res2) == 2:
         flag2 = 1
-        print('Adjacent at an Edge with two vertices {}, and {}'.format(points[0][res1[0]],points[0][res1[1]]))
+        print('Adjacent at an Edge with two vertices {}, and {}'.format(coordinates[0][res1[0]], coordinates[0][res1[1]]))
 
     if flag1 >= 1:
         print("overlapped with {} vertex !!".format(flag1))
 
+    coordinates[0].remove(centerx[0])
+    coordinates[1].remove(centerx[1])
     return flag0, flag1, flag2
 
 
-if __name__ == "__main__":
-    points1 = [[[100,100],[200,300],[300,100]],[[450,450],[300,400],[400,200]]]
-    #d = Distance(c1, c2)
-    points2 = [[[80,90], [170, 80], [90, 130]], [[70,130], [90,130], [110, 180], [70, 180]]]
-    # a triangle and sequare adjacent
-    points3 = [[[140,40],[180,100],[100,100]],[[100,100],[180,100],[180,160],[100,180]]]
-    # two triangles overlapped
-    points4 = [[[200,60],[280,30],[250,100]],[[240,60],[310,50],[290,110]]]
-    # pentagon and rectangle overlapped
-    points5 = [[[110,180],[180,220],[150,290],[100,290],[70,250]],[[150,180],[230,180],[230,260],[150,260]]]
-    # two object touching in a vertex and an edge
-    points6 = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
-    # two objects overlapped with more than two vertex.
-    points =  [[[40,370],[110,370],[110,430],[40,430]],[[90,310],[90,390],[50,390]]]
-    obj1 = points[0]
-    obj2 = points[1]
-    cx1 = sum([obj1[i][0] for i in range(len(obj1))]) / len(obj1)
-    cy1 = sum([obj1[i][1] for i in range(len(obj1))]) / len(obj1)
-    cx2 = sum([obj2[i][0] for i in range(len(obj2))]) / len(obj2)
-    cy2 = sum([obj2[i][1] for i in range(len(obj2))]) / len(obj2)
-    centerx = [[cx1, cy1], [cx2, cy2]]
-    #print(centerx)
-    flag0, flag1, flag2 = AdjacencyCheck(points, centerx)
-    print("Touching flag",    flag0)
-    print("Overlapping flag", flag1)
-    print("Adjacent flag",    flag2)
+# if __name__ == "__main__":
+#     points1 = [[[100,100],[200,300],[300,100]],[[450,450],[300,400],[400,200]]]
+#     #d = Distance(c1, c2)
+#     points2 = [[[80,90], [170, 80], [90, 130]], [[70,130], [90,130], [110, 180], [70, 180]]]
+#     # a triangle and sequare adjacent
+#     points3 = [[[140,40],[180,100],[100,100]],[[100,100],[180,100],[180,160],[100,180]]]
+#     # two triangles overlapped
+#     points4 = [[[200,60],[280,30],[250,100]],[[240,60],[310,50],[290,110]]]
+#     # pentagon and rectangle overlapped
+#     points5 = [[[110,180],[180,220],[150,290],[100,290],[70,250]],[[150,180],[230,180],[230,260],[150,260]]]
+#     # two object touching in a vertex and an edge
+#     points6 = [[[40,10],[40,70],[10,40]],[[70,10],[70,70],[40,40]]]
+#     # two objects overlapped with more than two vertex.
+#     points =  [[[40,370],[110,370],[110,430],[40,430]],[[90,310],[90,390],[50,390]]]
+#     obj1 = points[0]
+#     obj2 = points[1]
+#     cx1 = sum([obj1[i][0] for i in range(len(obj1))]) / len(obj1)
+#     cy1 = sum([obj1[i][1] for i in range(len(obj1))]) / len(obj1)
+#     cx2 = sum([obj2[i][0] for i in range(len(obj2))]) / len(obj2)
+#     cy2 = sum([obj2[i][1] for i in range(len(obj2))]) / len(obj2)
+#     centerx = [[cx1, cy1], [cx2, cy2]]
+#     #print(centerx)
+#     flag0, flag1, flag2 = AdjacencyCheck(points, centerx)
+#     print("Touching flag",    flag0)
+#     print("Overlapping flag", flag1)
+#     print("Adjacent flag",    flag2)
 
