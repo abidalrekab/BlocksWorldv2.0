@@ -1,44 +1,125 @@
 import random
 from random import seed
-from GenerateCombination import GenerateCombination
+from math import *
 from GeneratePoints import GeneratePoints
-from CentersCalculations import CentersCalculations
-from CenterCheck import CenterCheck
-from AngleBtw2Points import AngleBtw2Points
-from AdjacencyCheck import AdjacencyCheck
-from itertools import combinations
 from RotateApoint import RotateApoint
+from blocksWorld import regularPolygon
 
-def Rectangle(center, length, width, orientation):
-    point1 = RotateApoint(center, [center[0] + length / 2, center[1] + width / 2], orientation)
-    point2 = RotateApoint(center, [center[0] - length / 2, center[1] + width / 2], orientation)
-    point3 = RotateApoint(center, [center[0] - length / 2, center[1] - width / 2], orientation)
-    point4 = RotateApoint(center, [center[0] + length / 2, center[1] - width / 2], orientation)
+def RotationSet(points, Anchor, angle):
+    ''''
+    rotating a set of points at once
+    points are the vertices of the object
+    Anchor is the reference point about which points are rotated
+    angle is angle of rotation in rads
+    '''
+    New_points = []
+    for idx, items in enumerate(points):
+        out = []
+        for  idy, point in enumerate(items):
+            out.append(RotateApoint(point, Anchor, radians(angle)))
+        New_points.append(out)
+    return New_points
+def ScaleSet(points, dx, dy):
+    pass
+def Rectangle(center, L, W, orientation):
+
+    d = sqrt(L**2 + W**2)
+    alpha = - asin(W/d)
+    point1 = [round(num1) for num1 in RotateApoint([center[0] + L / 2, center[1] + W / 2], center, alpha + orientation)]
+    point2 = [round(num2) for num2 in RotateApoint([center[0] - L / 2, center[1] + W / 2], center, alpha + orientation)]
+    point3 = [round(num3) for num3 in RotateApoint([center[0] - L / 2, center[1] - W / 2], center, alpha + orientation)]
+    point4 = [round(num4) for num4 in RotateApoint([center[0] + L / 2, center[1] - W / 2], center, alpha + orientation)]
     return [point1, point2, point3, point4]
 
-def Square():
-    pass
-def Sedean(gap = 'False'):
-    seed(0)
-    ##### these Object A parameters #######
-    OriAngle = random.randint(0, 90)
-    center = [random.randint(300, 340), random.randint(220, 260)]
-    size = random.randint(50, 100)  # Now setting how many vertices in every object ( we have only three for now )
-    NrVertices = 4  # number of vertices for the first object.
-    points0 = GeneratePoints(center, size, NrVertices, OriAngle)
-    points1 = GeneratePoints(center, size, NrVertices, OriAngle)
-    points2 = GeneratePoints(center, size, NrVertices, OriAngle)
-    points3 = GeneratePoints(center, size, NrVertices, OriAngle)
-    points4 = GeneratePoints(center, size, NrVertices, OriAngle)
-    points5 = GeneratePoints(center, size, NrVertices, OriAngle)
+def Square(center, length, orientation):
+    alpha = - asin(1/sqrt(2))
+    point1 = [round(num1) for num1 in RotateApoint( [center[0] + length / 2, center[1] + length / 2], center, alpha + orientation)]
+    point2 = [round(num2) for num2 in RotateApoint( [center[0] - length / 2, center[1] + length / 2], center, alpha + orientation)]
+    point3 = [round(num3) for num3 in RotateApoint( [center[0] - length / 2, center[1] - length / 2], center, alpha + orientation)]
+    point4 = [round(num4) for num4 in RotateApoint( [center[0] + length / 2, center[1] - length / 2], center, alpha + orientation)]
+    return [point1, point2, point3, point4]
+
+def Circle(center, Redius):
+    return regularPolygon(250,center, Redius)
 
 
+def Triangle(center, Redius, orientation):
+    return GeneratePoints(center, Redius, 3, orientation)
 
-    pass
+def Triangle90(center, Redius, orientation):
+    Points = regularPolygon(250,center, Redius)
+    del Points[2]
+    Points.append(center)
+    return Points
 
 
+def Sedean( gap, missing, scale = 1, rotation = 0 ):
+    if gap == 'True':
+        VarLocaion = random.choices(range(-50,50,5), k = 2)
+        VarSize = random.choices(range(0,30,5), k = 2)
+    else:
+        VarSize = 0
+        VarLocaion = 0
+
+    Wheelsize = random.randint(35,55)
+
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    BodyL, BodyW = [random.randint(150, 200), random.randint(50, 76)]
+    orientation = random.randint(0, 90)
+    d1 = sqrt(BodyL ** 2 + BodyW ** 2)
+    alpha1 = asin(BodyW / d1)
+    alpha2 = asin(1/ sqrt(2))
+    obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
+    p1 = obj1[0]
+    p2 = obj1[1]
+    p3 = obj1[2]
+    p4 = obj1[3]
+    x = range(p2[0],p1[0])
+    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + VarLocaion[0])] for num in x]
+    y2 = [[num + VarLocaion[1], round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + VarLocaion[1])] for num in x]
+    c1 = y1[round(0.2 * len(y1))]
+    c2 = y1[round(0.8 * len(y1))]
+    c3 = y2[round(0.5 * len(y2))]
+    obj2 = Circle(c1, Wheelsize + VarSize[0])
+    obj3 = Circle(c2, Wheelsize + VarSize[1])
+    obj4 = Square(c3, 60, alpha2)
+    vertices = [obj1,obj2, obj3, obj4]
+    cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0])/4), round((c0[1] + c1[1] + c2[1] + c3[1])/4)]
+    vertices = RotationSet(vertices, cenroid, rotation )
+
+
+    if missing == 'True':
+        pass
+
+
+    return vertices
 def Turck(center, OriAngle, gap = 'False'):
-    pass
+    seed(0)
+    Wheelsize = random.randint(35, 55)
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    BodyL, BodyW = [random.randint(150, 200), random.randint(50, 76)]
+    orientation = random.randint(0, 90)
+    d1 = sqrt(BodyL ** 2 + BodyW ** 2)
+    alpha1 = asin(BodyW / d1)
+    alpha2 = asin(1 / sqrt(2))
+    obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
+    p1 = obj1[0]
+    p2 = obj1[1]
+    p3 = obj1[2]
+    p4 = obj1[3]
+    x = range(p2[0], p1[0])
+    y1 = [[num, round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1])] for num in x]
+    y2 = [[num, round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1])] for num in x]
+    c1 = y1[round(0.2 * len(y1))]
+    c2 = y1[round(0.8 * len(y1))]
+    c3 = y2[round(0.5 * len(y2))]
+    obj2 = Circle(c1, Wheelsize)
+    obj3 = Circle(c2, Wheelsize)
+    obj4 = Square(c3, 60, alpha2)
+    vertices = [obj1, obj2, obj3, obj4]
+    cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / 4), round((c0[1] + c1[1] + c2[1] + c3[1]) / 4)]
+    vertices = RotationSet(vertices, cenroid, rotation)
+    return vertices
 
 def Wagen(center, OriAngle, gap = 'False'):
     pass

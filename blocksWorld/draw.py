@@ -38,7 +38,6 @@ def drawWire(canvas: object, points: object) -> object:
     for i in range(size):
         p0 = points[i]
         p1 = points[(i + 1) % size]
-
         x0 = p0[0]
         y0 = p0[1]
         x1 = p1[0]
