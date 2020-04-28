@@ -7,7 +7,7 @@ from GenerateAdjecentShapesPoints import GenerateAdjecentShapesPoints
 from blocksWorld import drawSolid, drawWire, draw
 from CreateNewObject import CreateNewObject
 from SaveData import Save
-from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean
+from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean, SUV
 if __name__ == "__main__":
     # The main program parameters
     NumberOfImages = 1                              # the number of images you want [0-100000]
@@ -27,7 +27,8 @@ if __name__ == "__main__":
           "orientation": 0}]}
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
-        Ver = Sedean(gap='True',missing='False', scale= 1, rotation= 30)
+        Ver = Sedean(gap='False',missing='False', scale= 1, rotation= 30)
+        #Ver = SUV(gap='False',missing='False', scale= 1, rotation= 0)
         #points = Rectangle([120,100], 150, 120, 0)
         #points = Circle([120,100], 50)
         #print(points)
