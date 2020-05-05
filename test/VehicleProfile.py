@@ -114,7 +114,6 @@ def SUV(gap, missing, scale = 1, rotation = 0):
     orientation = random.randint(0, 90)
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
     d2 = sqrt(CabL ** 2 + CabW ** 2)
-
     alpha1 = asin(BodyW / d1)
     alpha2 = asin(CabW / d2)
     obj1 = Rectangle(c0, BodyL, BodyW,  alpha1)

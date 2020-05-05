@@ -27,7 +27,7 @@ if __name__ == "__main__":
           "orientation": 0}]}
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
-        Ver = Sedean(gap='False',missing='False', scale= 1, rotation= 30)
+        Ver = Sedean(gap='True',missing='False', scale= 1, rotation= 45)
         #Ver = SUV(gap='False',missing='False', scale= 1, rotation= 0)
         #points = Rectangle([120,100], 150, 120, 0)
         #points = Circle([120,100], 50)
