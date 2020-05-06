@@ -65,19 +65,19 @@ def Triangle90(center, Redius, orientation):
     return Points
 
 
-def Sedean( gap, missing, scale = 1, rotation = 0 ):
+def Sedean( gap, missing, scale = 2, rotation = 0 ):
     if gap == 'True':
-        VarLocaion = random.choices(range(-30,30,5), k = 2)
-        VarSize = random.choices(range(0,30,5), k = 2)
+        VarLocaion = random.choices(range(-40,20,5), k = 2)
+        VarSize = random.choices(range(0,20,5), k = 2)
     else:
         VarSize = [0,0]
         VarLocaion = [0,0]
 
-    Wheelsize = random.randint(35,55)
+    Wheelsize = random.randint(35,55) * scale
 
     c0 = [random.randint(300, 340), random.randint(220, 260)]
-    BodyL, BodyW = [random.randint(150, 200), random.randint(50, 76)]
-    orientation = random.randint(0, 90)
+    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
+    CabenL = random.randint(30,60) * scale
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
     alpha1 = asin(BodyW / d1)
     alpha2 = asin(1/ sqrt(2))
@@ -88,13 +88,13 @@ def Sedean( gap, missing, scale = 1, rotation = 0 ):
     p4 = obj1[3]
     x = range(p2[0],p1[0])
     y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
-    y2 = [[num + VarLocaion[1], round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1])] for num in x]
+    y2 = [[num + VarLocaion[1] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabenL/2)] for num in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.8 * len(y1))]
     c3 = y2[round(0.5 * len(y2))]
     obj2 = Circle(c1, Wheelsize + VarSize[0])
     obj3 = Circle(c2, Wheelsize + VarSize[1])
-    obj4 = Square(c3, 60, alpha2)
+    obj4 = Square(c3, CabenL, alpha2)
     vertices = [obj1,obj2, obj3, obj4]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0])/4), round((c0[1] + c1[1] + c2[1] + c3[1])/4)]
     vertices = RotationSet(vertices, cenroid, rotation )
@@ -107,11 +107,17 @@ def Sedean( gap, missing, scale = 1, rotation = 0 ):
 
 def SUV(gap, missing, scale = 1, rotation = 0):
     seed(0)
-    Wheelsize = random.randint(25, 45)
+    if gap == 'True':
+        VarLocaion = random.choices(range(-40,20,5), k = 2)
+        VarSize = random.choices(range(0,20,5), k = 2)
+    else:
+        VarSize = [0,0]
+        VarLocaion = [0,0]
+
+    Wheelsize = random.randint(45, 55) * scale
     c0 = [random.randint(300, 340), random.randint(220, 260)]
-    BodyL, BodyW = [random.randint(150, 200), random.randint(30, 55)]
-    CabL, CabW   = [random.randint(80, 120), random.randint(30, 35)]
-    orientation = random.randint(0, 90)
+    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
+    CabL, CabW   = [random.randint(80, 120), random.randint(40, 55)]
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
     d2 = sqrt(CabL ** 2 + CabW ** 2)
     alpha1 = asin(BodyW / d1)
@@ -122,18 +128,23 @@ def SUV(gap, missing, scale = 1, rotation = 0):
     p3 = obj1[2]
     p4 = obj1[3]
     x = range(p2[0], p1[0])
-    y1 = [[num, round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1])] for num in x]
-    y2 = [[num, round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1])] for num in x]
+    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
+    y2 = [[num + VarLocaion[1] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW/2)] for num in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.8 * len(y1))]
-    c3 = y2[round(0.5 * len(y2))]
+    c3 = y2[round(0.4 * len(y2))]
     obj2 = Circle(c1, Wheelsize)
     obj3 = Circle(c2, Wheelsize)
     obj4 = Rectangle(c3, CabL, CabW, alpha2)
-    obj5 = Rectangle1([200,100], 100, 50, radians(110), radians(80), asin(50/ sqrt(100 ** 2 + 50 ** 2)))
-    vertices = [obj1, obj2, obj3, obj4, obj5]
+    obj5 = Rectangle1(c3, CabL, CabW, radians(110), radians(70), asin(CabW/ sqrt(CabW ** 2 + CabL ** 2)))
+    vertices = [obj1, obj2, obj3, obj5]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / 4), round((c0[1] + c1[1] + c2[1] + c3[1]) / 4)]
     vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(0,3))
+        del vertices[r]
+    else:
+        r = 0
     return vertices
 
 def Wagen(center, OriAngle, gap = 'False'):
