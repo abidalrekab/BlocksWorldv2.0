@@ -37,7 +37,6 @@ def Rectangle1(center, L, W, theta1, theta2, orientation):
     alpha = - asin(W/d)
     L1 = sqrt((W/sin(theta1))**2 - W**2)
     L2 = sqrt((W/sin(theta2))**2 - W**2)
-    print(L1, L2)
     point1 = [round(num1) for num1 in RotateApoint([center[0] + L / 2, center[1] + W / 2], center, alpha + orientation)]
     point2 = [round(num2) for num2 in RotateApoint([center[0] - L / 2, center[1] + W / 2], center, alpha + orientation)]
     point3 = [round(num3) for num3 in RotateApoint([center[0] - L / 2 + L2 if theta2 < radians(90) else center[0] - L / 2 - L2, center[1] - W / 2], center, alpha + orientation)]
@@ -147,11 +146,54 @@ def SUV(gap, missing, scale = 1, rotation = 0):
         r = 0
     return vertices
 
-def Wagen(center, OriAngle, gap = 'False'):
+def Wagen( gap, missing, scale = 2, rotation = 0):
+    seed(0)
+    if gap == 'True':
+        VarLocaion = random.choices(range(-40, 20, 5), k=2)
+        VarSize = random.choices(range(0, 20, 5), k=2)
+    else:
+        VarSize = [0, 0]
+        VarLocaion = [0, 0]
+
+    Wheelsize = random.randint(45, 55) * scale
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
+    CabL, CabW = [random.randint(80, 120), random.randint(40, 55)]
+    d1 = sqrt(BodyL ** 2 + BodyW ** 2)
+    d2 = sqrt(CabL ** 2 + CabW ** 2)
+    alpha1 = asin(BodyW / d1)
+    alpha2 = asin(CabW / d2)
+    obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
+    p1 = obj1[0]
+    p2 = obj1[1]
+    p3 = obj1[2]
+    p4 = obj1[3]
+    x = range(p2[0], p1[0])
+    y1 = [
+        [num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])]
+        for num in x]
+    y2 = [[num + VarLocaion[1],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW / 2)] for num
+          in x]
+    c1 = y1[round(0.2 * len(y1))]
+    c2 = y1[round(0.8 * len(y1))]
+    c3 = y2[round(0.4 * len(y2))]
+    obj2 = Circle(c1, Wheelsize)
+    obj3 = Circle(c2, Wheelsize)
+    obj4 = Rectangle(c3, CabL, CabW, alpha2)
+    obj5 = Rectangle1(c3, CabL, CabW, radians(110), radians(70), asin(CabW / sqrt(CabW ** 2 + CabL ** 2)))
+    vertices = [obj1, obj2, obj3, obj5]
+    cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / 4), round((c0[1] + c1[1] + c2[1] + c3[1]) / 4)]
+    vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(0, 3))
+        del vertices[r]
+    else:
+        r = 0
+    return vertices
+
+def train( gap, missing, scale = 2, rotation = 0):
     pass
 
-def train(center, OriAngle, gap = 'False'):
-    pass
-
-def Motorocyle(center, OriAngle, gap = 'False'):
+def Motorocyle( gap, missing, scale = 2, rotation = 0):
     pass
