@@ -3,7 +3,7 @@ from random import seed
 from math import *
 from GeneratePoints import GeneratePoints
 from RotateApoint import RotateApoint
-from blocksWorld import regularPolygon
+from blocksWorld import regularPolygon, rotate
 
 def RotationSet(points, Anchor, angle):
     ''''
@@ -19,10 +19,7 @@ def RotationSet(points, Anchor, angle):
             out.append(RotateApoint(point, Anchor, radians(angle)))
         New_points.append(out)
     return New_points
-def ScaleSet(points, dx, dy):
-    pass
 def Rectangle(center, L, W, orientation):
-
     d = sqrt(L**2 + W**2)
     alpha = - asin(W/d)
     point1 = [round(num1) for num1 in RotateApoint([center[0] + L / 2, center[1] + W / 2], center, alpha + orientation)]
@@ -55,10 +52,14 @@ def Circle(center, Redius):
 
 
 def Triangle(center, Redius, orientation):
-    return GeneratePoints(center, Redius, 3, orientation)
+    Points0 = regularPolygon(3,center, Redius)
+    Points = rotate(Points0, center, orientation)
+    return Points
 
-def Triangle90(center, Redius, orientation):
-    Points = regularPolygon(3,center, Redius)
+
+def Triangle90(center, Redius, angle):
+    Points0 = regularPolygon(3,center, Redius)
+    Points = rotate(Points0,center, angle)
     del Points[0]
     Points.append(center)
     return Points
@@ -185,7 +186,71 @@ def Wagen( gap, missing, scale = 1, rotation = 0):
     return vertices
 
 def train( gap, missing, scale = 2, rotation = 0):
-    pass
+    seed(0)
+    if gap == 'True':
+        VarLocaion = random.choices(range(-40, 20, 5), k=2)
+        VarSize = random.choices(range(0, 20, 5), k=2)
+    else:
+        VarSize = [0, 0]
+        VarLocaion = [0, 0]
+
+    Wheelsize1 = random.randint(65, 75) * scale            # for big wheel
+    Wheelsize2 = random.randint(45, 55) * scale            # for small wheel
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    BodyL, BodyW = [random.randint(150, 180) * scale, random.randint(50, 76) * scale]
+    CabL, CabW = [ random.randint(60, 75), random.randint(100, 140)]
+    d1 = sqrt(BodyL ** 2 + BodyW ** 2)
+    d2 = sqrt(CabL ** 2 + CabW ** 2)
+    alpha1 = asin(BodyW / d1)
+    alpha2 = asin(CabW / d2)
+    obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
+    p1 = obj1[0]
+    p2 = obj1[1]
+    p3 = obj1[2]
+    p4 = obj1[3]
+    x = range(p2[0], p1[0])
+    y1 = [
+        [num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])]
+        for num in x]
+    y2 = [[num + VarLocaion[1],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW / 2)] for num
+          in x]
+    c1 = y1[round(0.2 * len(y1))]
+    c2 = y1[round(0.5 * len(y1))]
+    c3m = y1[-1]
+    c3 = [c3m[0] + CabL/2, c3m[1] - CabW/2]
+    obj2 = Circle(c1, Wheelsize2)
+    obj3 = Circle(c2, Wheelsize2)
+    obj4 = Rectangle(c3, CabL, CabW, alpha2)
+    p41 = obj4[0]
+    p42 = obj4[1]
+    p43 = obj4[2]
+    p44 = obj4[3]
+    x1 = range(p42[0], p41[0])
+    y3 = [
+        [num + VarLocaion[0], round(((num - p41[0]) * ((p42[1] - p41[1]) / (p42[0] - p41[0]))) + p41[1] + 2 * VarLocaion[0])]
+        for num in x1]
+    y4 = [[num + VarLocaion[1],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1])] for num
+          in x]
+    c4 = y3[round(0.5 * len(y3))]
+    obj5 = Circle(c4, Wheelsize1)
+    c5m = y4[round(0.2 * len(y4))]
+    Obj6R = 40
+    Obj7R = 60
+    c5 = [c5m[0], c5m[1] - Obj6R/2]
+    obj6 = Triangle(c5, Obj6R, 90)
+    c6 = y1[0]
+    obj7 = Triangle90(c6, Obj7R, 0 )
+    vertices = [obj1, obj2, obj3, obj4, obj5, obj6, obj7]
+    cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0] + c4[0] + c5[0] + c6[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1]+ c4[0] + c5[0] + c6[1]) / len(vertices))]
+    vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(len(vertices)))
+        del vertices[r]
+    else:
+        r = 0
+    return vertices
 
 def Motorocyle( gap, missing, scale = 2, rotation = 0):
     pass
