@@ -252,5 +252,32 @@ def train( gap, missing, scale = 2, rotation = 0):
         r = 0
     return vertices
 
-def Motorocyle( gap, missing, scale = 2, rotation = 0):
-    pass
+def Bicyle( gap, missing, scale = 2, rotation = 0):
+    seed(0)
+    if gap == 'True':
+        VarLocaion = random.choices(range(-40, 20, 5), k=2)
+        VarSize = random.choices(range(0, 20, 5), k=2)
+    else:
+        VarSize = [0, 0]
+        VarLocaion = [0, 0]
+
+    Wheelsize = random.randint(45, 55) * scale
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
+    obj1 = Rectangle1(c0, BodyL, BodyW, radians(60), radians(85), asin(BodyW/ sqrt(BodyW ** 2 + BodyL ** 2)))
+    p1 = obj1[0]
+    p2 = obj1[1]
+    p3 = obj1[2]
+    p4 = obj1[3]
+    x = range(p2[0], p1[0])
+    y1 = [
+        [num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])]
+        for num in x]
+    y2 = [[num + VarLocaion[1],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - BodyW / 2)] for num
+          in x]
+    c1 = y1[round(0.2 * len(y1))]
+    c2 = y1[round(0.8 * len(y1))]
+    obj2 = Circle(c1, Wheelsize)
+    obj3 = Circle(c2, Wheelsize)
+
