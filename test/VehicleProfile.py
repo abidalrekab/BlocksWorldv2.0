@@ -283,7 +283,7 @@ def train( gap, missing, scale = 2, rotation = 0):
         r = 0
     return vertices
 
-def Bicyle( gap, missing, scale = 2, rotation = 0):
+def Bicycle( gap, missing, scale = 2, rotation = 0):
     seed(0)
     if gap == 'True':
         VarLocaion = random.choices(range(-40, 20, 5), k=2)
@@ -311,4 +311,12 @@ def Bicyle( gap, missing, scale = 2, rotation = 0):
     c2 = y1[round(0.8 * len(y1))]
     obj2 = Circle(c1, Wheelsize)
     obj3 = Circle(c2, Wheelsize)
-
+    vertices = [obj1, obj2, obj3]
+    cenroid = [round((c0[0] + c1[0] + c2[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] ) / len(vertices))]
+    vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(len(vertices)))
+        del vertices[r]
+    else:
+        r = 0
+    return vertices
