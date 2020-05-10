@@ -32,8 +32,7 @@ if __name__ == "__main__":
         #Ver = SUV1(gap='False',missing='False', scale= 1, rotation= -20)
         #Ver = Wagen(gap='True',missing='False', scale= 0.7, rotation= 0)
         #Ver = train(gap='False',missing='False', scale= 0.8, rotation= 180)
-        Ver = Bicycle(gap='False',missing='False', scale= 0.8, rotation= 180)
-
+        Ver = Bicycle(gap='True',missing='False', scale= 1, rotation= 0)
         #points = Rectangle([120,100], 150, 120, 0)
         #points = Circle([120,100], 50)
         #print(points)
