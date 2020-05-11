@@ -9,34 +9,56 @@ from CreateNewObject import CreateNewObject
 from SaveData import Save
 from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean, SUV1, SUV2, Wagen, train, Bicycle
 
+
+# Function to convert number into string
+# Switcher is dictionary data type here
+def Choose_from_Profile(argument, Parameters):
+    gap = Parameters[0]
+    missing = Parameters[1]
+    scale = Parameters[2]/10
+    rotation = Parameters[3]
+    switcherFunctions = {
+        0: Sedean( gap, missing, scale, rotation),
+        1: SUV1(   gap, missing, scale, rotation),
+        2: SUV2(   gap, missing, scale, rotation),
+        3: Wagen(  gap, missing, scale, rotation),
+        4: train(  gap, missing, scale, rotation),
+        5: Bicycle(gap, missing, scale, rotation)
+    }
+    switcherName = {
+        0: 'Sedean',
+        1: 'SUV1',
+        2: 'SUV2',
+        3: 'Wagen',
+        4: 'train',
+        5: 'Bicycle'
+    }
+    # get() method of dictionary data type returns
+    # value of passed argument if it is present
+    # in dictionary otherwise second argument will
+    # be assigned as default value of passed argument
+    return switcherFunctions.get(argument, "nothing"), switcherName.get(argument, "nothing")
+
 if __name__ == "__main__":
     # The main program parameters
-    NumberOfImages = 1                              # the number of images you want [0-100000]
+    NumberOfImages = 100                              # the number of images you want [0-100000]
     colors = ['red', 'blue', 'black', 'yellow', 'green', 'red', 'blue', 'black', 'yellow', 'green']     # choose a set of colors that gonna be used
     # create output directory
     if not os.path.exists(AggregateOutputPath):
         os.makedirs(AggregateOutputPath)
     # Generate N images and save their information into json file that has the same name as image file
-    OriAngle = random.randint(0, 90)
-    center = [random.randint(300, 340), random.randint(220, 260)]
+
     for idx in range(NumberOfImages):
         tag = 'Image(' + str(idx) + ')'+ str(uuid.uuid4())
         imageName = tag + '.png'
-        jsonfile = tag
+        jsonfile = tag + '.txt'
         print("Creating Image Number {} of {}".format(idx,NumberOfImages))
-        data = {'layer0':[{"AggregateObjectName":tag, "AggCenter" : [], "AggrObjects":[],
-          "orientation": 0}]}
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
-        #Ver = Sedean(gap='True',missing='False', scale= 1, rotation= 0)
-        #Ver = SUV1(gap='False',missing='False', scale= 1, rotation= -20)
-        #Ver = Wagen(gap='True',missing='False', scale= 0.7, rotation= 0)
-        #Ver = train(gap='False',missing='False', scale= 0.8, rotation= 180)
-        Ver = Bicycle(gap='True',missing='False', scale= 1, rotation= 0)
-        #points = Rectangle([120,100], 150, 120, 0)
-        #points = Circle([120,100], 50)
-        #print(points)
-        #drawWire(canvas, points)
+        Parameters = [random.choice(['True', 'False']),random.choice(['True', 'False']), random.choice(range(5, 20)), random.choice(range(0,90,5) )]
+        Ver, FunName = Choose_from_Profile(random.choice(range(0,5)), Parameters)
+        print(FunName)
+        data = {'ImageTag':[{"File Name": FunName, "AggCenter": [], "Gap": Parameters[0], "Missing" : Parameters[1], "Scale": Parameters[2]/10, "orientation": Parameters[3], "Vertices": Ver}]}
         for idx, points in enumerate(Ver):
             drawSolid(canvas, points, colors[idx])
         ObjectName = 'object_' + str(00)

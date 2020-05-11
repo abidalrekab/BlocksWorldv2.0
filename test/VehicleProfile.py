@@ -4,6 +4,8 @@ from math import *
 from RotateApoint import RotateApoint
 from blocksWorld import regularPolygon, rotate
 from Distance import Distance
+
+
 def RotationSet(points, Anchor, angle):
     ''''
     rotating a set of points at once
@@ -64,6 +66,7 @@ def Triangle90(center, Redius, angle):
     return Points
 
 def Sedean( gap, missing, scale = 2, rotation = 0 ):
+    #seed(0)
     if gap == 'True':
         VarLocaion = random.choices(range(-40,20,5), k = 2)
         VarSize = random.choices(range(0,20,5), k = 2)
@@ -134,7 +137,7 @@ def SUV1(gap, missing, scale = 1, rotation = 0):
     return vertices
 
 def SUV2(gap, missing, scale = 1, rotation = 0):
-    seed(0)
+    #seed(0)
     if gap == 'True':
         VarLocaion = random.choices(range(-40,20,5), k = 2)
         VarSize = random.choices(range(0,20,5), k = 2)
@@ -176,7 +179,7 @@ def SUV2(gap, missing, scale = 1, rotation = 0):
     return vertices
 
 def Wagen( gap, missing, scale = 1, rotation = 0):
-    seed(0)
+    #seed(0)
     if gap == 'True':
         VarLocaion = random.choices(range(-40, 20, 5), k=2)
         VarSize = random.choices(range(0, 20, 5), k=2)
@@ -311,7 +314,54 @@ def Bicycle( gap, missing, scale = 1, rotation = 0):
 
     p11 = [p1[0] + L , p1[1]]
     p22 = [p2[0] + L , p2[1]]
-    print(p11, p22)
+    x1 = range(int(p11[0]), int(p22[0]))
+    y1 = [
+        [num + VarLocaion[0], round(((num - p11[0]) * ((p22[1] - p11[1]) / (p22[0] - p11[0]))) + p11[1] + 2 * VarLocaion[0])] for num in x1]
+    c5 = y1[round(0.4 * len(y1))]
+    O6L, O6w = 120, 10
+    obj5 = Rectangle(c4,O5L, O5w, asin(O5w / sqrt(O5L ** 2 + O5w ** 2)))
+    obj6 = Rectangle(c5,O6L, O6w, asin(O6w / sqrt(O6L ** 2 + O6w ** 2)) + 45)
+    vertices = [obj1, obj2, obj3, obj4, obj5, obj6]
+    cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1] ) / len(vertices))]
+    vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(len(vertices)))
+        del vertices[r]
+    else:
+        r = 0
+    return vertices
+
+def Monocycle( gap, missing, scale = 1, rotation = 0):
+    #seed(0)
+    if gap == 'True':
+        VarLocaion = random.choices(range(-20, 20, 5), k=2)
+        VarSize = random.choices(range(-20, 20, 5), k=2)
+        VarAngle = random.choices(range(-10, 10, 5), k=2)
+    else:
+        VarSize = [0, 0]
+        VarLocaion = [0, 0]
+        VarAngle = [0,0]
+
+    Wheelsize = random.randint(70, 95) * scale
+    c0 = [random.randint(300, 340), random.randint(220, 260)]
+    Obj1R = random.randint(80, 100) * scale
+    obj1 = Triangle(c0, Obj1R, 90 + VarAngle[0])
+    L = Distance(obj1[0],obj1[1])
+    l = sqrt(3/4) * L
+    c1 = [c0[0] - 0.5 * L, c0[1] + l/3]
+    obj2 = Triangle([sum(x) for x in zip(c1, VarLocaion)], Obj1R, -90 + VarAngle[1])
+    p1 = obj2[0]
+    p2 = obj2[1]
+    p3 = obj2[2]
+    c2 = p3
+    c3 = [p2[0] + L, p2[1]]
+    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize + VarSize[0])
+    obj4 = Circle([sum(x) for x in zip(c3, VarLocaion)], Wheelsize + VarSize[1])
+    O5L, O5w = 20, 10
+    c4 = [p1[0], p1[1] - O5w/2]
+
+    p11 = [p1[0] + L , p1[1]]
+    p22 = [p2[0] + L , p2[1]]
     x1 = range(int(p11[0]), int(p22[0]))
     y1 = [
         [num + VarLocaion[0], round(((num - p11[0]) * ((p22[1] - p11[1]) / (p22[0] - p11[0]))) + p11[1] + 2 * VarLocaion[0])] for num in x1]
