@@ -65,9 +65,9 @@ def Triangle90(center, Redius, angle):
     Points.append(center)
     return Points
 
-def Sedean( gap, missing, scale = 2, rotation = 0 ):
+def Sedean( Distortion, missing, scale = 2, rotation = 0 ):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-40,20,5), k = 2)
         VarSize = random.choices(range(0,20,5), k = 2)
     else:
@@ -99,46 +99,57 @@ def Sedean( gap, missing, scale = 2, rotation = 0 ):
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0])/4), round((c0[1] + c1[1] + c2[1] + c3[1])/4)]
     vertices = RotationSet(vertices, cenroid, rotation )
     if missing == 'True':
-        r = random.choice(range(0,3))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0
     return vertices
 
-def SUV1(gap, missing, scale = 1, rotation = 0):
+def SUV1(Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
-    Wheelsize = random.randint(25, 45)
+    if Distortion == 'True':
+        VarLocaion = random.choices(range(-40,20,5), k = 2)
+        VarSize = random.choices(range(0,20,5), k = 2)
+    else:
+        VarSize = [0,0]
+        VarLocaion = [0,0]
+
+    Wheelsize = random.randint(25, 45) * scale
     c0 = [random.randint(300, 340), random.randint(220, 260)]
-    BodyL, BodyW = [random.randint(150, 200), random.randint(30, 55)]
-    CabL, CabW   = [random.randint(80, 120), random.randint(30, 35)]
-    orientation = random.randint(0, 90)
+    BodyL, BodyW = [random.randint(150, 200)* scale, random.randint(30, 55)* scale]
+    CabL, CabW   = [random.randint(80, 120)* scale, random.randint(30, 35)* scale]
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
     d2 = sqrt(CabL ** 2 + CabW ** 2)
     alpha1 = asin(BodyW / d1)
     alpha2 = asin(CabW / d2)
-    obj1 = Rectangle(c0, BodyL, BodyW,  alpha1)
+    obj1 = Rectangle(c0, BodyL , BodyW,  alpha1)
     p1 = obj1[0]
     p2 = obj1[1]
     p3 = obj1[2]
     p4 = obj1[3]
     x = range(p2[0], p1[0])
-    y1 = [[num, round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1])] for num in x]
-    y2 = [[num, round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1])] for num in x]
+    y1 = [[num, round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
+    y2 = [[num, round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW/2 )] for num in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.8 * len(y1))]
     c3 = y2[round(0.5 * len(y2))]
-    obj2 = Circle(c1, Wheelsize)
-    obj3 = Circle(c2, Wheelsize)
+    obj2 = Circle(c1, Wheelsize + VarSize[0])
+    obj3 = Circle(c2, Wheelsize + VarSize[1])
     obj4 = Rectangle(c3, CabL, CabW, alpha2)
     #obj5 = Rectangle1([200,100], 100, 50, radians(110), radians(80), asin(50/ sqrt(100 ** 2 + 50 ** 2)))
     vertices = [obj1, obj2, obj3, obj4]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / 4), round((c0[1] + c1[1] + c2[1] + c3[1]) / 4)]
     vertices = RotationSet(vertices, cenroid, rotation)
+    if missing == 'True':
+        r = random.choice(range(len(vertices)+1))
+        del vertices[r]
+    else:
+        r = 0
     return vertices
 
-def SUV2(gap, missing, scale = 1, rotation = 0):
+def SUV2(Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-40,20,5), k = 2)
         VarSize = random.choices(range(0,20,5), k = 2)
     else:
@@ -172,15 +183,15 @@ def SUV2(gap, missing, scale = 1, rotation = 0):
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / 4), round((c0[1] + c1[1] + c2[1] + c3[1]) / 4)]
     vertices = RotationSet(vertices, cenroid, rotation)
     if missing == 'True':
-        r = random.choice(range(0,3))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0
     return vertices
 
-def Wagen( gap, missing, scale = 1, rotation = 0):
+def Wagen( Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-40, 20, 5), k=2)
         VarSize = random.choices(range(0, 20, 5), k=2)
     else:
@@ -206,21 +217,21 @@ def Wagen( gap, missing, scale = 1, rotation = 0):
     c2 = [c2m[0]- 0.75 * lo2, c2m[1] + wo2/2]
     c3 = y1[round(0.2 * len(y1))]
     obj2 = Rectangle1(c2, lo2, wo2, radians(110), radians(90), asin(wo2 / sqrt(lo2 ** 2 + wo2 ** 2)) )
-    obj3 = Circle(c1, Wheelsize)
-    obj4 = Triangle(c3, 60 * scale, 90 )
+    obj3 = Circle(c1, Wheelsize + VarSize[0])
+    obj4 = Triangle(c3, random.randint(60,80) * scale, 90 )
     vertices = [obj1, obj2, obj3, obj4]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1]) / len(vertices))]
     vertices = RotationSet(vertices, cenroid, rotation)
     if missing == 'True':
-        r = random.choice(range(0, 3))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0
     return vertices
 
-def train( gap, missing, scale = 2, rotation = 0):
+def train( Distortion, missing, scale = 2, rotation = 0):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-40, 20, 5), k=2)
         VarSize = random.choices(range(0, 20, 5), k=2)
     else:
@@ -231,7 +242,7 @@ def train( gap, missing, scale = 2, rotation = 0):
     Wheelsize2 = random.randint(45, 55) * scale            # for small wheel
     c0 = [random.randint(300, 340), random.randint(220, 260)]
     BodyL, BodyW = [random.randint(150, 180) * scale, random.randint(50, 76) * scale]
-    CabL, CabW = [ random.randint(60, 75), random.randint(100, 140)]
+    CabL, CabW = [ random.randint(60, 75) * scale, random.randint(100, 140)* scale]
     alpha1 = asin(BodyW / sqrt(BodyL ** 2 + BodyW ** 2))
     alpha2 = asin(CabW / sqrt(CabL ** 2 + CabW ** 2))
     obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
@@ -250,8 +261,8 @@ def train( gap, missing, scale = 2, rotation = 0):
     c2 = y1[round(0.5 * len(y1))]
     c3m = y1[-1]
     c3 = [c3m[0] + CabL/2, c3m[1] - CabW/2]
-    obj2 = Circle(c1, Wheelsize2)
-    obj3 = Circle(c2, Wheelsize2)
+    obj2 = Circle([sum(x) for x in zip(c1, VarLocaion)], Wheelsize2 + VarSize[0])
+    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize2 + VarSize[1])
     obj4 = Rectangle(c3, CabL, CabW, alpha2)
     p41 = obj4[0]
     p42 = obj4[1]
@@ -270,22 +281,22 @@ def train( gap, missing, scale = 2, rotation = 0):
     Obj6R = random.randint(40, 75) * scale
     Obj7R = random.randint(60, 85) * scale
     c5 = [c5m[0], c5m[1] - Obj6R/2]
-    obj6 = Triangle(c5, Obj6R, 90)
+    obj6 = Triangle([sum(x) for x in zip(c5, VarLocaion)], Obj6R + VarSize[0], 90)
     c6 = y1[0]
-    obj7 = Triangle90(c6, Obj7R, 0 )
+    obj7 = Triangle90([sum(x) for x in zip(c6, VarLocaion)], Obj7R + VarSize[1], 0 )
     vertices = [obj1, obj2, obj3, obj4, obj5, obj6, obj7]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0] + c4[0] + c5[0] + c6[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1]+ c4[0] + c5[0] + c6[1]) / len(vertices))]
     vertices = RotationSet(vertices, cenroid, rotation)
     if missing == 'True':
-        r = random.choice(range(len(vertices)))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0
     return vertices
 
-def Bicycle( gap, missing, scale = 1, rotation = 0):
+def Bicycle( Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-20, 20, 5), k=2)
         VarSize = random.choices(range(-20, 20, 5), k=2)
         VarAngle = random.choices(range(-10, 10, 5), k=2)
@@ -325,15 +336,15 @@ def Bicycle( gap, missing, scale = 1, rotation = 0):
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1] ) / len(vertices))]
     vertices = RotationSet(vertices, cenroid, rotation)
     if missing == 'True':
-        r = random.choice(range(len(vertices)))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0
     return vertices
 
-def Monocycle( gap, missing, scale = 1, rotation = 0):
+def Monocycle( Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
-    if gap == 'True':
+    if Distortion == 'True':
         VarLocaion = random.choices(range(-20, 20, 5), k=2)
         VarSize = random.choices(range(-20, 20, 5), k=2)
         VarAngle = random.choices(range(-10, 10, 5), k=2)
@@ -373,7 +384,7 @@ def Monocycle( gap, missing, scale = 1, rotation = 0):
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1] ) / len(vertices))]
     vertices = RotationSet(vertices, cenroid, rotation)
     if missing == 'True':
-        r = random.choice(range(len(vertices)))
+        r = random.choice(range(len(vertices)+1))
         del vertices[r]
     else:
         r = 0

@@ -13,17 +13,17 @@ from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean, SUV1, SU
 # Function to convert number into string
 # Switcher is dictionary data type here
 def Choose_from_Profile(argument, Parameters):
-    gap = Parameters[0]
+    Distortion = Parameters[0]
     missing = Parameters[1]
     scale = Parameters[2]/10
     rotation = Parameters[3]
     switcherFunctions = {
-        0: Sedean( gap, missing, scale, rotation),
-        1: SUV1(   gap, missing, scale, rotation),
-        2: SUV2(   gap, missing, scale, rotation),
-        3: Wagen(  gap, missing, scale, rotation),
-        4: train(  gap, missing, scale, rotation),
-        5: Bicycle(gap, missing, scale, rotation)
+        0: Sedean( Distortion, missing, scale, rotation),
+        1: SUV1(   Distortion, missing, scale, rotation),
+        2: SUV2(   Distortion, missing, scale, rotation),
+        3: Wagen(  Distortion, missing, scale, rotation),
+        4: train(  Distortion, missing, scale, rotation),
+        5: Bicycle(Distortion, missing, scale, rotation)
     }
     switcherName = {
         0: 'Sedean',
@@ -48,15 +48,18 @@ if __name__ == "__main__":
         os.makedirs(AggregateOutputPath)
     # Generate N images and save their information into json file that has the same name as image file
 
-    for idx in range(NumberOfImages):
+    for idx in range(NumberOfImages + 1):
         tag = 'Image(' + str(idx) + ')'+ str(uuid.uuid4())
         imageName = tag + '.png'
         jsonfile = tag + '.txt'
         print("Creating Image Number {} of {}".format(idx,NumberOfImages))
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
-        Parameters = [random.choice(['True', 'False']),random.choice(['True', 'False']), random.choice(range(5, 20)), random.choice(range(0,90,5) )]
-        Ver, FunName = Choose_from_Profile(random.choice(range(0,5)), Parameters)
+        #Parameters = [random.choice(['True', 'False']),random.choice(['True', 'False']), random.choice(range(5, 20)), random.choice(range(0,90,5) )]
+        Parameters = ['True', 'False',random.choice(range(5, 20)), random.choice(range(0,90,5) )]
+        #Choice = random.choice(range(0,6))
+        Choice = 5
+        Ver, FunName = Choose_from_Profile(Choice, Parameters)
         print(FunName)
         data = {'ImageTag':[{"File Name": FunName, "AggCenter": [], "Gap": Parameters[0], "Missing" : Parameters[1], "Scale": Parameters[2]/10, "orientation": Parameters[3], "Vertices": Ver}]}
         for idx, points in enumerate(Ver):
