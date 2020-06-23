@@ -1,9 +1,6 @@
-import random
-from random import seed
 from math import *
 from RotateApoint import RotateApoint
 from blocksWorld import regularPolygon, rotate
-from Distance import Distance
 
 
 def RotationSet(points, Anchor, angle):
@@ -64,12 +61,3 @@ def Triangle90(center, Redius, angle):
     del Points[0]
     Points.append(center)
     return Points
-
-def House():
-    pass
-
-def Hospital():
-    pass
-
-def School():
-    pass
