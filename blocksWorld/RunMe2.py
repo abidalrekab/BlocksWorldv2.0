@@ -1,13 +1,10 @@
-import random
 from PathsModule import AggregateOutputPath
 import os
 import uuid
 from getImage import getImage
-from GenerateAdjecentShapesPoints import GenerateAdjecentShapesPoints
-from blocksWorld import drawSolid, drawWire, draw
-from CreateNewObject import CreateNewObject
+from blocksWorld import drawSolid
 from SaveData import Save
-from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean, SUV1, SUV2, Wagen, train, Bicycle
+from VehicleProfile import *
 
 # Function to convert number into string
 # Switcher is dictionary data type here

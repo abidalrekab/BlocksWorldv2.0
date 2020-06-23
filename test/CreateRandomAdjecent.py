@@ -3,7 +3,7 @@ from random import seed
 from math import *
 from random import randint
 from PathsModule import AggregateOutputPath
-from itertools import combinations
+
 
 def GenerateCombination(N):
     # initiate the object B and C positions

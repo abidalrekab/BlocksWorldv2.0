@@ -1,5 +1,4 @@
 import random
-from random import seed
 from math import *
 from RotateApoint import RotateApoint
 from blocksWorld import regularPolygon, rotate
