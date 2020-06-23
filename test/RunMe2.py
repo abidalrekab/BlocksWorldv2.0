@@ -9,7 +9,6 @@ from CreateNewObject import CreateNewObject
 from SaveData import Save
 from VehicleProfile import Rectangle, Circle, Square, Triangle, Sedean, SUV1, SUV2, Wagen, train, Bicycle
 
-
 # Function to convert number into string
 # Switcher is dictionary data type here
 def Choose_from_Profile(argument, Parameters):
