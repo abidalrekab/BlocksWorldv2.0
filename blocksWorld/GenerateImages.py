@@ -9,20 +9,40 @@ from VehicleProfile import *
 # Function to convert number into string
 # Switcher is dictionary data type here
 def Choose_from_Profile(argument, Parameters):
+    '''
+
+    :param argument: controls which profile is selected
+         0: Sedan
+        1: SUV1
+        2: SUV2
+        3: Wagon
+        4: train
+        5: Bicycle
+
+    :param Parameters: the argument has four variables:
+        - Distortion which specifies to which degree the user want distortion in the generated images - 10% is slightly Distorted
+            90% is highly Distorted. in fact this parameter is subjective so it depends on what u consider.
+        - Missing: controls if the object has any missing parts- let say we have a car in the image - if u activate this feature the program
+            will choose one of the car's components to be removed. this will add more complexicity.
+        - Scale : it is clear that sometimes we want different size from the same object so the scale control how big or small
+            the object is.
+        - Rotation controls the angle in which the object is posed. it accepts any angle ( 0 - 360 )
+    :return:
+    '''
     Distortion = Parameters[0]
     missing = Parameters[1]
     scale = Parameters[2]/10
     rotation = Parameters[3]
     switcherFunctions = {
-        0: Sedean( Distortion, missing, scale, rotation),
+        0: Sedan(  Distortion, missing, scale, rotation),
         1: SUV1(   Distortion, missing, scale, rotation),
         2: SUV2(   Distortion, missing, scale, rotation),
-        3: Wagen(  Distortion, missing, scale, rotation),
+        3: Wagon(  Distortion, missing, scale, rotation),
         4: train(  Distortion, missing, scale, rotation),
         5: Bicycle(Distortion, missing, scale, rotation)
     }
     switcherName = {
-        0: 'Sedean',
+        0: 'Sedan',
         1: 'SUV1',
         2: 'SUV2',
         3: 'Wagen',
@@ -43,7 +63,6 @@ if __name__ == "__main__":
     if not os.path.exists(AggregateOutputPath):
         os.makedirs(AggregateOutputPath)
     # Generate N images and save their information into json file that has the same name as image file
-
     for idx in range(NumberOfImages + 1):
         tag = 'Image(' + str(idx) + ')'+ str(uuid.uuid4())
         imageName = tag + '.png'
