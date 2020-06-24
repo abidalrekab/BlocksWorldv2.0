@@ -3,20 +3,26 @@ from math import *
 from Distance import Distance
 from DrawingTools import *
 
-def Sedan( Distortion, missing, scale = 2, rotation = 0 ):
+def Sedan( Distortion, missing, scale = 1, rotation = 0 ):
     #seed(0)
-    if Distortion == 'True':
-        VarLocaion = random.choices(range(-40,20,5), k = 2)
-        VarSize = random.choices(range(0,20,5), k = 2)
-    else:
-        VarSize = [0,0]
-        VarLocaion = [0,0]
+    if Distortion > 0 :   # Distortion is in range 0.1, 0.2, 0.3..... , 1
 
-    Wheelsize = random.randint(35,55) * scale
+        VarLocaion = random.choices(range(round(-50 * Distortion) ,round(50 * Distortion)), k = 5)
+        VarSize = random.choices(range(round(-50 * Distortion),round(50 * Distortion)), k = 5)
+    else:
+        VarSize = [0 for i in range(10)]
+        VarLocaion = [0 for i in range(10)]
+
+    Diameter = random.randint(35,65)
+    Wheelsize1 = ( Diameter+ VarSize[0]) * scale
+    Wheelsize2 = ( Diameter + VarSize[1]) * scale
 
     c0 = [random.randint(300, 340), random.randint(220, 260)]
-    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
-    CabenL = random.randint(30,60) * scale
+
+    BodyL, BodyW = [(random.randint(150, 200)+ VarSize[2]) * scale, (random.randint(50, 76) + VarSize[3]) * scale]
+
+    CabenL = (random.randint(30,60) + VarSize[4]) * scale
+
     alpha1 = asin(BodyW / sqrt(BodyL ** 2 + BodyW ** 2))
     alpha2 = asin(1/ sqrt(2))
     obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
@@ -25,13 +31,13 @@ def Sedan( Distortion, missing, scale = 2, rotation = 0 ):
     p3 = obj1[2]
     p4 = obj1[3]
     x = range(p2[0],p1[0])
-    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
-    y2 = [[num + VarLocaion[1] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabenL/2)] for num in x]
+    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[1])] for num in x]
+    y2 = [[num + VarLocaion[2] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[3] - CabenL/2)] for num in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.8 * len(y1))]
     c3 = y2[round(0.5 * len(y2))]
-    obj2 = Circle(c1, Wheelsize + VarSize[0])
-    obj3 = Circle(c2, Wheelsize + VarSize[1])
+    obj2 = Circle(c1, Wheelsize1)
+    obj3 = Circle(c2, Wheelsize2)
     obj4 = Square(c3, CabenL, alpha2)
     vertices = [obj1,obj2, obj3, obj4]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0])/4), round((c0[1] + c1[1] + c2[1] + c3[1])/4)]
