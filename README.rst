@@ -13,10 +13,10 @@ Core features
 * generate simple test image that resemble:
 - Different basic objects that form a complex entity like a car, House, Bicycle ,.... etc.
 - Objects can be generated based on four parameters:
-    - Distortion ( with precentage of 0 ( no distortion ) to 1.0 which heavly distorted.
-    - Missing or removing sub-part of an entity.
-    - scale (0.5x - 5x )
-    - Orientation ( 0 - 360 )
+    - Distortion :  with precentage of 0 ( no distortion ) to 1.0 which heavly distorted.
+    - Missing : this feature removes sub-part of an entity at random.
+    - scale (0.5x - 5x ) this values can be controlled by user or be at random.
+    - Orientation ( 0 - 360 ) set at random. 
 
 Supported platforms
 ===================
