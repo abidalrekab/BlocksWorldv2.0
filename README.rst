@@ -1,4 +1,4 @@
-Copyright (c) 2018 Dan Petre
+Copyright (c) 2020 Mohamed Abidalrekab, Dan Petre
 
 The MIT License (MIT)
 
@@ -10,7 +10,13 @@ BlocksWorld is a tool for generating simple test images.
 Core features
 =============
 
-* generate simple test images.
+* generate simple test image that resemble:
+- Different basic objects that form a complex entity like a car, House, Bicycle ,.... etc.
+- Objects can be generated based on four parameters:
+    - Distortion :  with precentage of 0 ( no distortion ) to 1.0 which heavly distorted.
+    - Missing : this feature removes sub-part of an entity at random.
+    - scale (0.5x - 5x ) this values can be controlled by user or be at random.
+    - Orientation ( 0 - 360 ) set at random. 
 
 Supported platforms
 ===================
