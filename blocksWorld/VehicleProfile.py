@@ -55,7 +55,6 @@ def Sedan( Distortion, missing, scale = 1, rotation = 0 ):
 def SUV1(Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
     if Distortion > 0:  # Distortion is in range 0.1, 0.2, 0.3..... , 1
-
         VarLocaion = random.choices(range(round(25 * Distortion), round(50 * Distortion)), k=5)
         for i in range(0, 5):
             VerSign = random.randint(0, 2) * 2 - 1
@@ -69,7 +68,7 @@ def SUV1(Distortion, missing, scale = 1, rotation = 0):
     Wheelsize2 = (random.randint(25, 45) + VarSize[1] ) * scale
 
     c0 = [random.randint(300, 340), random.randint(220, 260)]
-    BodyL, BodyW = [random.randint(150, 200)* scale, random.randint(30, 55)* scale]
+    BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(30, 55) * scale]
     CabL, CabW   = [(random.randint(80, 120) + VarSize[2] )* scale, (random.randint(30, 35) + VarSize[3])* scale]
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
     d2 = sqrt(CabL ** 2 + CabW ** 2)
@@ -103,7 +102,6 @@ def SUV1(Distortion, missing, scale = 1, rotation = 0):
 def SUV2(Distortion, missing, scale = 1, rotation = 0):
     #seed(0)
     if Distortion > 0:  # Distortion is in range 0.1, 0.2, 0.3..... , 1
-
         VarLocaion = random.choices(range(round(25 * Distortion), round(50 * Distortion)), k=5)
         for i in range(0, 5):
             VerSign = random.randint(0, 2) * 2 - 1
@@ -129,8 +127,8 @@ def SUV2(Distortion, missing, scale = 1, rotation = 0):
     p3 = obj1[2]
     p4 = obj1[3]
     x = range(p2[0], p1[0])
-    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
-    y2 = [[num + VarLocaion[1] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW/2)] for num in x]
+    y1 = [[num + VarLocaion[0], round(((num - p1[0])* ((p2[1]-p1[1])/(p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[1])] for num in x]
+    y2 = [[num + VarLocaion[2] , round(((num - p4[0])* ((p3[1]-p4[1])/(p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[3] - CabW/2)] for num in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.8 * len(y1))]
     c3 = y2[round(0.4 * len(y2))]
@@ -148,19 +146,18 @@ def SUV2(Distortion, missing, scale = 1, rotation = 0):
     return vertices
 
 def Wagon( Distortion, missing, scale = 1, rotation = 0):
-    #seed(0)
-    if Distortion == 'True':
-        VarLocaion = random.choices(range(-40, 20, 5), k=2)
-        for i in range(0,5):
+    # seed(0)
+    if Distortion > 0:  # Distortion is in range 0.1, 0.2, 0.3..... , 1
+        VarLocaion = random.choices(range(round(25 * Distortion), round(50 * Distortion)), k=5)
+        for i in range(0, 5):
             VerSign = random.randint(0, 2) * 2 - 1
             VarLocaion[i] = VarLocaion[i] * VerSign
-
-        VarSize = random.choices(range(0, 20, 5), k=2)
+        VarSize = random.choices(range(round(-50 * Distortion), round(50 * Distortion)), k=5)
     else:
-        VarSize = [0, 0]
-        VarLocaion = [0, 0]
+        VarSize = [0 for i in range(10)]
+        VarLocaion = [0 for i in range(10)]
 
-    Wheelsize = random.randint(65, 85) * scale
+    Wheelsize = (random.randint(65, 85) + VarSize[0])* scale
     c0 = [random.randint(300, 340), random.randint(220, 260)]
     BodyL, BodyW = [random.randint(150, 200) * scale, random.randint(50, 76) * scale]
     d1 = sqrt(BodyL ** 2 + BodyW ** 2)
@@ -171,15 +168,15 @@ def Wagon( Distortion, missing, scale = 1, rotation = 0):
     p3 = obj1[2]
     p4 = obj1[3]
     x = range(p2[0], p1[0])
-    y1 = [[num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])] for num in x]
-    y2 = [[num + VarLocaion[1], round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1])] for num in x]
+    y1 = [[num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[1])] for num in x]
+    y2 = [[num + VarLocaion[2], round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[3])] for num in x]
     c1 = y1[-1]
     c2m = y2[0]
-    lo2, wo2 = 60 * scale, 20 * scale
+    lo2, wo2 = (60 + VarSize[1]) * scale, (20 + VarSize[2])* scale
     c2 = [c2m[0]- 0.75 * lo2, c2m[1] + wo2/2]
     c3 = y1[round(0.2 * len(y1))]
     obj2 = Rectangle1(c2, lo2, wo2, radians(110), radians(90), asin(wo2 / sqrt(lo2 ** 2 + wo2 ** 2)) )
-    obj3 = Circle(c1, Wheelsize + VarSize[0])
+    obj3 = Circle(c1, Wheelsize)
     obj4 = Triangle(c3, random.randint(60,80) * scale, 90 )
     vertices = [obj1, obj2, obj3, obj4]
     cenroid = [round((c0[0] + c1[0] + c2[0] + c3[0]) / len(vertices)), round((c0[1] + c1[1] + c2[1] + c3[1]) / len(vertices))]
@@ -192,22 +189,22 @@ def Wagon( Distortion, missing, scale = 1, rotation = 0):
     return vertices
 
 def train( Distortion, missing, scale = 2, rotation = 0):
-    #seed(0)
-    if Distortion == 'True':
-        VarLocaion = random.choices(range(-40, 20, 5), k=2)
-        for i in range(0,5):
+    # seed(0)
+    if Distortion > 0:  # Distortion is in range 0.1, 0.2, 0.3..... , 1
+        VarLocaion = random.choices(range(round(25 * Distortion), round(50 * Distortion)), k=10)
+        for i in range(0, 10):
             VerSign = random.randint(0, 2) * 2 - 1
             VarLocaion[i] = VarLocaion[i] * VerSign
-        VarSize = random.choices(range(0, 20, 5), k=2)
+        VarSize = random.choices(range(round(-50 * Distortion), round(50 * Distortion)), k=10)
     else:
-        VarSize = [0, 0]
-        VarLocaion = [0, 0]
+        VarSize = [0 for i in range(10)]
+        VarLocaion = [0 for i in range(10)]
 
-    Wheelsize1 = random.randint(65, 75) * scale            # for big wheel
-    Wheelsize2 = random.randint(45, 55) * scale            # for small wheel
+    Wheelsize1 = (random.randint(65, 75) + VarSize[0]) * scale            # for big wheel
+    Wheelsize2 = (random.randint(45, 55) + VarSize[1]) * scale            # for small wheel
     c0 = [random.randint(300, 340), random.randint(220, 260)]
     BodyL, BodyW = [random.randint(150, 180) * scale, random.randint(50, 76) * scale]
-    CabL, CabW = [ random.randint(60, 75) * scale, random.randint(100, 140)* scale]
+    CabL, CabW = [ (random.randint(60, 75) + VarSize[2])* scale, (random.randint(100, 140) + VarSize[3])* scale]
     alpha1 = asin(BodyW / sqrt(BodyL ** 2 + BodyW ** 2))
     alpha2 = asin(CabW / sqrt(CabL ** 2 + CabW ** 2))
     obj1 = Rectangle(c0, BodyL, BodyW, alpha1)
@@ -217,17 +214,17 @@ def train( Distortion, missing, scale = 2, rotation = 0):
     p4 = obj1[3]
     x = range(p2[0], p1[0])
     y1 = [
-        [num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[0])]
+        [num + VarLocaion[0], round(((num - p1[0]) * ((p2[1] - p1[1]) / (p2[0] - p1[0]))) + p1[1] + 2 * VarLocaion[1])]
         for num in x]
-    y2 = [[num + VarLocaion[1],
-           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1] - CabW / 2)] for num
+    y2 = [[num + VarLocaion[2],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[3] - CabW / 2)] for num
           in x]
     c1 = y1[round(0.2 * len(y1))]
     c2 = y1[round(0.5 * len(y1))]
     c3m = y1[-1]
     c3 = [c3m[0] + CabL/2, c3m[1] - CabW/2]
-    obj2 = Circle([sum(x) for x in zip(c1, VarLocaion)], Wheelsize2 + VarSize[0])
-    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize2 + VarSize[1])
+    obj2 = Circle([sum(x) for x in zip(c1, VarLocaion)], Wheelsize2 )
+    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize2 )
     obj4 = Rectangle(c3, CabL, CabW, alpha2)
     p41 = obj4[0]
     p42 = obj4[1]
@@ -235,10 +232,10 @@ def train( Distortion, missing, scale = 2, rotation = 0):
     p44 = obj4[3]
     x1 = range(p42[0], p41[0])
     y3 = [
-        [num + VarLocaion[0], round(((num - p41[0]) * ((p42[1] - p41[1]) / (p42[0] - p41[0]))) + p41[1] + 2 * VarLocaion[0])]
+        [num + VarLocaion[4], round(((num - p41[0]) * ((p42[1] - p41[1]) / (p42[0] - p41[0]))) + p41[1] + 2 * VarLocaion[5])]
         for num in x1]
-    y4 = [[num + VarLocaion[1],
-           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[1])] for num
+    y4 = [[num + VarLocaion[6],
+           round(((num - p4[0]) * ((p3[1] - p4[1]) / (p3[0] - p4[0]))) + p4[1] + 2 * VarLocaion[7])] for num
           in x]
     c4 = y3[round(0.5 * len(y3))]
     obj5 = Circle(c4, Wheelsize1)
@@ -260,20 +257,22 @@ def train( Distortion, missing, scale = 2, rotation = 0):
     return vertices
 
 def Bicycle( Distortion, missing, scale = 1, rotation = 0):
-    #seed(0)
-    if Distortion == 'True':
-        VarLocaion = random.choices(range(-20, 20, 5), k=2)
-        for i in range(0,5):
+    # seed(0)
+    if Distortion > 0:  # Distortion is in range 0.1, 0.2, 0.3..... , 1
+        VarLocaion = random.choices(range(round(25 * Distortion), round(50 * Distortion)), k=10)
+        for i in range(0, 10):
             VerSign = random.randint(0, 2) * 2 - 1
             VarLocaion[i] = VarLocaion[i] * VerSign
-        VarSize = random.choices(range(-20, 20, 5), k=2)
+        VarSize = random.choices(range(round(-50 * Distortion), round(50 * Distortion)), k=10)
         VarAngle = random.choices(range(-10, 10, 5), k=2)
-    else:
-        VarSize = [0, 0]
-        VarLocaion = [0, 0]
-        VarAngle = [0,0]
 
-    Wheelsize = random.randint(70, 95) * scale
+    else:
+        VarSize = [0 for i in range(10)]
+        VarLocaion = [0 for i in range(10)]
+        VarAngle = [0 for i in range(10)]
+
+    Wheelsize1 = (random.randint(70, 95) + VarSize[0])* scale
+    Wheelsize2 = (random.randint(70, 95) + VarSize[1]) * scale
     c0 = [random.randint(300, 340), random.randint(220, 260)]
     Obj1R = random.randint(80, 100) * scale
     obj1 = Triangle(c0, Obj1R, 90 + VarAngle[0])
@@ -286,8 +285,8 @@ def Bicycle( Distortion, missing, scale = 1, rotation = 0):
     p3 = obj2[2]
     c2 = p3
     c3 = [p2[0] + L, p2[1]]
-    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize + VarSize[0])
-    obj4 = Circle([sum(x) for x in zip(c3, VarLocaion)], Wheelsize + VarSize[1])
+    obj3 = Circle([sum(x) for x in zip(c2, VarLocaion)], Wheelsize1 )
+    obj4 = Circle([sum(x) for x in zip(c3, VarLocaion)], Wheelsize2 )
     O5L, O5w = 20, 10
     c4 = [p1[0], p1[1] - O5w/2]
 

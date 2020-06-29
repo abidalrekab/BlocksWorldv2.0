@@ -10,7 +10,6 @@ from VehicleProfile import *
 # Switcher is dictionary data type here
 def Choose_from_Profile(argument, Parameters):
     '''
-
     :param argument: controls which profile is selected
          0: Sedan
         1: SUV1
@@ -71,9 +70,11 @@ if __name__ == "__main__":
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
         #Parameters = [random.choice(['True', 'False']),random.choice(['True', 'False']), random.choice(range(5, 20)), random.choice(range(0,90,5) )]
-        Parameters = [0.1 , 'False',random.choice(range(5, 20)), random.choice(range(0,90,5) )]
+        Distrotion = 0.1 # for slightly Distorted
+        #Distrotion = 0.5  # for heavily Distorted
+        Parameters = [Distrotion , 'False',random.choice(range(5, 20)), random.choice(range(0,90,5) )]
         #Choice = random.choice(range(0,6))
-        Choice = 1
+        Choice = 5
         Ver, FunName = Choose_from_Profile(Choice, Parameters)
         print(FunName)
         data = {'ImageTag':[{"File Name": FunName, "AggCenter": [], "Gap": Parameters[0], "Missing" : Parameters[1], "Scale": Parameters[2]/10, "orientation": Parameters[3], "Vertices": Ver}]}
