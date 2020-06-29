@@ -57,7 +57,7 @@ def Choose_from_Profile(argument, Parameters):
 
 if __name__ == "__main__":
     # The main program parameters
-    NumberOfImages = 4                              # the number of images you want [0-100000]
+    NumberOfImages = 100                              # the number of images you want [0-100000]
     colors = ['red', 'blue', 'black', 'yellow', 'green', 'red', 'blue', 'black', 'yellow', 'green']     # choose a set of colors that gonna be used
     # create output directory
     if not os.path.exists(AggregateOutputPath):
@@ -71,9 +71,9 @@ if __name__ == "__main__":
         resultFile = os.path.join(AggregateOutputPath, imageName)
         image, canvas = getImage('RGB', (640, 480), 'white')
         #Parameters = [random.choice(['True', 'False']),random.choice(['True', 'False']), random.choice(range(5, 20)), random.choice(range(0,90,5) )]
-        Parameters = [0 , 'False',random.choice(range(5, 20)), random.choice(range(0,90,5) )]
+        Parameters = [0.1 , 'False',random.choice(range(5, 20)), random.choice(range(0,90,5) )]
         #Choice = random.choice(range(0,6))
-        Choice = 0
+        Choice = 1
         Ver, FunName = Choose_from_Profile(Choice, Parameters)
         print(FunName)
         data = {'ImageTag':[{"File Name": FunName, "AggCenter": [], "Gap": Parameters[0], "Missing" : Parameters[1], "Scale": Parameters[2]/10, "orientation": Parameters[3], "Vertices": Ver}]}
@@ -81,7 +81,7 @@ if __name__ == "__main__":
             drawSolid(canvas, points, colors[idx])
         ObjectName = 'object_' + str(00)
         image.save(resultFile)
-        #Save(data, jsonfile)
+        Save(data, jsonfile)
 
 
 
